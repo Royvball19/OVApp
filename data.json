@@ -1,5 +1,6 @@
 {"firstName":"Kaas","lastName":"Koekjes","myTripList":[]}
 {"firstName":"Flip","lastName":"Flop","myTripList":[]}
+,
+{"locationTo":"Amersfoort","locationFrom":"Utrecht"}
 {"locationTo":"Rotterdam","locationFrom":"Amsterdam"}
-{"locationTo":"Rotterdam","locationFrom":"Amsterdam"}
-{"locationTo":"Rotterdam","locationFrom":"Amsterdam"}
+{"locationTo":"Groningen","locationFrom":"Limburg"}

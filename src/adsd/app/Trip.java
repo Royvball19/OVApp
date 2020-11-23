@@ -4,21 +4,25 @@ import org.json.JSONObject;
 
 public class Trip
 {
+    // Attributes
     private String locationFrom;
     private String locationTo;
 
+    // Standard Constructor
     public Trip(String locationFrom, String locationTo)
     {
         this.locationFrom = locationFrom;
         this.locationTo   = locationTo;
     }
 
+    // JSON Constructor
     public Trip(JSONObject object)
     {
         locationFrom  = object.getString("locationFrom");
         locationTo    = object.getString("locationTo");
     }
 
+    // toJSON Method
     public JSONObject toJSON()
     {
         JSONObject jobj = new JSONObject();
@@ -28,6 +32,7 @@ public class Trip
         return jobj;
     }
 
+    // Getters and Setters
     public String getLocationFrom() {
         return this.locationFrom;
     }

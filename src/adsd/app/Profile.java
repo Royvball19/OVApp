@@ -68,6 +68,7 @@ public class Profile
         System.out.println("Naam: " + firstName + " " + lastName);
     }
 
+    // Getters and Setters
     public String getFirstName() {
         return this.firstName;
     }

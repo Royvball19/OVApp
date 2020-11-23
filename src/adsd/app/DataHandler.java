@@ -10,18 +10,13 @@ public class DataHandler
 {
     final String filename = "data.json";
 
-    ArrayList<Profile> profiles = new ArrayList<>();
-    ArrayList<Trip> trips = new ArrayList<>();
+
+    private ArrayList<Profile> profiles = new ArrayList<>();
+    private ArrayList<Trip> trips = new ArrayList<>();
 
     // writeToJSON Method to write data to JSON
     public void writeToJSON() throws FileNotFoundException, UnsupportedEncodingException
     {
-/*        profiles.add(new Profile("Kaas", "Koekjes"));
-        profiles.add(new Profile("Flip", "Flop"));
-
-        trips.add(new Trip("Amsterdam", "Rotterdam"));
-        trips.add(new Trip("Amsterdam", "Rotterdam"));
-        trips.add(new Trip("Amsterdam", "Rotterdam"));*/
 
         PrintWriter writer = new PrintWriter(filename, "UTF-8");
 
@@ -31,6 +26,8 @@ public class DataHandler
             p = q.toJSON().toString();
             writer.println(p);
         }
+
+        writer.println(",");
 
         String t;
         for (Trip q : trips)
@@ -92,10 +89,12 @@ public class DataHandler
 
     }
 
+    // getProfile Method to get index from ArrayList
     public Profile getProfile(int index) {
         return profiles.get(index);
     }
 
+    // getTrip Method to get index from ArrayList
     public Trip getTrip(int index) {
         return trips.get(index);
     }
