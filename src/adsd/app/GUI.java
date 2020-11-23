@@ -1,5 +1,6 @@
 package adsd.app;
 
-public class OVApp {
+public class GUI
+{
 
 }
