@@ -18,5 +18,7 @@ public class Program
 
         // Datahandler writeToJSON always at the end of the application
         datahandler.writeToJSON();
+
+        // development test note
     }
 }
