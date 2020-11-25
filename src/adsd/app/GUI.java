@@ -36,7 +36,7 @@ public class GUI extends Application
         Label departureRoute = new Label("Kies uw route");
         departureRoute.setId("departureRouteText");
 
-        Label departureTime = new Label("Vertrek tijd");
+        Label departureTime = new Label("Vertrektijd");
         departureTime.setId("departureTimeText");
 
         Label label4 = new Label("Reis informatie");
@@ -63,11 +63,6 @@ public class GUI extends Application
             label8.setText("Kost:                         " + dataHandler.getTrip((Integer) newValue).getPrice());
         });
 
-
-
-
-
-
         Label label9 = new Label("Gegevens:");
         label9.setStyle("-fx-font-weight: bold");
         Label label10 = new Label("Naam:            Roy van Ballegooijen\nLeeftijd:          21\nWoonplaats:  Linschoten");
@@ -75,11 +70,13 @@ public class GUI extends Application
         ToolBar toolBar = new ToolBar();
         toolBar.setId("toolbar");
 
-        Button button1 = new Button("Mijn profiel");
+        Button button1 = new Button();
         toolBar.getItems().add(button1);
+        button1.setId("testButtonImage");
 
-        Button button2 = new Button("Mijn favorieten");
+        Button button2 = new Button();
         toolBar.getItems().add(button2);
+        button2.setId("testButtonImage2");
 
 
         ChoiceBox choicebox = new ChoiceBox();
@@ -87,6 +84,7 @@ public class GUI extends Application
         choicebox.getSelectionModel().select(0);
 
         Button b1 = new Button("Plan uw reis");
+        b1.setId("Testbutton");
 
         Button b2 = new Button("Andere route");
 

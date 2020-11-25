@@ -18,12 +18,14 @@
     -fx-focus-color: orange;
 }
 
-#departureRouteText {
+#departureRouteText
+{
     -fx-font-weight: bold;
     -fx-font-size: 20;
 }
 
-#departureTimeText {
+#departureTimeText
+{
     -fx-font-weight: bold;
     -fx-font-size: 20;
 }
@@ -33,24 +35,53 @@
     -fx-focus-color: orange;
 }
 
-.button {
+.button
+{
     -fx-background-color: #808080;
     -fx-font-weight: bolder;
     -fx-text-fill: white;
-    -fx-border-style: none;
 }
 
-.button:hover{
+.button:hover
+{
     -fx-background-color: orange;
     -fx-text-fill: black;
     -fx-alignment: CENTER;
-    -fx-content-display: LEFT;
     -fx-cursor: hand;
 }
 
-#b1 {
-    -fx-min-width: 100;
-    -fx-border-radius: 5em;
+#Testbutton
+{
+    -fx-background-radius: 40;
+    -fx-background-color: #808080;
+    -fx-min-width: 125;
+}
+
+#Testbutton:hover
+{
+    -fx-background-color: orange;
+    -fx-text-fill: black;
+    -fx-alignment: CENTER;
+    -fx-cursor: hand;
+}
+
+#testButtonImage
+{
+    -fx-background-color: none;
+    -fx-background-image: url("profile-user-3.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90%;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
+}
+
+#testButtonImage2 {
+    -fx-background-color: none;
+    -fx-background-image: url("favorite.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90%;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
 }
 
 .choice-box
@@ -74,4 +105,6 @@
 #toolbar
 {
     -fx-background-color: null;
+    -fx-min-height: 60;
+    -fx-alignment: center;
 }
