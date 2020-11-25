@@ -1,6 +1,6 @@
 {"firstName":"Kaas","lastName":"Koekjes","myTripList":[]}
 {"firstName":"Flip","lastName":"Flop","myTripList":[]}
 ,
-{"locationTo":"Amersfoort","locationFrom":"Utrecht"}
-{"locationTo":"Rotterdam","locationFrom":"Amsterdam"}
-{"locationTo":"Groningen","locationFrom":"Limburg"}
+{"travelTime":"31","distance":"24","locationTo":"Amersfoort","price":"€4,20","locationFrom":"Utrecht"}
+{"travelTime":"40","distance":"37","locationTo":"Rotterdam","price":"€7,45","locationFrom":"Amsterdam"}
+{"travelTime":"130","distance":"140","locationTo":"Groningen","price":"€35,60","locationFrom":"Limburg"}
