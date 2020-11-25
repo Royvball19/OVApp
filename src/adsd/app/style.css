@@ -1,0 +1,58 @@
+.root
+{
+    -fx-font-family: 'Segoe UI';
+    -fx-background-image: url("https://i.ibb.co/WybkPgZ/ov.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 265 400;
+    -fx-background-position: top left;
+}
+
+.label
+{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12;
+}
+
+.text-field
+{
+    -fx-focus-color: orange;
+}
+
+.button
+{
+    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-text-fill: #ffffff;
+}
+
+.button:hover{
+    -fx-background-color: orange, orange, #626262, orange;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: black;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+
+.choice-box
+{
+    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-text-fill: #ffffff;
+    -fx-mark-color: orange;
+}
+
+.choice-box .menu-item > .label
+{
+    -fx-text-fill: #000000;
+}
+
+.choice-box .menu-item:focused
+{
+    -fx-background-color: orange;
+}
+
+
+#toolbar
+{
+    -fx-background-color: null;
+}

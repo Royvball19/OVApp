@@ -82,4 +82,8 @@ public class DataHandler {
         return trips.get(index);
     }
 
+    public ArrayList<Trip> getTripList(){
+        return trips;
+    }
+
 }

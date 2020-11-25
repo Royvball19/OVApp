@@ -1,5 +1,6 @@
 package adsd.app;
 
+import javafx.application.Application;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
@@ -19,44 +20,50 @@ public class Program
         // Datahandler readFromJSON always at the start of the application
         datahandler.readFromJSON();
 
+
+        //Start Gui
+        Application.launch(GUI.class, args);
+
         ResourceBundle rb = ResourceBundle.getBundle("lang");
 
         Scanner scan = new Scanner(System.in);
         boolean next = true;
 
-        while (next) {
-            System.out.println(rb.getString("choice1"));
-            System.out.println("[1] Amersfoort -> Utrecht");
-            System.out.println("[2] Rotterdam -> Amsterdam");
-            System.out.println("[3] Groningen -> Limburg");
 
-            int keuze = scan.nextInt();
+//        while (next) {
+//            System.out.println(rb.getString("choice1"));
+//            System.out.println("[1] Amersfoort -> Utrecht");
+//            System.out.println("[2] Rotterdam -> Amsterdam");
+//            System.out.println("[3] Groningen -> Limburg");
+//
+//            int keuze = scan.nextInt();
+//
+//            switch(keuze){
+//
+//                case 0:
+//                    next = false;
+//
+//                case 1:
+//                    datahandler.getTrip(0).printTripDetails();
+//
+//                    next = true;
+//                    break;
+//
+//                case 2:
+//                    datahandler.getTrip(1).printTripDetails();
+//                    next = true;
+//                    break;
+//
+//                case 3:
+//                    datahandler.getTrip(2).printTripDetails();
+//                    next = true;
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//        }
 
-            switch(keuze){
-
-                case 0:
-                    next = false;
-
-                case 1:
-                    datahandler.getTrip(0).printTripDetails();
-
-                    next = true;
-                    break;
-
-                case 2:
-                    datahandler.getTrip(1).printTripDetails();
-                    next = true;
-                    break;
-
-                case 3:
-                    datahandler.getTrip(2).printTripDetails();
-                    next = true;
-                    break;
-
-                default:
-                    break;
-            }
-        }
 
         // Datahandler writeToJSON always at the end of the application
         datahandler.writeToJSON();
