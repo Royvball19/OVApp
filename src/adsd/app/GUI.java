@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.application.Application;
 
+import java.util.Scanner;
+
 public class GUI extends Application
 {
     private Scene start, viewinfo, myprofile;
@@ -15,6 +17,7 @@ public class GUI extends Application
     Scene window;
     DataHandler dataHandler;
     int currentTrip;
+    private Scanner in        = new Scanner(System.in);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -39,16 +42,17 @@ public class GUI extends Application
         label4.setStyle("-fx-font-weight: bold");
 
 
+        // Travel information labels
+        Label label5 = new Label();
+        Label label6 = new Label();
+        Label label7 = new Label();
+        Label label8 = new Label();
 
-
-        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> System.out.println(currentTrip=Integer.valueOf(newValue.toString())) );
-
-        // Reis informatie
-        Label label5 = new Label("Vertrekplaats:        " + dataHandler.getTrip(currentTrip).getLocationFrom());
-        Label label6 = new Label("Aankomstplaats:       " + dataHandler.getTrip(currentTrip).getLocationTo());
-        Label label7 = new Label("Reistijd:             " + dataHandler.getTrip(currentTrip).getTravelTime());
-        Label label8 = new Label("Kost:                 " + dataHandler.getTrip(currentTrip).getPrice());
-
+        // Update travel information for each selected trip
+        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label5.setText("Vertrekplaats:           " + dataHandler.getTrip((Integer) newValue).getLocationFrom()));
+        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label6.setText("Aankomstplaats:       " + dataHandler.getTrip((Integer) newValue).getLocationTo()));
+        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label7.setText("Reistijd:                     " + dataHandler.getTrip((Integer) newValue).getTravelTime()));
+        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label8.setText("Kost:                         " + dataHandler.getTrip((Integer) newValue).getPrice()));
 
 
 
