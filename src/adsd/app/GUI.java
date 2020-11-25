@@ -33,10 +33,11 @@ public class GUI extends Application
             routeOption.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo());
         }
 
+        Label departureRoute = new Label("Kies uw route");
+        departureRoute.setId("departureRouteText");
 
-
-        Label label3 = new Label("Vertrek tijd");
-        label3.setStyle("-fx-font-weight: bold");
+        Label departureTime = new Label("Vertrek tijd");
+        departureTime.setId("departureTimeText");
 
         Label label4 = new Label("Reis informatie");
         label4.setStyle("-fx-font-weight: bold");
@@ -49,10 +50,18 @@ public class GUI extends Application
         Label label8 = new Label();
 
         // Update travel information for each selected trip
-        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label5.setText("Vertrekplaats:           " + dataHandler.getTrip((Integer) newValue).getLocationFrom()));
-        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label6.setText("Aankomstplaats:       " + dataHandler.getTrip((Integer) newValue).getLocationTo()));
-        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label7.setText("Reistijd:                     " + dataHandler.getTrip((Integer) newValue).getTravelTime()));
-        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label8.setText("Kost:                         " + dataHandler.getTrip((Integer) newValue).getPrice()));
+//        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label5.setText("Vertrekplaats:           " + dataHandler.getTrip((Integer) newValue).getLocationFrom()));
+//        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label6.setText("Aankomstplaats:       " + dataHandler.getTrip((Integer) newValue).getLocationTo()));
+//        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label7.setText("Reistijd:                     " + dataHandler.getTrip((Integer) newValue).getTravelTime()));
+//        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) -> label8.setText("Kost:                         " + dataHandler.getTrip((Integer) newValue).getPrice()));
+
+        routeOption.getSelectionModel().selectedIndexProperty().addListener((v, oldValue, newValue) ->
+        {
+            label5.setText("Vertrekplaats:           " + dataHandler.getTrip((Integer) newValue).getLocationFrom());
+            label6.setText("Aankomstplaats:       " + dataHandler.getTrip((Integer) newValue).getLocationTo());
+            label7.setText("Reistijd:                     " + dataHandler.getTrip((Integer) newValue).getTravelTime());
+            label8.setText("Kost:                         " + dataHandler.getTrip((Integer) newValue).getPrice());
+        });
 
 
 
@@ -77,7 +86,7 @@ public class GUI extends Application
         choicebox.getItems().addAll("Welke tijd:", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
         choicebox.getSelectionModel().select(0);
 
-        Button b1 = new Button("Plan uw reis in");
+        Button b1 = new Button("Plan uw reis");
 
         Button b2 = new Button("Andere route");
 
@@ -110,10 +119,12 @@ public class GUI extends Application
         layout1.setVgap(12);
         layout1.add(toolBar, 4, 0);
         layout1.add(routeOption, 4, 5);
-        layout1.add(label3, 4, 7);
+        layout1.add(departureRoute, 4, 4);
+        layout1.add(departureTime, 4, 7);
         layout1.add(choicebox, 4, 8);
-        layout1.add(b1, 4, 16);
-        layout1.setHalignment(label3, HPos.CENTER);
+        layout1.add(b1, 4, 12);
+        layout1.setHalignment(departureTime, HPos.CENTER);
+        layout1.setHalignment(departureRoute, HPos.CENTER);
         layout1.setHalignment(routeOption, HPos.CENTER);
         layout1.setHalignment(choicebox, HPos.CENTER);
         layout1.setHalignment(b1, HPos.CENTER);
