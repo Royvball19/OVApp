@@ -12,6 +12,7 @@ public class Program
 {
 
     private static DataHandler datahandler;
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
@@ -24,7 +25,6 @@ public class Program
         //Start Gui
         Application.launch(GUI.class, args);
 
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
         Scanner scan = new Scanner(System.in);
         boolean next = true;
