@@ -15,7 +15,7 @@
 
 .text-field
 {
-    -fx-focus-color: orange;
+    -fx-focus-color: #ffa500;
 }
 
 #departureRouteText
@@ -32,7 +32,7 @@
 
 .text-field
 {
-    -fx-focus-color: orange;
+    -fx-focus-color: #ffa500;
 }
 
 .button
@@ -73,6 +73,11 @@
     -fx-background-size: 90%;
     -fx-min-height: 40;
     -fx-min-width: 40;
+    -fx-background-radius: 50;
+}
+
+#testButtonImage:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
 #testButtonImage2 {
@@ -82,6 +87,23 @@
     -fx-background-size: 90%;
     -fx-min-height: 40;
     -fx-min-width: 40;
+}
+
+#testButtonImage2:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
+}
+
+#testButtonImage3 {
+    -fx-background-color: none;
+    -fx-background-image: url("world.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90%;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
+}
+
+#testButtonImage3:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
 .choice-box

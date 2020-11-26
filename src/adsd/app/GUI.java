@@ -78,6 +78,10 @@ public class GUI extends Application
         toolBar.getItems().add(button2);
         button2.setId("testButtonImage2");
 
+        Button button3 = new Button();
+        toolBar.getItems().add(button3);
+        button3.setId("testButtonImage3");
+
 
         ChoiceBox choicebox = new ChoiceBox();
         choicebox.getItems().addAll("Welke tijd:", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
