@@ -57,15 +57,9 @@ public class Profile
     }
 
     // addTrip Method
-    public void addTrip(String locationFrom, String locationTo)
+    public void addTrip(String locationFrom, String locationTo, String price, String distance, String travelTime)
     {
-        myTripList.add(new Trip(locationFrom,locationTo));
-    }
-
-    // Testprint Method
-    public void print()
-    {
-        System.out.println("Naam: " + firstName + " " + lastName);
+        myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime));
     }
 
     // Getters and Setters
