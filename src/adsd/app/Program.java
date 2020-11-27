@@ -12,7 +12,7 @@ public class Program
 {
 
     private static DataHandler datahandler;
-    private ResourceBundle rb = ResourceBundle.getBundle("lang");
+    private static ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
@@ -22,47 +22,41 @@ public class Program
         datahandler.readFromJSON();
 
 
-        //Start Gui
-        Application.launch(GUI.class, args);
-
-
         Scanner scan = new Scanner(System.in);
         boolean next = true;
 
 
-//        while (next) {
-//            System.out.println(rb.getString("choice1"));
-//            System.out.println("[1] Amersfoort -> Utrecht");
-//            System.out.println("[2] Rotterdam -> Amsterdam");
-//            System.out.println("[3] Groningen -> Limburg");
-//
-//            int keuze = scan.nextInt();
-//
-//            switch(keuze){
-//
-//                case 0:
-//                    next = false;
-//
-//                case 1:
-//                    datahandler.getTrip(0).printTripDetails();
-//
-//                    next = true;
-//                    break;
-//
-//                case 2:
-//                    datahandler.getTrip(1).printTripDetails();
-//                    next = true;
-//                    break;
-//
-//                case 3:
-//                    datahandler.getTrip(2).printTripDetails();
-//                    next = true;
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//        }
+        while (next) {
+            System.out.println(rb.getString("choice1"));
+            System.out.println("[1] Amersfoort -> Utrecht");
+            System.out.println("[2] Rotterdam -> Amsterdam");
+            System.out.println("[3] Groningen -> Limburg");
+
+            String keuze = scan.nextLine();
+
+            switch(keuze){
+
+                case "0":
+                    next = false;
+
+                case "1":
+                    datahandler.getTrip(0).printTripDetails();
+
+                    break;
+
+                case "2":
+                    datahandler.getTrip(1).printTripDetails();
+                    break;
+
+                case "3":
+                    datahandler.getTrip(2).printTripDetails();
+                    break;
+
+                default:
+                    System.out.println("Voer een geldige keuze in!");
+                    break;
+            }
+        }
 
 
         // Datahandler writeToJSON always at the end of the application
