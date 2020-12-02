@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -12,7 +13,6 @@ public class Program
 {
 
     private static DataHandler datahandler;
-    private static ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
@@ -21,12 +21,15 @@ public class Program
         // Datahandler readFromJSON always at the start of the application
         datahandler.readFromJSON();
 
+        Application.launch(GUI.class, args);
 
         Scanner scan = new Scanner(System.in);
         boolean next = true;
 
+        Locale.setDefault(new Locale("nl", "NL"));
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-        while (next) {
+        /*while (next) {
             System.out.println(rb.getString("choice1"));
             System.out.println("[1] Amersfoort -> Utrecht");
             System.out.println("[2] Rotterdam -> Amsterdam");
@@ -56,7 +59,7 @@ public class Program
                     System.out.println("Voer een geldige keuze in!");
                     break;
             }
-        }
+        }*/
 
 
         // Datahandler writeToJSON always at the end of the application

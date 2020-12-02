@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.application.Application;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -16,13 +17,15 @@ public class GUI extends Application
     private Scene chooseTripScene, viewTripDetails, viewMyProfile;
     private DataHandler dataHandler;
     private Scanner in        = new Scanner(System.in);
-    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         dataHandler = new DataHandler();
         dataHandler.readFromJSON();
+
+        Locale.setDefault(new Locale("nl", "NL"));
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
         // GUI Labels
         Label departureRoute = new Label(rb.getString("departureRoute"));
@@ -63,6 +66,10 @@ public class GUI extends Application
         toolBar.getItems().add(myProfileButton);
         myProfileButton.setId("testButtonImage");
 
+        Button recentTripButton = new Button();
+        toolBar.getItems().add(recentTripButton);
+        recentTripButton.setId("RecentTripButton");
+
         Button myFavoriteButton = new Button();
         toolBar.getItems().add(myFavoriteButton);
         myFavoriteButton.setId("testButtonImage2");
@@ -78,6 +85,10 @@ public class GUI extends Application
         choicebox.getSelectionModel().select(0);
 
         ChoiceBox tripOption = new ChoiceBox();
+
+        ChoiceBox<String> tripDateOption = new ChoiceBox<>();
+        tripDateOption.getItems().addAll(rb.getString("choiceboxdate"), "Vandaag", "Morgen", "Overmorgen");
+        tripDateOption.getSelectionModel().select(0);
 
         // Loop to add trips to tripOption choicebox
         for (int i = 0; i < dataHandler.getTripList().size(); i++ )
@@ -122,7 +133,10 @@ public class GUI extends Application
         chooseTripLayout.add(departureRoute, 4, 4);
         chooseTripLayout.add(departureTime, 4, 7);
         chooseTripLayout.add(choicebox, 4, 8);
+        chooseTripLayout.add(tripDateOption, 4, 9);
+        chooseTripLayout.add(recentTripButton, 4, 10);
         chooseTripLayout.add(planTripButton, 4, 12);
+        chooseTripLayout.setHalignment(tripDateOption, HPos.CENTER);
         chooseTripLayout.setHalignment(departureTime, HPos.CENTER);
         chooseTripLayout.setHalignment(departureRoute, HPos.CENTER);
         chooseTripLayout.setHalignment(tripOption, HPos.CENTER);

@@ -2,6 +2,7 @@ package adsd.app;
 
 import org.json.JSONObject;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Trip {
@@ -13,7 +14,7 @@ public class Trip {
     private String travelTime;
 
     DataHandler dataHandler = new DataHandler();
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
+
 
     // Standard Constructor
     public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime) {
@@ -88,6 +89,8 @@ public class Trip {
     }
 
     public void printTripDetails() {
+        Locale.setDefault(new Locale("nl", "NL"));
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
         System.out.println(rb.getString("detailsPrint"));
         System.out.println(rb.getString("fromPrint")+ locationFrom );
