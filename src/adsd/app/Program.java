@@ -1,6 +1,10 @@
 package adsd.app;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
@@ -9,57 +13,35 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class Program
+public class Program extends Application
 {
 
     private static DataHandler datahandler;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        Parent startScherm = loader.load();
+        primaryStage.setTitle("TravelYroute OV App");
+        primaryStage.setScene(new Scene(startScherm));
+        primaryStage.show();
+        primaryStage.setResizable(false);
+
+        startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+    }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
         // Datahandler import
         datahandler = new DataHandler();
-        // Datahandler readFromJSON always at the start of the application
         datahandler.readFromJSON();
 
-        Application.launch(GUI.class, args);
-
-        Scanner scan = new Scanner(System.in);
-        boolean next = true;
+        launch(args);
 
         Locale.setDefault(new Locale("nl", "NL"));
         ResourceBundle rb = ResourceBundle.getBundle("lang");
-
-        /*while (next) {
-            System.out.println(rb.getString("choice1"));
-            System.out.println("[1] Amersfoort -> Utrecht");
-            System.out.println("[2] Rotterdam -> Amsterdam");
-            System.out.println("[3] Groningen -> Limburg");
-
-            String keuze = scan.nextLine();
-
-            switch(keuze){
-
-                case "0":
-                    next = false;
-
-                case "1":
-                    datahandler.getTrip(0).printTripDetails();
-
-                    break;
-
-                case "2":
-                    datahandler.getTrip(1).printTripDetails();
-                    break;
-
-                case "3":
-                    datahandler.getTrip(2).printTripDetails();
-                    break;
-
-                default:
-                    System.out.println("Voer een geldige keuze in!");
-                    break;
-            }
-        }*/
 
 
         // Datahandler writeToJSON always at the end of the application
