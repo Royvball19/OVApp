@@ -1,7 +1,7 @@
 .root
 {
     -fx-font-family: 'Segoe UI';
-    -fx-background-image: url("image.jpg");
+    -fx-background-image: url("Images/image.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -68,7 +68,7 @@
 #myProfileButton
 {
     -fx-background-color: none;
-    -fx-background-image: url("profile-user-3.png");
+    -fx-background-image: url("Images/profile-user-3.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 90%;
     -fx-min-height: 40;
@@ -82,7 +82,7 @@
 
 #myFavoriteButton {
     -fx-background-color: none;
-    -fx-background-image: url("favorite.png");
+    -fx-background-image: url("Images/favorite.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 90%;
     -fx-min-height: 40;
@@ -95,7 +95,7 @@
 
 #LangOptionButton {
     -fx-background-color: none;
-    -fx-background-image: url("world.png");
+    -fx-background-image: url("Images/world.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 90%;
     -fx-min-height: 40;
@@ -108,7 +108,7 @@
 
 #myRecentTripButton {
     -fx-background-color: none;
-    -fx-background-image: url("clock.png");
+    -fx-background-image: url("Images/clock.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 90%;
     -fx-min-height: 40;
@@ -116,6 +116,19 @@
 }
 
 #myRecentTripButton:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
+}
+
+#homeScreenButton {
+    -fx-background-color: none;
+    -fx-background-image: url("Images/home-icon-silhouette.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90%;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
+}
+
+#homeScreenButton:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 

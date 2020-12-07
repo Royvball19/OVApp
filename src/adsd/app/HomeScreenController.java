@@ -1,8 +1,11 @@
 package adsd.app;
 
+import adsd.app.DataHandler;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +15,7 @@ import javafx.scene.control.skin.ChoiceBoxSkin;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class HomeScreenController  {
@@ -26,7 +30,9 @@ public class HomeScreenController  {
     @FXML private ChoiceBox dateOption;
     @FXML private Button planTripButton;
 
+
     DataHandler dataHandler;
+
 
 
 
@@ -53,5 +59,54 @@ public class HomeScreenController  {
         timeOption.getSelectionModel().select(0);
         dateOption.getItems().addAll(rb.getString("choiceboxdate"), "Vandaag", "Morgen", "Overmorgen");
         dateOption.getSelectionModel().select(0);
+
+
+
     }
+
+    public void showRoute (ActionEvent event) throws IOException{
+
+
+        Parent homeScreenParent1 = FXMLLoader.load(getClass().getResource("RouteInformation.fxml"));
+        Scene routeInformation = new Scene(homeScreenParent1);
+
+        routeInformation.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+        // This line gets the stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(routeInformation);
+        window.show();
+
+
+
+    }
+
+    public void showMyProfileButton (ActionEvent event) throws IOException {
+        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
+        Scene myProfileScene = new Scene(homeScreenParent2);
+
+        myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+        // This line gets the stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(myProfileScene);
+        window.show();
+    }
+
+    public void showMyFavoriteTrips (ActionEvent event) throws IOException {
+        Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
+        Scene myFavoriteTrips = new Scene(homeScreenParent3);
+
+        myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+        // This line gets the stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(myFavoriteTrips);
+        window.show();
+    }
+
+
 }

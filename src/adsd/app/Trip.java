@@ -12,27 +12,32 @@ public class Trip {
     private String price;
     private String distance;
     private String travelTime;
+    private String arrivalTime;
+    private String departureTime;
 
     DataHandler dataHandler = new DataHandler();
 
 
     // Standard Constructor
-    public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime) {
+    public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime, String departureTime, String arrivalTime) {
         this.locationFrom = locationFrom;
         this.locationTo = locationTo;
         this.price = price;
         this.distance = distance;
         this.travelTime = travelTime;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
     }
 
     // JSON Constructor
     public Trip(JSONObject object) {
-        locationFrom = object.getString("locationFrom");
-        locationTo = object.getString("locationTo");
-        price = object.getString("price");
-        distance = object.getString("distance");
-        travelTime = object.getString("travelTime");
-
+        locationFrom    = object.getString("locationFrom");
+        locationTo      = object.getString("locationTo");
+        price           = object.getString("price");
+        distance        = object.getString("distance");
+        travelTime      = object.getString("travelTime");
+        departureTime   = object.getString("departureTime");
+        arrivalTime     = object.getString("arrivalTime");
     }
 
     // toJSON Method
@@ -44,6 +49,8 @@ public class Trip {
         jobj.put("price", price);
         jobj.put("distance", distance);
         jobj.put("travelTime", travelTime);
+        jobj.put("departureTime", departureTime);
+        jobj.put("arrivalTime", arrivalTime);
         return jobj;
     }
 
@@ -87,6 +94,23 @@ public class Trip {
     public void setTravelTime(String travelTime) {
         this.travelTime = travelTime;
     }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getArrivalTime(){
+        return this.arrivalTime;
+    }
+
+    public void setDepartureTime(){
+        this.departureTime = departureTime;
+    }
+
+    public String getDepartureTime(){
+        return  this.departureTime;
+    }
+
 
     public void printTripDetails() {
         Locale.setDefault(new Locale("nl", "NL"));

@@ -13,9 +13,8 @@
    <children>
       <ToolBar layoutX="33.0" layoutY="22.0" prefHeight="40.0" prefWidth="200.0" styleClass="toolbar" stylesheets="@style.css">
         <items>
-          <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-            <Button id="myRecentTripButton" fx:id="recentTripButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-            <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
+          <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
+            <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
             <Button id="LangOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
         </items>
       </ToolBar>
@@ -37,7 +36,7 @@
             <Label fx:id="departureTime" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="timeOption" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="dateOption" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Button fx:id="planTripButton" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Button fx:id="planTripButton" alignment="CENTER" mnemonicParsing="false" onAction="#showRoute" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
