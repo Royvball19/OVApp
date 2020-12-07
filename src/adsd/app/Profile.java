@@ -55,9 +55,9 @@ public class Profile
     }
 
     // addTrip Method
-    public void addTrip(String locationFrom, String locationTo, String price, String distance, String travelTime)
+    public void addTrip(String locationFrom, String locationTo, String price, String distance, String travelTime, String departureTime, String arrivalTime)
     {
-        myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime));
+        myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime, departureTime, arrivalTime));
     }
 
     public void addRoute(int ID, String locationFrom, String locationTo, String locationFromLat, String locationFromLng, String locationToLat, String locationToLng)
