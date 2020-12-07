@@ -2,8 +2,6 @@ package adsd.app;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Profile
@@ -12,7 +10,7 @@ public class Profile
     private String firstName;
     private String lastName;
     private ArrayList<Trip> myTripList;
-
+    private ArrayList<Route> myFavoriteTrip;
 
     // Standard Constructor
     public Profile(String firstName, String lastName)
@@ -60,6 +58,11 @@ public class Profile
     public void addTrip(String locationFrom, String locationTo, String price, String distance, String travelTime)
     {
         myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime));
+    }
+
+    public void addRoute(int ID, String locationFrom, String locationTo, String locationFromLat, String locationFromLng, String locationToLat, String locationToLng)
+    {
+        myFavoriteTrip.add(new Route( ID, locationFrom, locationTo, locationFromLat, locationFromLng, locationToLat, locationToLng));
     }
 
     // Getters and Setters

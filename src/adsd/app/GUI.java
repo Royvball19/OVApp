@@ -18,6 +18,7 @@ public class GUI extends Application
     private DataHandler dataHandler;
     private Scanner in        = new Scanner(System.in);
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -40,7 +41,7 @@ public class GUI extends Application
         Label records = new Label(rb.getString("records"));
         records.setStyle("-fx-font-weight: bold");
 
-        Label profileRecords = new Label(rb.getString("profileRecords"));
+        Label profileRecords = new Label("Naam: " + dataHandler.getProfile(0).getFirstName() + " " + dataHandler.getProfile(0).getLastName());
 
         Label locationFrom = new Label();
 
