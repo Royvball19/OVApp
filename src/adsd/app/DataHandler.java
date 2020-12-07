@@ -77,6 +77,10 @@ public class DataHandler {
         return profiles.get(index);
     }
 
+    public ArrayList<Profile> getProfileList(){
+        return profiles;
+    }
+
     // getTrip Method to get index from ArrayList
     public Trip getTrip(int index) {
         return trips.get(index);

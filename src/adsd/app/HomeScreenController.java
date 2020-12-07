@@ -32,7 +32,7 @@ public class HomeScreenController  {
 
 
     DataHandler dataHandler;
-
+    RouteInformationController routeInformationController;
 
 
 
@@ -65,6 +65,9 @@ public class HomeScreenController  {
     }
 
     public void showRoute (ActionEvent event) throws IOException{
+
+//        String message = "naar iets kleiner";//your string
+//        routeInformationController.labelLocFromInfo.setText(message);
 
 
         Parent homeScreenParent1 = FXMLLoader.load(getClass().getResource("RouteInformation.fxml"));
@@ -107,6 +110,12 @@ public class HomeScreenController  {
         window.setScene(myFavoriteTrips);
         window.show();
     }
+
+
+    public void setTest(String test) {
+
+    }
+
 
 
 }

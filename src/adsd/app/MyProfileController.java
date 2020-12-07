@@ -7,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -24,10 +22,12 @@ public class MyProfileController {
 
     @FXML Label labelFirstName;
     @FXML Label labelLastName;
-    @FXML Label firstName;
-    @FXML Label lastName;
+    @FXML Label labelFirstNameInfo;
+    @FXML Label labelLastNameInfo;
     @FXML Button showHomeScreen;
     @FXML ToolBar myToolBar;
+    @FXML ComboBox profileSelector;
+    @FXML Button showSelectedProfile;
 
     public void initialize() throws FileNotFoundException {
 
@@ -37,10 +37,20 @@ public class MyProfileController {
         labelFirstName.setText(rb.getString("labelFirstName"));
         labelLastName.setText(rb.getString("labelLastName"));
 
-
+        for (int i = 0; i < dataHandler.getProfileList().size(); i++ )
+        {
+            profileSelector.getItems().add(dataHandler.getProfile(i).getFirstName());
+        }
 
 //        firstName.setText(dataHandler.getProfile(i).getFirstName());
 //        lastName.setText(dataHandler.getProfile(i).getLastName());
+
+    }
+
+    public void showProfileDetails(ActionEvent event) {
+
+        labelFirstNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getFirstName());
+        labelLastNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getLastName());
 
     }
 

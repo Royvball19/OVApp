@@ -4,6 +4,7 @@ import adsd.app.DataHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -20,28 +21,30 @@ public class RouteInformationController extends HomeScreenController {
 
     @FXML ToolBar myToolBar;
 
-    @FXML Label labelLocFrom;
-    @FXML Label labelLocFromInfo;
-    @FXML Label labelLocTo;
-    @FXML Label labelLocToInfo;
-    @FXML Label labelTravelTime;
-    @FXML Label labelTravelTimeInfo;
-    @FXML Label labelPrice;
-    @FXML Label labelPriceInfo;
-    @FXML Label labelDepartureTime;
-    @FXML Label labelDepartureTimeInfo;
-    @FXML Label labelArrivalTime;
-    @FXML Label labelArrivalTimeInfo;
+    @FXML private Label labelLocFrom;
+    @FXML public static Label labelLocFromInfo;
+    @FXML private Label labelLocTo;
+    @FXML private Label labelLocToInfo;
+    @FXML private Label labelTravelTime;
+    @FXML private Label labelTravelTimeInfo;
+    @FXML private Label labelPrice;
+    @FXML private Label labelPriceInfo;
+    @FXML private Label labelDepartureTime;
+    @FXML private Label labelDepartureTimeInfo;
+    @FXML private Label labelArrivalTime;
+    @FXML private Label labelArrivalTimeInfo;
+    @FXML private Label labelTitle;
 
     DataHandler dataHandler;
 
-    private int selectedTrip;
 
 
     public void initialize() throws FileNotFoundException {
 
         dataHandler = new DataHandler();
         dataHandler.readFromJSON();
+
+
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
@@ -50,16 +53,16 @@ public class RouteInformationController extends HomeScreenController {
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
 
-        labelLocFromInfo.setText(dataHandler.getTrip(0).getLocationFrom());
-        labelLocToInfo.setText(dataHandler.getTrip(0).getLocationTo());
-        labelTravelTimeInfo.setText(dataHandler.getTrip(0).getTravelTime());
-        labelPriceInfo.setText(dataHandler.getTrip(0).getPrice());
-        labelDepartureTimeInfo.setText(dataHandler.getTrip(0).getDepartureTime());
-        labelArrivalTimeInfo.setText(dataHandler.getTrip(0).getArrivalTime());
+//        labelLocFromInfo.setText(dataHandler.getTrip(selectedTrip).getLocationFrom());
+//        labelLocToInfo.setText(dataHandler.getTrip(selectedTrip).getLocationTo());
+//        labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTravelTime());
+//        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getPrice());
+//        labelDepartureTimeInfo.setText(dataHandler.getTrip(selectedTrip).getDepartureTime());
+//        labelArrivalTimeInfo.setText(dataHandler.getTrip(selectedTrip).getArrivalTime());
 
-//        labelLocFromInfo.setText(dataHandler.getTrip(HomeScreen.getSelectedTrip()).getLocationFrom());
+//
 
-        System.out.println("RouteInformation controller : " + getSelectedTrip());
+//        System.out.println("RouteInformation controller : " + getSelectedTrip());
 
 
 
@@ -80,11 +83,37 @@ public class RouteInformationController extends HomeScreenController {
         window.show();
     }
 
-    public void setSelectedTrip(int selectedTrip){
-        this.selectedTrip = selectedTrip;
+
+    public void showMyFavoriteTrips (ActionEvent event) throws IOException {
+        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
+        Scene myFavoriteTrips = new Scene(homeScreenParent);
+
+        myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+        // This line gets the stage information
+        Stage window = (Stage) myToolBar.getScene().getWindow();
+
+        window.setScene(myFavoriteTrips);
+        window.show();
     }
 
-    public int getSelectedTrip(){
-        return selectedTrip;
+    public void showMyProfileButton (ActionEvent event) throws IOException {
+        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
+        Scene myProfileScene = new Scene(homeScreenParent2);
+
+        myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+        // This line gets the stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(myProfileScene);
+        window.show();
     }
+
+    public void setLocFrom(String test) {
+        labelLocFromInfo.setText(test);
+    }
+
+
+
 }
