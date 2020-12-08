@@ -12,32 +12,39 @@ public class Trip {
     private String price;
     private String distance;
     private String travelTime;
-    private String arrivalTime;
-    private String departureTime;
+    private double locationFromLat;
+    private double locationFromLng;
+    private double locationToLat;
+    private double locationToLng;
 
     DataHandler dataHandler = new DataHandler();
 
 
     // Standard Constructor
-    public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime, String departureTime, String arrivalTime) {
+    public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng) {
         this.locationFrom = locationFrom;
         this.locationTo = locationTo;
         this.price = price;
         this.distance = distance;
         this.travelTime = travelTime;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
+        this.locationFromLat = locationFromLat;
+        this.locationFromLng = locationFromLng;
+        this.locationToLat = locationToLat;
+        this.locationToLng = locationToLng;
     }
 
     // JSON Constructor
     public Trip(JSONObject object) {
-        locationFrom    = object.getString("locationFrom");
-        locationTo      = object.getString("locationTo");
-        price           = object.getString("price");
-        distance        = object.getString("distance");
-        travelTime      = object.getString("travelTime");
-        departureTime   = object.getString("departureTime");
-        arrivalTime     = object.getString("arrivalTime");
+        locationFrom = object.getString("locationFrom");
+        locationTo = object.getString("locationTo");
+        price = object.getString("price");
+        distance = object.getString("distance");
+        travelTime = object.getString("travelTime");
+        locationFromLat = object.getDouble("locationFromLat");
+        locationFromLng = object.getDouble("locationFromLon");
+        locationToLat = object.getDouble("locationToLat");
+        locationToLng = object.getDouble("locationToLon");
+
     }
 
     // toJSON Method
@@ -49,8 +56,10 @@ public class Trip {
         jobj.put("price", price);
         jobj.put("distance", distance);
         jobj.put("travelTime", travelTime);
-        jobj.put("departureTime", departureTime);
-        jobj.put("arrivalTime", arrivalTime);
+        jobj.put("locationFromLat", locationFromLat);
+        jobj.put("locationFromLon", locationFromLng);
+        jobj.put("locationToLat", locationToLat);
+        jobj.put("locationToLon", locationToLng);
         return jobj;
     }
 
@@ -95,22 +104,37 @@ public class Trip {
         this.travelTime = travelTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public double getLocationFromLat() {
+        return locationFromLat;
     }
 
-    public String getArrivalTime(){
-        return this.arrivalTime;
+    public void setLocationFromLat(double locationFromLat) {
+        this.locationFromLat = locationFromLat;
     }
 
-    public void setDepartureTime(){
-        this.departureTime = departureTime;
+    public double getLocationFromLng() {
+        return locationFromLng;
     }
 
-    public String getDepartureTime(){
-        return  this.departureTime;
+    public void setLocationFromLng(double locationFromLng) {
+        this.locationFromLng = locationFromLng;
     }
 
+    public double getLocationToLat() {
+        return locationToLat;
+    }
+
+    public void setLocationToLat(double locationToLat) {
+        this.locationToLat = locationToLat;
+    }
+
+    public double getLocationToLng() {
+        return locationToLng;
+    }
+
+    public void setLocationToLng(double locationToLng) {
+        this.locationToLng = locationToLng;
+    }
 
     public void printTripDetails() {
         Locale.setDefault(new Locale("nl", "NL"));

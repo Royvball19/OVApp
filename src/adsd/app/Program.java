@@ -11,12 +11,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Program extends Application
+public class Program
 {
 
     private static DataHandler datahandler;
 
-    @Override
+/*    @Override
     public void start(Stage primaryStage) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
@@ -28,7 +28,7 @@ public class Program extends Application
 
         startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-    }
+    }*/
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
@@ -36,7 +36,7 @@ public class Program extends Application
         datahandler = new DataHandler();
         datahandler.readFromJSON();
 
-        launch(args);
+        Application.launch(GUI.class, args);
 
         Locale.setDefault(new Locale("nl", "NL"));
         ResourceBundle rb = ResourceBundle.getBundle("lang");

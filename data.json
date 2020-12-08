@@ -1,6 +1,6 @@
 {"firstName":"Jan-Peter","lastName":"Balkenende","myTripList":[]}
 {"firstName":"Flip","lastName":"Flop","myTripList":[]}
 ,
-{"departureTime":"11:00","travelTime":"31","distance":"24","locationTo":"Amersfoort","price":"\u20ac4,20","arrivalTime":"12:00","locationFrom":"Utrecht"}
-{"departureTime":"11:00","travelTime":"40","distance":"37","locationTo":"Rotterdam","price":"\u20ac7,45","arrivalTime":"12:00","locationFrom":"Amsterdam"}
-{"departureTime":"11:00","travelTime":"130","distance":"140","locationTo":"Groningen","price":"\u20ac35,60","arrivalTime":"12:00","locationFrom":"Limburg"}
+{"travelTime":"31","locationFromLon":5.384214,"locationToLat":52.0907374,"distance":"24","locationTo":"Amersfoort","price":"\u20ac4,20","locationToLon":5.1214201,"locationFrom":"Utrecht","locationFromLat":52.153708}
+{"travelTime":"31","locationFromLon":4.8951679,"locationToLat":51.5719149,"distance":"24","locationTo":"Amsterdam","price":"\u20ac4,20","locationToLon":4.768323,"locationFrom":"Breda","locationFromLat":52.3702157}
+{"travelTime":"31","locationFromLon":5.8987296,"locationToLat":52.5167747,"distance":"24","locationTo":"Zwolle","price":"\u20ac4,20","locationToLon":6.0830219,"locationFrom":"Arnhem","locationFromLat":51.9851034}

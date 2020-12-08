@@ -1,6 +1,6 @@
 package adsd.app;
 
-public class Route {
+public class FavoriteTrip {
 
     // Attributes
     private int ID;
@@ -12,7 +12,7 @@ public class Route {
     private String locationToLng;
 
     // Standard Constructor
-    public Route(int ID, String locationFrom, String locationTo, String locationFromLat, String locationFromLng, String locationToLat, String locationToLng)
+    public FavoriteTrip(int ID, String locationFrom, String locationTo, String locationFromLat, String locationFromLng, String locationToLat, String locationToLng)
     {
         this.ID = ID;
         this.locationFrom = locationFrom;

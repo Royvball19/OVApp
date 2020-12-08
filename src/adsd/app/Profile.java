@@ -10,7 +10,7 @@ public class Profile
     private String firstName;
     private String lastName;
     private ArrayList<Trip> myTripList;
-    private ArrayList<Route> myFavoriteTrip;
+    private ArrayList<FavoriteTrip> myFavoriteTrip;
 
     // Standard Constructor
     public Profile(String firstName, String lastName)
@@ -55,14 +55,14 @@ public class Profile
     }
 
     // addTrip Method
-    public void addTrip(String locationFrom, String locationTo, String price, String distance, String travelTime, String departureTime, String arrivalTime)
+    public void addTrip(String locationFrom, String locationTo, String price, String distance, String travelTime, double locationFromLat, double locationFromLon, double locationToLat, double locationToLon)
     {
-        myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime, departureTime, arrivalTime));
+        myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime, locationFromLat, locationFromLon, locationToLat, locationToLon));
     }
 
     public void addRoute(int ID, String locationFrom, String locationTo, String locationFromLat, String locationFromLng, String locationToLat, String locationToLng)
     {
-        myFavoriteTrip.add(new Route( ID, locationFrom, locationTo, locationFromLat, locationFromLng, locationToLat, locationToLng));
+        myFavoriteTrip.add(new FavoriteTrip( ID, locationFrom, locationTo, locationFromLat, locationFromLng, locationToLat, locationToLng));
     }
 
     // Getters and Setters

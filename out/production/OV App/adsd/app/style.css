@@ -18,7 +18,7 @@
     -fx-focus-color: #ffa500;
 }
 
-#departureRoute
+#departureRouteText
 {
     -fx-font-weight: bold;
     -fx-font-size: 20;
@@ -93,7 +93,8 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
-#LangOptionButton {
+/*Changed variable name first letter to non caps*/
+#langOptionButton {
     -fx-background-color: none;
     -fx-background-image: url("Images/world.png");
     -fx-background-repeat: no-repeat;
@@ -102,7 +103,7 @@
     -fx-min-width: 40;
 }
 
-#LangOptionButton:hover {
+#langOptionButton:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
@@ -150,9 +151,79 @@
 }
 
 
-.toolbar
+#toolbar
 {
     -fx-background-color: null;
     -fx-min-height: 60;
     -fx-alignment: center;
+}
+
+#showMapPane {
+    -fx-background-color: black;
+    -fx-background-size: cover;
+}
+
+#showMapReturnButton {
+    -fx-background-color: white;
+    -fx-background-image: url("Images/arrow.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 80%;
+    -fx-background-position: center center;
+    -fx-background-radius: 0;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
+    -fx-border-radius: 0;
+    -fx-opacity: 0.60;
+}
+
+#showMapReturnButton:hover {
+    -fx-opacity: 0.80;
+}
+
+
+
+/*Map CSS*/
+
+#map {
+    height: 400px;
+    width: 265px;
+}
+
+header,
+
+b {
+    font-size: 15px;
+    font-family: "Segoe UI";
+}
+
+#floating-panel {
+    position: absolute;
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    background-color: transparent;
+    padding: 2px;
+    border: transparent;
+    text-align: center;
+    font-family: "Roboto", "sans-serif";
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
 }
