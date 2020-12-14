@@ -1,10 +1,8 @@
 package adsd.app;
 
-import adsd.app.DataHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -32,7 +30,7 @@ public class MyProfileController {
     public void initialize() throws FileNotFoundException {
 
         dataHandler = new DataHandler();
-        dataHandler.readFromJSON();
+        dataHandler.readFromExternalData();
 
         labelFirstName.setText(rb.getString("labelFirstName"));
         labelLastName.setText(rb.getString("labelLastName"));

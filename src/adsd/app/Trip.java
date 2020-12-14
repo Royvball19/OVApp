@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 public class Trip {
     // Attributes
+    private Integer ID;
     private String locationFrom;
     private String locationTo;
     private String price;
@@ -17,33 +18,34 @@ public class Trip {
     private double locationToLat;
     private double locationToLng;
 
-    DataHandler dataHandler = new DataHandler();
 
 
     // Standard Constructor
-    public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng) {
-        this.locationFrom = locationFrom;
-        this.locationTo = locationTo;
-        this.price = price;
-        this.distance = distance;
-        this.travelTime = travelTime;
+    public Trip(Integer ID, String locationFrom, String locationTo, String price, String distance, String travelTime, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng) {
+        this.ID              = ID;
+        this.locationFrom    = locationFrom;
+        this.locationTo      = locationTo;
+        this.price           = price;
+        this.distance        = distance;
+        this.travelTime      = travelTime;
         this.locationFromLat = locationFromLat;
         this.locationFromLng = locationFromLng;
-        this.locationToLat = locationToLat;
-        this.locationToLng = locationToLng;
+        this.locationToLat   = locationToLat;
+        this.locationToLng   = locationToLng;
     }
 
     // JSON Constructor
     public Trip(JSONObject object) {
+        ID = object.getInt("ID");
         locationFrom = object.getString("locationFrom");
         locationTo = object.getString("locationTo");
         price = object.getString("price");
         distance = object.getString("distance");
         travelTime = object.getString("travelTime");
         locationFromLat = object.getDouble("locationFromLat");
-        locationFromLng = object.getDouble("locationFromLon");
+        locationFromLng = object.getDouble("locationFromLng");
         locationToLat = object.getDouble("locationToLat");
-        locationToLng = object.getDouble("locationToLon");
+        locationToLng = object.getDouble("locationToLng");
 
     }
 
@@ -51,19 +53,31 @@ public class Trip {
     public JSONObject toJSON() {
         JSONObject jobj = new JSONObject();
 
+        jobj.put("ID", ID);
         jobj.put("locationFrom", locationFrom);
         jobj.put("locationTo", locationTo);
         jobj.put("price", price);
         jobj.put("distance", distance);
         jobj.put("travelTime", travelTime);
         jobj.put("locationFromLat", locationFromLat);
-        jobj.put("locationFromLon", locationFromLng);
+        jobj.put("locationFromLng", locationFromLng);
         jobj.put("locationToLat", locationToLat);
-        jobj.put("locationToLon", locationToLng);
+        jobj.put("locationToLng", locationToLng);
         return jobj;
     }
 
     // Getters and Setters
+    public int getID()
+    {
+        return this.ID;
+    }
+
+    public void setID(Integer ID)
+    {
+        this.ID = ID;
+    }
+
+
     public String getLocationFrom() {
         return this.locationFrom;
     }

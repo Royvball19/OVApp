@@ -31,7 +31,7 @@ public class GUI extends Application
     public void start(Stage primaryStage) throws IOException {
 
         dataHandler = new DataHandler();
-        dataHandler.readFromJSON();
+        dataHandler.readFromExternalData();
 
         Locale.setDefault(new Locale("nl", "NL"));
         ResourceBundle rb = ResourceBundle.getBundle("lang");
@@ -257,7 +257,12 @@ public class GUI extends Application
         // Button action listeners
         planTripButton.setOnAction(e ->
         {
-            primaryStage.setScene(viewTripDetails);
+            if (tripOption.getSelectionModel().getSelectedIndex() == -1) {
+                System.out.println("Please select");
+            }
+                else{
+                    primaryStage.setScene(viewTripDetails);
+                }
         });
 
         chooseOtherTrip.setOnAction(e ->
@@ -281,14 +286,14 @@ public class GUI extends Application
         chooseTripLayout.setId("chooseTripLayout");
         chooseTripLayout.setHgap(10);
         chooseTripLayout.setVgap(12);
-        chooseTripLayout.add(toolBar, 4, 0);
-        chooseTripLayout.add(tripOption, 4, 5);
-        chooseTripLayout.add(departureRoute, 4, 4);
-        chooseTripLayout.add(departureTime, 4, 7);
-        chooseTripLayout.add(choicebox, 4, 8);
-        chooseTripLayout.add(tripDateOption, 4, 9);
+        chooseTripLayout.add(toolBar, 5, 0);
+        chooseTripLayout.add(tripOption, 5, 5);
+        chooseTripLayout.add(departureRoute, 5, 4);
+        chooseTripLayout.add(departureTime, 5, 7);
+        chooseTripLayout.add(choicebox, 5, 8);
+        chooseTripLayout.add(tripDateOption, 5, 9);
 /*        chooseTripLayout.add(recentTripButton, 4, 10);*/
-        chooseTripLayout.add(planTripButton, 4, 12);
+        chooseTripLayout.add(planTripButton, 5, 12);
         chooseTripLayout.setHalignment(tripDateOption, HPos.CENTER);
         chooseTripLayout.setHalignment(departureTime, HPos.CENTER);
         chooseTripLayout.setHalignment(departureRoute, HPos.CENTER);
@@ -335,7 +340,6 @@ public class GUI extends Application
         viewProfileLayout.setHalignment(labelLastNameInfoRecords, HPos.CENTER);
         viewProfileLayout.setHalignment(labelFirstNameInfo, HPos.CENTER);
         viewProfileLayout.setHalignment(labelLastNameInfo, HPos.CENTER);
-/*        viewProfileLayout.setHalignment(profileRecords, HPos.LEFT);*/
         viewMyProfile = new Scene(viewProfileLayout, 255, 400);
 
         // Import Stylesheets

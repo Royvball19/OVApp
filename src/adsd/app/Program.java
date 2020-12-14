@@ -1,10 +1,6 @@
 package adsd.app;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
@@ -32,9 +28,21 @@ public class Program
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
+        System.out.println("Loading driver...");
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver loaded!\n");
+        } catch (ClassNotFoundException e)
+        {
+            throw new IllegalStateException("Cannot find the driver in the classpath!", e);
+        }
+
+
+
         // Datahandler import
         datahandler = new DataHandler();
-        datahandler.readFromJSON();
+        datahandler.readFromExternalData();
 
         Application.launch(GUI.class, args);
 
@@ -43,7 +51,7 @@ public class Program
 
 
         // Datahandler writeToJSON always at the end of the application
-        datahandler.writeToJSON();
+        datahandler.writeToExternalData();
 
     }
 }

@@ -1,6 +1,5 @@
 package adsd.app;
 
-import adsd.app.DataHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +41,7 @@ public class RouteInformationController extends HomeScreenController {
     public void initialize() throws FileNotFoundException {
 
         dataHandler = new DataHandler();
-        dataHandler.readFromJSON();
+        dataHandler.readFromExternalData();
 
 
 

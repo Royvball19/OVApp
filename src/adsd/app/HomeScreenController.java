@@ -1,7 +1,5 @@
 package adsd.app;
 
-import adsd.app.DataHandler;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.skin.ChoiceBoxSkin;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -39,7 +36,7 @@ public class HomeScreenController  {
     public void initialize() throws FileNotFoundException {
 
         dataHandler = new DataHandler();
-        dataHandler.readFromJSON();
+        dataHandler.readFromExternalData();
 
         departureRoute.setText((rb.getString("departureRoute")));
         departureRoute.setStyle("-fx-font-weight: bold");
