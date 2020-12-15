@@ -1,18 +1,22 @@
 package adsd.app;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Program
+public class Program extends Application
 {
 
     private static DataHandler datahandler;
 
-/*    @Override
+    @Override
     public void start(Stage primaryStage) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
@@ -24,7 +28,7 @@ public class Program
 
         startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-    }*/
+    }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
@@ -44,7 +48,8 @@ public class Program
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
-        Application.launch(GUI.class, args);
+//        Application.launch(GUI.class, args);
+        launch(args);
 
         Locale.setDefault(new Locale("nl", "NL"));
         ResourceBundle rb = ResourceBundle.getBundle("lang");

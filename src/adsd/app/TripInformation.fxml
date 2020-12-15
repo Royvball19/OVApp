@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.RouteInformationController">
+<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.TripInformationController">
 <children>
     <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@style.css">
         <items>
             <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@style.css" />
             <Button id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
             <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-            <Button id="LangOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
+            <Button id="langOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
         </items>
     </ToolBar>
-    <GridPane layoutX="33.0" layoutY="136.0" prefHeight="217.0" prefWidth="200.0">
+    <GridPane id="tripInfoPane" layoutX="27.0" layoutY="106.0" prefHeight="274.0" prefWidth="221.0" stylesheets="@style.css">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="115.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="106.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

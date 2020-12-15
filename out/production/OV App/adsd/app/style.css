@@ -150,11 +150,14 @@
     -fx-background-color: orange;
 }
 
+#labelLocFrom, #labelLocFromInfo, #labelLocTo, #labelLocToInfo, #labelTravelTime, #labelTravelTimeInfo, #labelPrice, #labelPriceInfo, #labelDepartureTime, #labelDepartureTimeInfo, #labelArrivalTime, #labelArrivalTimeInfo {
+    -fx-font-size: 14px;
+}
 
-#toolbar
+
+#myToolBar
 {
     -fx-background-color: null;
-    -fx-min-height: 60;
     -fx-alignment: center;
 }
 

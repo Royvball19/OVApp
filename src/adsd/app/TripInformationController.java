@@ -14,14 +14,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class RouteInformationController extends HomeScreenController {
+public class TripInformationController extends HomeScreenController {
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @FXML ToolBar myToolBar;
 
     @FXML private Label labelLocFrom;
-    @FXML public static Label labelLocFromInfo;
+    @FXML private Label labelLocFromInfo;
     @FXML private Label labelLocTo;
     @FXML private Label labelLocToInfo;
     @FXML private Label labelTravelTime;
@@ -35,6 +35,8 @@ public class RouteInformationController extends HomeScreenController {
     @FXML private Label labelTitle;
 
     DataHandler dataHandler;
+
+
 
 
 
@@ -52,18 +54,23 @@ public class RouteInformationController extends HomeScreenController {
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
 
-//        labelLocFromInfo.setText(dataHandler.getTrip(selectedTrip).getLocationFrom());
-//        labelLocToInfo.setText(dataHandler.getTrip(selectedTrip).getLocationTo());
-//        labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTravelTime());
-//        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getPrice());
-//        labelDepartureTimeInfo.setText(dataHandler.getTrip(selectedTrip).getDepartureTime());
-//        labelArrivalTimeInfo.setText(dataHandler.getTrip(selectedTrip).getArrivalTime());
-
-//
-
-//        System.out.println("RouteInformation controller : " + getSelectedTrip());
 
 
+
+
+    }
+
+    public void sendInput(int selectedTrip){
+
+        labelLocFromInfo.setText(dataHandler.getTrip(selectedTrip).getLocationFrom());
+        labelLocToInfo.setText(dataHandler.getTrip(selectedTrip).getLocationTo());
+        labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTravelTime());
+        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getPrice());
+
+
+
+
+        System.out.println("RouteInformation controller : " + selectedTrip);
 
     }
 

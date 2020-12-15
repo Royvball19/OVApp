@@ -6,7 +6,6 @@ import org.json.JSONTokener;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class DataHandler {
     final String filename = "data.json";
@@ -18,12 +17,16 @@ public class DataHandler {
     private ArrayList<Profile> profiles = new ArrayList<>();
     private ArrayList<Trip> trips = new ArrayList<>();
     private ArrayList<FavoriteTrip> favTrips = new ArrayList<>();
+    // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
+    boolean useDataType = true;
 
 
     // writeToJSON Method to write data to JSON
     public void writeToExternalData() throws FileNotFoundException, UnsupportedEncodingException {
 
-        PrintWriter writer = new PrintWriter(filename, "UTF-8");
+        if (useDataType)
+        {
+            PrintWriter writer = new PrintWriter(filename, "UTF-8");
 
         String p;
         for (Profile q : profiles) {
@@ -42,47 +45,44 @@ public class DataHandler {
         writer.flush();
         writer.close();
 
-        try
-        {
-            Connection conn = DriverManager.getConnection(url, username, password);
+        } else {
+            try {
+                Connection conn = DriverManager.getConnection(url, username, password);
 
-            // Create the java mysql update preparedstatement
-            String updateUsersQuery = "update User set age = ?, residence = ? where id = ?;";
-            PreparedStatement usersPreparedStmt = conn.prepareStatement(updateUsersQuery);
+                // Create the java mysql update preparedstatement
+                String updateUsersQuery = "update User set age = ?, residence = ? where id = ?;";
+                PreparedStatement usersPreparedStmt = conn.prepareStatement(updateUsersQuery);
 
-            for (int i = 0; i < profiles.size(); i++ )
-            {
-                usersPreparedStmt.setInt(1, profiles.get(i).getAge());
-                usersPreparedStmt.setString(2, profiles.get(i).getResidence());
-                usersPreparedStmt.setInt(3, profiles.get(i).getID());
-                usersPreparedStmt.addBatch();
+                for (int i = 0; i < profiles.size(); i++) {
+                    usersPreparedStmt.setInt(1, profiles.get(i).getAge());
+                    usersPreparedStmt.setString(2, profiles.get(i).getResidence());
+                    usersPreparedStmt.setInt(3, profiles.get(i).getID());
+                    usersPreparedStmt.addBatch();
+                }
+
+                String updateTripsQuery = "update Trip set locationFrom = ?, locationTo = ? where id = ?;";
+                PreparedStatement tripsPreparedStmt = conn.prepareStatement(updateTripsQuery);
+
+                for (int i = 0; i < trips.size(); i++) {
+                    tripsPreparedStmt.setString(1, trips.get(i).getLocationFrom());
+                    tripsPreparedStmt.setString(2, trips.get(i).getLocationTo());
+                    tripsPreparedStmt.setInt(3, trips.get(i).getID());
+                    tripsPreparedStmt.addBatch();
+                }
+
+                //todo FavoriteTrip
+
+                //todo Favorites
+
+                // Execute the java preparedstatement batches
+                usersPreparedStmt.executeBatch();
+                tripsPreparedStmt.executeBatch();
+
+                conn.close();
+            } catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
             }
-
-            String updateTripsQuery = "update Trip set locationFrom = ?, locationTo = ? where id = ?;";
-            PreparedStatement tripsPreparedStmt = conn.prepareStatement(updateTripsQuery);
-
-            for (int i = 0; i < trips.size(); i++ )
-            {
-                tripsPreparedStmt.setString(1, trips.get(i).getLocationFrom());
-                tripsPreparedStmt.setString(2, trips.get(i).getLocationTo());
-                tripsPreparedStmt.setInt(3, trips.get(i).getID());
-                tripsPreparedStmt.addBatch();
-            }
-
-            //todo FavoriteTrip
-
-            //todo Favorites
-
-            // Execute the java preparedstatement batches
-            usersPreparedStmt.executeBatch();
-            tripsPreparedStmt.executeBatch();
-
-            conn.close();
-        }
-        catch (Exception e)
-        {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
         }
     }
 

@@ -16,7 +16,7 @@
                 <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@style.css" />
                 <Button id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
                 <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-                <Button id="LangOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
+                <Button id="langOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
             </items>
         </ToolBar>
         <GridPane layoutX="33.0" layoutY="229.0" prefHeight="124.0" prefWidth="200.0">

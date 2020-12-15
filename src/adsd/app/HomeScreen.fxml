@@ -11,11 +11,11 @@
 
 <AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.HomeScreenController">
    <children>
-      <ToolBar layoutX="33.0" layoutY="22.0" prefHeight="40.0" prefWidth="200.0" styleClass="toolbar" stylesheets="@style.css">
+      <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@style.css">
         <items>
           <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
             <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-            <Button id="LangOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
+            <Button id="langOptionButton" fx:id="langOptionButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
         </items>
       </ToolBar>
       <GridPane layoutX="33.0" layoutY="111.0" prefHeight="242.0" prefWidth="200.0">
@@ -36,7 +36,7 @@
             <Label fx:id="departureTime" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="timeOption" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="dateOption" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Button fx:id="planTripButton" alignment="CENTER" mnemonicParsing="false" onAction="#showRoute" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Button fx:id="planTripButton" alignment="CENTER" mnemonicParsing="false" onAction="#showTrip" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
