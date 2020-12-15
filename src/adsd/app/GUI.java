@@ -145,7 +145,7 @@ public class GUI extends Application
             locationFrom.setText(rb.getString("locationFrom") + dataHandler.getTrip((Integer) newValue).getLocationFrom());
             locationTo.setText(rb.getString("locationTo") + dataHandler.getTrip((Integer) newValue).getLocationTo());
             tripTime.setText(rb.getString("tripTime") + dataHandler.getTrip((Integer) newValue).getTravelTime());
-            tripPrice.setText(rb.getString("tripPrice") + dataHandler.getTrip((Integer) newValue).getPrice());
+            tripPrice.setText(rb.getString("tripPrice") + dataHandler.getTrip((Integer) newValue).getVehicle());
 
             File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {

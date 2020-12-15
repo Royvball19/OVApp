@@ -154,7 +154,7 @@ public class DataHandler {
                 ResultSet rs2 = stmt.executeQuery("select * from database.favorite_route");
                 while (rs2.next())
                 {
-                    favTrips.add(new FavoriteTrip(rs2.getInt("ID"), rs2.getString("locationFrom"), rs2.getString("locationTo")));
+                   // favTrips.add(new FavoriteTrip(rs2.getInt("ID"), rs2.getString("locationFrom"), rs2.getString("locationTo")));
                 }
                 ResultSet rs3 = stmt.executeQuery("select * from database.trip");
                 while (rs3.next())
@@ -165,7 +165,7 @@ public class DataHandler {
                 ResultSet rs4 = stmt.executeQuery("select * from database.favorite");
                 while (rs4.next())
                 {
-                    profiles.get(rs4.getInt("userID")).addFavoriteTrip(favTrips.get(rs4.getInt("routeID")).getID(), favTrips.get(rs4.getInt("routeID")).getLocationFrom(), favTrips.get(rs4.getInt("routeID")).getLocationTo());
+                   // profiles.get(rs4.getInt("userID")).addFavoriteTrip(favTrips.get(rs4.getInt("routeID")).getID(), favTrips.get(rs4.getInt("routeID")).getLocationFrom(), favTrips.get(rs4.getInt("routeID")).getLocationTo());
                 }
             } catch (SQLException e) {
                 throw new IllegalStateException("Cannot connect the database!", e);

@@ -44,6 +44,7 @@ public class Program
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
+
         Application.launch(GUI.class, args);
 
         Locale.setDefault(new Locale("nl", "NL"));
