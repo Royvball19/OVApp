@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.TripInformationController">
+<AnchorPane maxHeight="452.0" maxWidth="533.0" minHeight="400.0" minWidth="265.0" prefHeight="452.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.TripInformationController">
 <children>
     <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@style.css">
         <items>
@@ -46,5 +47,6 @@
             <Label fx:id="labelArrivalTimeInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
         </children>
     </GridPane>
+      <WebView fx:id="mapWebView" layoutX="257.0" layoutY="26.0" prefHeight="400.0" prefWidth="256.0" />
 </children>
 </AnchorPane>

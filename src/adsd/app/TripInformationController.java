@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -19,6 +21,7 @@ public class TripInformationController extends HomeScreenController {
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @FXML ToolBar myToolBar;
+    @FXML WebView mapWebView;
 
     @FXML private Label labelLocFrom;
     @FXML private Label labelLocFromInfo;
@@ -45,7 +48,9 @@ public class TripInformationController extends HomeScreenController {
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
-
+        WebEngine webEngine = mapWebView.getEngine();
+        String url = "file:///C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html";
+        webEngine.load(url);
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));

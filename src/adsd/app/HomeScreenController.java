@@ -12,8 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ResourceBundle;
 
 public class HomeScreenController {
@@ -69,6 +68,77 @@ public class HomeScreenController {
 
 
     public void showTrip(ActionEvent event) throws IOException {
+
+        File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+
+            //Writer to HTML to change the locations
+            bw.write("<!DOCTYPE html> \n" +
+                    "<html> \n" +
+                    "<head> \n" +
+                    "<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly\" defer></script>\n" +
+                    "    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" /> \n" +
+                    "    <script>\n" +
+                    "        function initMap() {\n" +
+                    "        const directionsRenderer = new google.maps.DirectionsRenderer();\n" +
+                    "        const directionsService = new google.maps.DirectionsService();\n" +
+                    "        const map = new google.maps.Map(document.getElementById(\"map\"), {\n" +
+                    "            mapTypeControl: false,\n" +
+                    "            streetViewControl: false,\n" +
+                    "            zoom: 14,\n" +
+                    "            restriction: {\n" +
+                    "                latLngBounds: {\n" +
+                    "                    north: 53.79305,\n" +
+                    "                    south: 50.66916,\n" +
+                    "                    east: 7.45822,\n" +
+                    "                    west: 2.88242,\n" +
+                    "                },\n" +
+                    "            },\n" +
+                    "        });\n" +
+                    "        directionsRenderer.setMap(map);\n" +
+                    "        calculateAndDisplayRoute(directionsService, directionsRenderer);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    function calculateAndDisplayRoute(directionsService, directionsRenderer) {\n" +
+                    "        directionsService.route(\n" +
+                    "            {\n" +
+                    "                origin: { lat: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationFromLat() + ", lng: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationFromLng() + " },\n" +
+                    "                destination: { lat: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationToLat() + ", lng: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationToLng() + " },\n" +
+                    "                // Note that Javascript allows us to access the constant\n" +
+                    "                // using square brackets and a string value as its\n" +
+                    "                // \"property.\"\n" +
+                    "                travelMode: 'TRANSIT',\n" +
+                    "            },\n" +
+                    "            (response, status) => {\n" +
+                    "                if (status == \"OK\") {\n" +
+                    "                    directionsRenderer.setDirections(response);\n" +
+                    "                } else {\n" +
+                    "                    window.alert(\"Directions request failed due to \" + status);\n" +
+                    "                }\n" +
+                    "            }\n" +
+                    "        );\n" +
+                    "        }\n" +
+                    "    </script>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+    /*                "<div id=\"floating-panel\">\n" +
+                    "    <b>Van: </b>\n" +
+                    "    <select id=\"start\">\n" +
+                    "        <option value=\"Utrecht Centraal\">Utrecht</option>\n" +
+                    "    </select>\n" +
+                    "    <b>Naar: </b>\n" +
+                    "    <select id=\"end\">\n" +
+                    "        <option value=\"Amersfoort Centraal\">Amersfoort</option>\n" +
+                    "    </select>\n" +
+                    "</div>\n" +*/
+                    "<div id=\"map\"></div>\n" +
+                    "</body>\n" +
+                    "</html>");
+
+            bw.write(""); bw.write(""); bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         if (tripOption.getSelectionModel().getSelectedIndex() == -1) {
