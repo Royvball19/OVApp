@@ -1,5 +1,6 @@
 package adsd.app;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Trip {
     private double locationFromLng;
     private double locationToLat;
     private double locationToLng;
-    private ArrayList times = new ArrayList();
+    private ArrayList<TripTimes> times;
 
 
     // Standard Constructor
@@ -33,6 +34,8 @@ public class Trip {
         this.locationFromLng = locationFromLng;
         this.locationToLat   = locationToLat;
         this.locationToLng   = locationToLng;
+        this.times = new ArrayList<TripTimes>();
+
     }
 
     // JSON Constructor
@@ -48,10 +51,20 @@ public class Trip {
         locationToLat = object.getDouble("locationToLat");
         locationToLng = object.getDouble("locationToLng");
 
+        times = new ArrayList<TripTimes>();
+        JSONArray time = object.getJSONArray("tripTimes");
+        for (int i=0; i<time.length(); i++)
+        {
+            TripTimes p = new TripTimes ((JSONObject) time.get(i));
+
+            times.add(p);
+        }
+
     }
 
     // toJSON Method
     public JSONObject toJSON() {
+
         JSONObject jobj = new JSONObject();
 
         jobj.put("ID", ID);
@@ -64,7 +77,21 @@ public class Trip {
         jobj.put("locationFromLng", locationFromLng);
         jobj.put("locationToLat", locationToLat);
         jobj.put("locationToLng", locationToLng);
+
+        JSONArray ja = new JSONArray();
+        for (TripTimes t : times)
+        {
+            ja.put(t.toJSON());
+
+        }
+        jobj.put("tripTimes", ja);
+
         return jobj;
+    }
+
+    public void addTime(double depTime, double arivTime)
+    {
+        times.add(new TripTimes(depTime, arivTime));
     }
 
     // Getters and Setters
@@ -151,9 +178,13 @@ public class Trip {
         this.locationToLng = locationToLng;
     }
 
-    public void addTripTime(int index, String depTime, String arrTime){
-
-        times.add(1,"10.00");
+    public void addTripTime(int index, String depTime){
 
     }
+
+    public ArrayList times(){
+
+        return times;
+    }
+
 }
