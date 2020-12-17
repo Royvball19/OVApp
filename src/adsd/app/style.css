@@ -186,6 +186,16 @@
 
 
 /*Map CSS*/
+#mapWebView {
+    -fx-opacity: 0.70;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0), 5, 0, 0, 0);
+}
+
+#mapWebView:hover {
+    -fx-opacity: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
+}
+
 
 #map {
     height: 400px;

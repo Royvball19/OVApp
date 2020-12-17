@@ -47,6 +47,6 @@
             <Label fx:id="labelArrivalTimeInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
         </children>
     </GridPane>
-      <WebView fx:id="mapWebView" layoutX="257.0" layoutY="26.0" prefHeight="400.0" prefWidth="256.0" />
+      <WebView id="mapWebView" fx:id="mapWebView" layoutX="257.0" layoutY="26.0" prefHeight="400.0" prefWidth="256.0" stylesheets="@style.css" />
 </children>
 </AnchorPane>

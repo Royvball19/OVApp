@@ -70,7 +70,8 @@ public class TripInformationController extends HomeScreenController {
         labelLocFromInfo.setText(dataHandler.getTrip(selectedTrip).getLocationFrom());
         labelLocToInfo.setText(dataHandler.getTrip(selectedTrip).getLocationTo());
         labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTravelTime());
-        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getPrice());
+        //TODO CHANGE LABEL NAME
+        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getVehicle());
 
 
 

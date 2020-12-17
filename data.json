@@ -1,4 +1,4 @@
 {"firstName":"Test","lastName":"Test","password":"Test","myFavoriteTrip":[],"ID":0,"userName":"Test","residence":"Test","age":1}
 {"firstName":"Test","lastName":"Test","password":"Test","myFavoriteTrip":[],"ID":1,"userName":"HTest","residence":"Test","age":1}
 ,
-{"travelTime":"100minuten","locationToLat":1.1,"distance":"10km","locationTo":"Amersfoort","tripTimes":[{"arivTime":11,"depTime":10}],"locationFromLng":1.1,"locationToLng":1.1,"ID":0,"locationFrom":"Utrecht","vehicle":"Trein","locationFromLat":1.1}
+{"travelTime":"100minuten","locationToLat":52.0907374,"distance":"10km","locationTo":"Amersfoort","tripTimes":[{"arivTime":11,"depTime":10}],"locationFromLng":5.384214,"locationToLng":5.1214201,"ID":0,"locationFrom":"Utrecht","vehicle":"Trein","locationFromLat":52.153708}
