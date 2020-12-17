@@ -50,7 +50,7 @@ public class GUI extends Application
         Label records = new Label(rb.getString("records"));
         records.setStyle("-fx-font-weight: bold");
 
-        Label profileRecords = new Label("Naam: " + dataHandler.getProfile(0).getFirstName() + " " + dataHandler.getProfile(0).getLastName());
+//        Label profileRecords = new Label("Naam: " + dataHandler.getProfile(0).getFirstName() + " " + dataHandler.getProfile(0).getLastName());
 
         Label locationFrom = new Label();
 
@@ -115,16 +115,19 @@ public class GUI extends Application
         ChoiceBox choicebox = new ChoiceBox();
         choicebox.getItems().addAll(rb.getString("choicebox"), "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
         choicebox.getSelectionModel().select(0);
-        choicebox.setVisible(false);
+        choicebox.setVisible(true);
 
         ChoiceBox tripOption = new ChoiceBox();
+        tripOption.getItems().addAll();
+        choicebox.getSelectionModel().select(0);
+        choicebox.setVisible(true);
 
         ChoiceBox profileSelector = new ChoiceBox();
 
         ChoiceBox<String> tripDateOption = new ChoiceBox<>();
         tripDateOption.getItems().addAll(rb.getString("choiceboxdate"), "Vandaag", "Morgen", "Overmorgen");
         tripDateOption.getSelectionModel().select(0);
-        tripDateOption.setVisible(false);
+        tripDateOption.setVisible(true);
 
 
         // Loop to add trips to tripOption choicebox
@@ -145,7 +148,7 @@ public class GUI extends Application
             locationFrom.setText(rb.getString("locationFrom") + dataHandler.getTrip((Integer) newValue).getLocationFrom());
             locationTo.setText(rb.getString("locationTo") + dataHandler.getTrip((Integer) newValue).getLocationTo());
             tripTime.setText(rb.getString("tripTime") + dataHandler.getTrip((Integer) newValue).getTravelTime());
-            tripPrice.setText(rb.getString("tripPrice") + dataHandler.getTrip((Integer) newValue).getPrice());
+            tripPrice.setText(rb.getString("tripPrice") + dataHandler.getTrip((Integer) newValue).getVehicle());
 
             File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {

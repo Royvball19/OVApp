@@ -15,7 +15,6 @@ public class Profile
     private String residence;
     private int age;
     private ArrayList<Trip> myTripList;
-    private ArrayList<FavoriteTrip> myFavoriteTrip;
 
     public Profile () {
 
@@ -31,7 +30,7 @@ public class Profile
         this.lastName   = lastName;
         this.residence  = residence;
         this.age        = age;
-        this.myFavoriteTrip = new ArrayList<FavoriteTrip>();
+        this.myTripList = new ArrayList<Trip>();
     }
 
     // JSON Constructor
@@ -45,12 +44,12 @@ public class Profile
         residence   = object.getString("residence");
         age         = object.getInt("age");
 
-        myFavoriteTrip  = new ArrayList<FavoriteTrip>();
-        JSONArray favTrips = object.getJSONArray("myFavoriteTrip");
-        for (int i=0; i<favTrips.length(); i++)
+        myTripList  = new ArrayList<Trip>();
+        JSONArray trips = object.getJSONArray("myFavoriteTrip");
+        for (int i=0; i<trips.length(); i++)
         {
-            FavoriteTrip p = new FavoriteTrip ((JSONObject) favTrips.get(i));
-            myFavoriteTrip.add(p);
+            Trip p = new Trip ((JSONObject) trips.get(i));
+            myTripList.add(p);
         }
     }
 
@@ -68,7 +67,7 @@ public class Profile
         jobj.put("age", age);
 
         JSONArray ja = new JSONArray();
-        for (FavoriteTrip t : myFavoriteTrip)
+        for (Trip t : myTripList)
         {
             ja.put(t.toJSON());
 
@@ -84,9 +83,9 @@ public class Profile
         myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime, locationFromLat, locationFromLon, locationToLat, locationToLon));
     }*/
 
-    public void addFavoriteTrip(int ID, String locationFrom, String locationTo)
+    public void addTrip(Integer ID, String locationFrom, String locationTo, String vehicle, String distance, String travelTime, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng)
     {
-        myFavoriteTrip.add(new FavoriteTrip(ID, locationFrom, locationTo));
+        myTripList.add(new Trip(ID,locationFrom, locationTo, vehicle, distance, travelTime, locationFromLat, locationFromLng, locationToLat, locationToLng));
     }
 
     // Getters and Setters
@@ -146,7 +145,7 @@ public class Profile
         this.age = age;
     }
 
-    public ArrayList<FavoriteTrip> getMyFavTrip(){
-        return myFavoriteTrip;
+    public ArrayList<Trip> myTripList(){
+        return myTripList;
     }
 }

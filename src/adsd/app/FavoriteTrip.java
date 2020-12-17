@@ -3,7 +3,7 @@ package adsd.app;
 import org.json.JSONObject;
 
 public class FavoriteTrip {
-
+/*
     // Attributes
     private int ID;
     private String locationFrom;
@@ -63,5 +63,5 @@ public class FavoriteTrip {
     public void setLocationTo(String locationTo)
     {
         this.locationTo = locationTo;
-    }
+    }*/
 }

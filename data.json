@@ -1,7 +1,4 @@
-{"firstName":"null","lastName":"null","password":"null","myFavoriteTrip":[],"ID":0,"userName":"null","residence":"null","age":0}
-{"firstName":"Roy","lastName":"van Ballegooijen","password":"test","myFavoriteTrip":[{"locationTo":"Amersfoort","ID":1,"locationFrom":"Utrecht"},{"locationTo":"Den Haag","ID":2,"locationFrom":"Amsterdam"}],"ID":1,"userName":"royvball","residence":"Kaasland","age":2}
-{"firstName":"Joel","lastName":"Soedito","password":"test","myFavoriteTrip":[{"locationTo":"Amersfoort","ID":1,"locationFrom":"Utrecht"}],"ID":2,"userName":"joelsoedito","residence":"Koekjesland","age":22}
+{"firstName":"Test","lastName":"Test","password":"Test","myFavoriteTrip":[],"ID":0,"userName":"Test","residence":"Test","age":1}
+{"firstName":"Test","lastName":"Test","password":"Test","myFavoriteTrip":[],"ID":1,"userName":"HTest","residence":"Test","age":1}
 ,
-{"travelTime":"00:31","locationToLat":52.0907374,"distance":"24km","locationTo":"Utrecht","price":"2,50","locationFromLng":5.384214,"locationToLng":5.1214201,"ID":1,"locationFrom":"Amersfoort","locationFromLat":52.153708}
-{"travelTime":"00:45","locationToLat":51.5719149,"distance":"45km","locationTo":"Amsterdam","price":"2,50","locationFromLng":4.8951679,"locationToLng":4.768323,"ID":2,"locationFrom":"Breda","locationFromLat":52.3702157}
-{"travelTime":"01:10","locationToLat":52.5167747,"distance":"92km","locationTo":"Zwolle","price":"2,50","locationFromLng":5.8987296,"locationToLng":6.0830219,"ID":3,"locationFrom":"Arnhem","locationFromLat":51.9851034}
+{"travelTime":"100minuten","locationToLat":1.1,"distance":"10km","locationTo":"Amersfoort","tripTimes":[{"arivTime":11,"depTime":10}],"locationFromLng":1.1,"locationToLng":1.1,"ID":0,"locationFrom":"Utrecht","vehicle":"Trein","locationFromLat":1.1}
