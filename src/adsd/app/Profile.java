@@ -83,69 +83,84 @@ public class Profile
         myTripList.add(new Trip(locationFrom,locationTo, price, distance, travelTime, locationFromLat, locationFromLon, locationToLat, locationToLon));
     }*/
 
-    public void addTrip(Integer ID, String locationFrom, String locationTo, String vehicle, String distance, String travelTime, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng)
+    public void addTrip(Integer ID, String locationFrom, String locationTo, String distance, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng)
     {
-        myTripList.add(new Trip(ID,locationFrom, locationTo, vehicle, distance, travelTime, locationFromLat, locationFromLng, locationToLat, locationToLng));
+        myTripList.add(new Trip(ID,locationFrom, locationTo, distance, locationFromLat, locationFromLng, locationToLat, locationToLng));
     }
 
     // Getters and Setters
-    public int getID() {
+    public int getID()
+    {
         return this.ID;
     }
 
-    public void setID(int ID) {
+    public void setID(int ID)
+    {
         this.ID = ID;
     }
 
-    public String getUserName() {
+    public String getUserName()
+    {
         return this.userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(String userName)
+    {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return this.lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
 
-    public String getResidence() {
+    public String getResidence()
+    {
         return this.residence;
     }
 
-    public void setResidence(String residence) {
+    public void setResidence(String residence)
+    {
         this.residence = residence;
     }
 
-    public int getAge() {
+    public int getAge()
+    {
         return this.age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age)
+    {
         this.age = age;
     }
 
-    public ArrayList<Trip> myTripList(){
+    public ArrayList<Trip> myTripList()
+    {
         return myTripList;
     }
 }

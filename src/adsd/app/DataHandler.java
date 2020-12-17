@@ -7,7 +7,8 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DataHandler {
+public class DataHandler
+{
     final String filename = "data.json";
 
     private String url = "jdbc:mysql://localhost:3306/database";
@@ -16,20 +17,21 @@ public class DataHandler {
 
     private ArrayList<Profile> profiles = new ArrayList<>();
     private ArrayList<Trip> trips = new ArrayList<>();
-    private ArrayList<FavoriteTrip> favTrips = new ArrayList<>();
     // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
     boolean useDataType = true;
 
 
     // writeToJSON Method to write data to JSON
-    public void writeToExternalData() throws FileNotFoundException, UnsupportedEncodingException {
+    public void writeToExternalData() throws FileNotFoundException, UnsupportedEncodingException
+    {
 
         if (useDataType)
         {
             PrintWriter writer = new PrintWriter(filename, "UTF-8");
 
         String p;
-        for (Profile q : profiles) {
+        for (Profile q : profiles)
+        {
             p = q.toJSON().toString();
             writer.println(p);
         }
@@ -37,7 +39,8 @@ public class DataHandler {
         writer.println(",");
 
         String t;
-        for (Trip q : trips) {
+        for (Trip q : trips)
+        {
             t = q.toJSON().toString();
             writer.println(t);
         }
@@ -45,25 +48,32 @@ public class DataHandler {
         writer.flush();
         writer.close();
 
-        } else {
-            try {
+        }
+        else
+            {
+            try
+            {
                 Connection conn = DriverManager.getConnection(url, username, password);
 
                 // Create the java mysql update preparedstatement
                 String updateUsersQuery = "update User set age = ?, residence = ? where id = ?;";
                 PreparedStatement usersPreparedStmt = conn.prepareStatement(updateUsersQuery);
 
-                for (int i = 0; i < profiles.size(); i++) {
+                // Update Profiles in MYQSL
+                for (int i = 0; i < profiles.size(); i++)
+                {
                     usersPreparedStmt.setInt(1, profiles.get(i).getAge());
                     usersPreparedStmt.setString(2, profiles.get(i).getResidence());
                     usersPreparedStmt.setInt(3, profiles.get(i).getID());
                     usersPreparedStmt.addBatch();
                 }
 
+                // Update Trips in MYQSL
                 String updateTripsQuery = "update Trip set locationFrom = ?, locationTo = ? where id = ?;";
                 PreparedStatement tripsPreparedStmt = conn.prepareStatement(updateTripsQuery);
 
-                for (int i = 0; i < trips.size(); i++) {
+                for (int i = 0; i < trips.size(); i++)
+                {
                     tripsPreparedStmt.setString(1, trips.get(i).getLocationFrom());
                     tripsPreparedStmt.setString(2, trips.get(i).getLocationTo());
                     tripsPreparedStmt.setInt(3, trips.get(i).getID());
@@ -79,7 +89,9 @@ public class DataHandler {
                 tripsPreparedStmt.executeBatch();
 
                 conn.close();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 System.err.println("Got an exception! ");
                 System.err.println(e.getMessage());
             }
@@ -89,7 +101,8 @@ public class DataHandler {
 
 
     // readFromJSON Method to read data from JSON
-    public void readFromExternalData() throws FileNotFoundException {
+    public void readFromExternalData() throws FileNotFoundException
+    {
 
         // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
         boolean readDataType = true;
@@ -136,7 +149,8 @@ public class DataHandler {
                     e.printStackTrace();
                 }
             }
-        } else
+        }
+        else
             {
             try (Connection connection = DriverManager.getConnection(url, username, password))
             {
@@ -159,7 +173,7 @@ public class DataHandler {
                 ResultSet rs3 = stmt.executeQuery("select * from database.trip");
                 while (rs3.next())
                 {
-                    trips.add(new Trip(rs3.getInt("ID"), rs3.getString("locationFrom"), rs3.getString("locationTo"), rs3.getString("price"), rs3.getString("distance"), rs3.getString("travelTime"), rs3.getDouble("locationFromLat"), rs3.getDouble("locationFromLng"), rs3.getDouble("locationToLat"), rs3.getDouble("locationToLng")));
+                    trips.add(new Trip(rs3.getInt("ID"), rs3.getString("locationFrom"), rs3.getString("locationTo"), rs3.getString("distance"), rs3.getDouble("locationFromLat"), rs3.getDouble("locationFromLng"), rs3.getDouble("locationToLat"), rs3.getDouble("locationToLng")));
                 }
 
                 ResultSet rs4 = stmt.executeQuery("select * from database.favorite");
@@ -167,27 +181,32 @@ public class DataHandler {
                 {
                    // profiles.get(rs4.getInt("userID")).addFavoriteTrip(favTrips.get(rs4.getInt("routeID")).getID(), favTrips.get(rs4.getInt("routeID")).getLocationFrom(), favTrips.get(rs4.getInt("routeID")).getLocationTo());
                 }
-            } catch (SQLException e) {
+            } catch (SQLException e)
+            {
                 throw new IllegalStateException("Cannot connect the database!", e);
             }
         }
     }
 
     // getProfile Method to get index from ArrayList
-    public Profile getProfile(int index) {
+    public Profile getProfile(int index)
+    {
         return profiles.get(index);
     }
 
-    public ArrayList<Profile> getProfileList() {
+    public ArrayList<Profile> getProfileList()
+    {
         return profiles;
     }
 
     // getTrip Method to get index from ArrayList
-    public Trip getTrip(int index) {
+    public Trip getTrip(int index)
+    {
         return trips.get(index);
     }
 
-    public ArrayList<Trip> getTripList() {
+    public ArrayList<Trip> getTripList()
+    {
         return trips;
     }
 

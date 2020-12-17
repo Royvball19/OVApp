@@ -12,7 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class MyProfileController {
+public class MyProfileController
+{
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
@@ -27,7 +28,8 @@ public class MyProfileController {
     @FXML ComboBox profileSelector;
     @FXML Button showSelectedProfile;
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws FileNotFoundException
+    {
 
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
@@ -45,14 +47,16 @@ public class MyProfileController {
 
     }
 
-    public void showProfileDetails(ActionEvent event) {
+    public void showProfileDetails(ActionEvent event)
+    {
 
         labelFirstNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getFirstName());
         labelLastNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getLastName());
 
     }
 
-    public void showHomeScreen(ActionEvent event) throws IOException {
+    public void showHomeScreen(ActionEvent event) throws IOException
+    {
         Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
         Scene MyProfileScene = new Scene(HomeScreenParent);
 
@@ -67,7 +71,8 @@ public class MyProfileController {
         window.show();
     }
 
-    public void showMyFavoriteTrips (ActionEvent event) throws IOException {
+    public void showMyFavoriteTrips (ActionEvent event) throws IOException
+    {
         Parent homeScreenParent = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent);
 

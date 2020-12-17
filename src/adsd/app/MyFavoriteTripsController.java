@@ -14,7 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class MyFavoriteTripsController {
+public class MyFavoriteTripsController
+{
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
@@ -23,13 +24,15 @@ public class MyFavoriteTripsController {
 
     @FXML ToolBar myToolBar;
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws FileNotFoundException
+    {
 
 
 
     }
 
-    public void showHomeScreen(ActionEvent event) throws IOException {
+    public void showHomeScreen(ActionEvent event) throws IOException
+    {
         Parent tripInfoParent = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
         Scene routeInfoScene = new Scene(tripInfoParent);
 
@@ -42,7 +45,8 @@ public class MyFavoriteTripsController {
         window.show();
     }
 
-    public void showMyProfile(ActionEvent event) throws IOException {
+    public void showMyProfile(ActionEvent event) throws IOException
+    {
         Parent tripInfoParent = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
         Scene routeInfoScene = new Scene(tripInfoParent);
 

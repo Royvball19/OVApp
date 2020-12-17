@@ -15,7 +15,8 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ResourceBundle;
 
-public class HomeScreenController {
+public class HomeScreenController
+{
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
@@ -38,7 +39,8 @@ public class HomeScreenController {
     TripInformationController routeInformationController;
 
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws FileNotFoundException
+    {
 
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
@@ -52,7 +54,8 @@ public class HomeScreenController {
 
         planTripButton.setText((rb.getString("planTripButton")));
 
-        for (int i = 0; i < dataHandler.getTripList().size(); i++) {
+        for (int i = 0; i < dataHandler.getTripList().size(); i++)
+        {
             tripOption.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo());
         }
 
@@ -67,12 +70,14 @@ public class HomeScreenController {
 
 
 
-    public void showTrip(ActionEvent event) throws IOException {
+    public void showTrip(ActionEvent event) throws IOException
+    {
 
         File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f)))
+        {
 
-            //Writer to HTML to change the locations
+            //Writer to HTML to change the Locations and Vehicletype
             bw.write("<!DOCTYPE html> \n" +
                     "<html> \n" +
                     "<head> \n" +
@@ -107,7 +112,7 @@ public class HomeScreenController {
                     "                // Note that Javascript allows us to access the constant\n" +
                     "                // using square brackets and a string value as its\n" +
                     "                // \"property.\"\n" +
-                    "                travelMode: 'TRANSIT',\n" +
+                    "                travelMode: '" + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getTripTimesList().get(0).getVehicleType() + "',\n" +
                     "            },\n" +
                     "            (response, status) => {\n" +
                     "                if (status == \"OK\") {\n" +
@@ -136,14 +141,18 @@ public class HomeScreenController {
                     "</html>");
 
             bw.write(""); bw.write(""); bw.close();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
 
-        if (tripOption.getSelectionModel().getSelectedIndex() == -1) {
+        if (tripOption.getSelectionModel().getSelectedIndex() == -1)
+        {
             // set text to a box with message: "please select"
-        } else {
+        }
+        else
+            {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("TripInformation.fxml"));
@@ -168,7 +177,8 @@ public class HomeScreenController {
 
     }
 
-    public void showMyProfileButton(ActionEvent event) throws IOException {
+    public void showMyProfileButton(ActionEvent event) throws IOException
+    {
         Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
         Scene myProfileScene = new Scene(homeScreenParent2);
 
@@ -181,7 +191,8 @@ public class HomeScreenController {
         window.show();
     }
 
-    public void showMyFavoriteTrips(ActionEvent event) throws IOException {
+    public void showMyFavoriteTrips(ActionEvent event) throws IOException
+    {
         Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent3);
 

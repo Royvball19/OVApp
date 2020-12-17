@@ -16,7 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class TripInformationController extends HomeScreenController {
+public class TripInformationController extends HomeScreenController
+{
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
@@ -43,7 +44,8 @@ public class TripInformationController extends HomeScreenController {
 
 
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws FileNotFoundException
+    {
 
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
@@ -55,7 +57,7 @@ public class TripInformationController extends HomeScreenController {
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
         labelTravelTime.setText(rb.getString("travelTime"));
-        labelPrice.setText(rb.getString("price"));
+        labelPrice.setText(rb.getString("vehicleType"));
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
 
@@ -65,13 +67,14 @@ public class TripInformationController extends HomeScreenController {
 
     }
 
-    public void sendInput(int selectedTrip){
+    public void sendInput(int selectedTrip)
+    {
 
         labelLocFromInfo.setText(dataHandler.getTrip(selectedTrip).getLocationFrom());
         labelLocToInfo.setText(dataHandler.getTrip(selectedTrip).getLocationTo());
-        labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTravelTime());
+        labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTripTimesList().get(0).getTravelTime().toString());
         //TODO CHANGE LABEL NAME
-        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getVehicle());
+        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getTripTimesList().get(0).getVehicleType());
 
 
 
@@ -80,7 +83,8 @@ public class TripInformationController extends HomeScreenController {
 
     }
 
-    public void showHomeScreen(ActionEvent event) throws IOException {
+    public void showHomeScreen(ActionEvent event) throws IOException
+    {
         Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
         Scene MyProfileScene = new Scene(HomeScreenParent);
 
@@ -96,7 +100,8 @@ public class TripInformationController extends HomeScreenController {
     }
 
 
-    public void showMyFavoriteTrips (ActionEvent event) throws IOException {
+    public void showMyFavoriteTrips (ActionEvent event) throws IOException
+    {
         Parent homeScreenParent = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent);
 
@@ -109,7 +114,8 @@ public class TripInformationController extends HomeScreenController {
         window.show();
     }
 
-    public void showMyProfileButton (ActionEvent event) throws IOException {
+    public void showMyProfileButton (ActionEvent event) throws IOException
+    {
         Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
         Scene myProfileScene = new Scene(homeScreenParent2);
 
@@ -122,7 +128,8 @@ public class TripInformationController extends HomeScreenController {
         window.show();
     }
 
-    public void setLocFrom(String test) {
+    public void setLocFrom(String test)
+    {
         labelLocFromInfo.setText(test);
     }
 

@@ -42,18 +42,15 @@ public class Program extends Application
             throw new IllegalStateException("Cannot find the driver in the classpath!", e);
         }
 
-
-
         // Datahandler import
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
-//        Application.launch(GUI.class, args);
+        // Application.launch(GUI.class, args);
         launch(args);
 
         Locale.setDefault(new Locale("nl", "NL"));
         ResourceBundle rb = ResourceBundle.getBundle("lang");
-
 
         // Datahandler writeToJSON always at the end of the application
         datahandler.writeToExternalData();
