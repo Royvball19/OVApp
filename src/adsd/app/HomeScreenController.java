@@ -6,13 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class HomeScreenController
@@ -21,51 +19,131 @@ public class HomeScreenController
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @FXML
-    private Label departureRoute;
+    private TextField locationFrom;
     @FXML
-    private Label departureTime;
-
-    @FXML
-    private ChoiceBox tripOption;
+    private TextField locationTo;
     @FXML
     private ChoiceBox timeOption;
     @FXML
-    private ChoiceBox dateOption;
+    private CheckBox trainBox;
     @FXML
-    private Button planTripButton;
+    private CheckBox busBox;
+    @FXML
+    private CheckBox metroBox;
+    @FXML
+    private CheckBox carBox;
+    @FXML
+    private Button checkTripOptions;
+    @FXML
+    private ChoiceBox<String> vehicleType;
+
+    @FXML private ListView<String> tripOptions;
 
 
-    DataHandler dataHandler;
+    // staat hier zodat er geen errors zitten in de html writer etc. moet later wel nog worden aanepast.
+    ChoiceBox tripOption;
+
+
+    DataHandler dataHandler = new DataHandler();
     TripInformationController routeInformationController;
 
 
     public void initialize() throws FileNotFoundException
     {
 
-        dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
-        departureRoute.setText((rb.getString("departureRoute")));
-        departureRoute.setStyle("-fx-font-weight: bold");
+        locationFrom.setPromptText(rb.getString("HSlocFrom"));
+        locationTo.setPromptText(rb.getString("HSlocTo"));
+
+        timeOption.getItems().addAll(  "10:30", "10:35");
 
 
-        departureTime.setText((rb.getString("departureTime")));
-        departureTime.setStyle("-fx-font-weight: bold");
+        vehicleType.getItems().add(rb.getString("HStrain"));
+        vehicleType.getItems().add(rb.getString("HSbus"));
+        vehicleType.getItems().add(rb.getString("HSmetro"));
 
-        planTripButton.setText((rb.getString("planTripButton")));
-
-        for (int i = 0; i < dataHandler.getTripList().size(); i++)
-        {
-            tripOption.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo());
-        }
-
-        timeOption.getItems().addAll(rb.getString("choicebox"), "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
-        timeOption.getSelectionModel().select(0);
-        dateOption.getItems().addAll(rb.getString("choiceboxdate"), "Vandaag", "Morgen", "Overmorgen");
-        dateOption.getSelectionModel().select(0);
+        checkTripOptions.setText(rb.getString("HScheckTripOptionsButton"));
 
 
     }
+
+    public String toComma(String timeFormat){
+        timeFormat = timeFormat.replace(":", ",");
+        return timeFormat;
+    }
+
+    public String toDubbleDot(String timeFormat){
+        timeFormat = timeFormat.replace(",", ":");
+        return timeFormat;
+    }
+
+
+
+    public void checkTripOptions(ActionEvent event){
+
+        boolean foundMatch = false;
+
+        // search function
+        DecimalFormat df = new DecimalFormat("00.00");
+
+        tripOptions.getItems().clear();
+
+        String vertrekplaats = locationFrom.getText();
+        String aankomstplaats = locationTo.getText();
+        String time = toComma(timeOption.getSelectionModel().getSelectedItem().toString());
+
+
+        String vehicle = null;
+        switch (vehicleType.getSelectionModel().getSelectedIndex()){
+            case 0:
+                vehicle = "TRANSIT";
+                break;
+            case 1:
+                vehicle = "DRIVING";
+                break;
+            case 2:
+                vehicle = "TRANSIT";
+                break;
+            default:
+                System.out.println("Er is geen keuze gemaakt");
+                break;
+        }
+
+
+            // search function
+            for (int i = 0; i < dataHandler.getTripList().size(); i++) {
+                if (dataHandler.getTrip(i).getLocationFrom().toLowerCase().contains(vertrekplaats.toLowerCase()) &&
+                        dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(aankomstplaats.toLowerCase())) {
+                    for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++) {
+                        if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase()) &&
+                                String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time)) {
+
+
+                            tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
+                            System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
+                            System.out.println(dataHandler.getTrip(i).getLocationFrom() + " naar " + dataHandler.getTrip(i).getLocationTo() + " om " +
+                                    df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
+                            foundMatch = true;
+                        }
+
+                    }
+                }
+
+            }
+
+            if (foundMatch = false){
+                // run method again with time selector index +1 and -1
+
+
+
+            }
+
+
+    }
+
+
+
 
 
 
@@ -147,12 +225,15 @@ public class HomeScreenController
         }
 
 
+
         if (tripOption.getSelectionModel().getSelectedIndex() == -1)
         {
             // set text to a box with message: "please select"
         }
         else
             {
+
+                // loads next scene
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("TripInformation.fxml"));

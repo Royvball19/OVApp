@@ -56,18 +56,21 @@ public class Program extends Application
 
 
 
-
+        // wordt text area
         Scanner input = new Scanner(System.in);
         System.out.println("Voer vertrekplaats in: ");
         String vertrekplaats = input.nextLine();
 
-//        System.out.println("Voer aankomstplaats in: ");
-//        String aankomstplaats = input.nextLine();
+        // text area
+        System.out.println("Voer aankomstplaats in: ");
+        String aankomstplaats = input.nextLine();
 
+
+        // choice box
         System.out.println("Welk vervoersmiddel?");
         String vehicle = input.nextLine();
 
-
+        // selector?
         System.out.println("Hoelaat wilt u dat doen dan?");
         Double tijd = input.nextDouble();
         String tijd2 = String.valueOf(tijd);
@@ -78,14 +81,16 @@ public class Program extends Application
 //        functie die zoekt op vertrek plaats
         for (int i = 0; i < datahandler.getTripList().size(); i++ )
         {
-            if (datahandler.getTrip(i).getLocationFrom().toLowerCase().contains(vertrekplaats.toLowerCase()))
+            if (datahandler.getTrip(i).getLocationFrom().toLowerCase().contains(vertrekplaats.toLowerCase()) &&
+                datahandler.getTrip(i).getLocationTo().toLowerCase().contains(aankomstplaats.toLowerCase()))
             {
                 for (int k = 0; k < datahandler.getTrip(i).getTripTimesList().size(); k++)
                 {
                     if (datahandler.getTrip(i).getTripTimesList().get(k).getVehicleType().toLowerCase().contains(vehicle.toLowerCase()) &&
                         String.valueOf(datahandler.getTrip(i).getTripTimesList().get(k).getDepTime()).contains(tijd2)  )  {
                         System.out.println(i + ", " + k);
-
+                        System.out.println(datahandler.getTrip(i).getLocationFrom() + "naar " + datahandler.getTrip(i).getLocationTo() + " om " +
+                                datahandler.getTrip(i).getTripTimesList().get(k).getDepTime());
 
                     }
                 }
