@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class TripInformationController extends HomeScreenController
@@ -30,8 +31,6 @@ public class TripInformationController extends HomeScreenController
     @FXML private Label labelLocToInfo;
     @FXML private Label labelTravelTime;
     @FXML private Label labelTravelTimeInfo;
-    @FXML private Label labelPrice;
-    @FXML private Label labelPriceInfo;
     @FXML private Label labelDepartureTime;
     @FXML private Label labelDepartureTimeInfo;
     @FXML private Label labelArrivalTime;
@@ -51,13 +50,13 @@ public class TripInformationController extends HomeScreenController
         dataHandler.readFromExternalData();
 
         WebEngine webEngine = mapWebView.getEngine();
-        String url = "file:///C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html";
+        String url = "index.html";
         webEngine.load(url);
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
         labelTravelTime.setText(rb.getString("travelTime"));
-        labelPrice.setText(rb.getString("vehicleType"));
+
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
 
@@ -65,22 +64,19 @@ public class TripInformationController extends HomeScreenController
 
 
 
+
+
     }
 
-    public void sendInput(int selectedTrip)
+    public void sendInput(int posA, int posB)
     {
+        DecimalFormat df = new DecimalFormat("00.00");
 
-        labelLocFromInfo.setText(dataHandler.getTrip(selectedTrip).getLocationFrom());
-        labelLocToInfo.setText(dataHandler.getTrip(selectedTrip).getLocationTo());
-        labelTravelTimeInfo.setText(dataHandler.getTrip(selectedTrip).getTripTimesList().get(0).getTravelTime().toString());
-        //TODO CHANGE LABEL NAME
-        labelPriceInfo.setText(dataHandler.getTrip(selectedTrip).getTripTimesList().get(0).getVehicleType());
-
-
-
-
-        System.out.println("RouteInformation controller : " + selectedTrip);
-
+        labelLocFromInfo.setText(dataHandler.getTrip(posA).getLocationFrom());
+        labelLocToInfo.setText(dataHandler.getTrip(posA).getLocationTo());
+        labelTravelTimeInfo.setText(dataHandler.getTrip(posA).getTripTimeObj(posB).getTravelTime().toString() + " "+ rb.getString("minutes"));
+        labelDepartureTimeInfo.setText(toDubbleDot(String.valueOf(df.format(dataHandler.getTrip(posA).getTripTimeObj(posB).getDepTime()))));
+        labelArrivalTimeInfo.setText(toDubbleDot(String.valueOf(df.format(dataHandler.getTrip(posA).getTripTimeObj(posB).getArivTime()))));
     }
 
     public void showHomeScreen(ActionEvent event) throws IOException
@@ -133,6 +129,9 @@ public class TripInformationController extends HomeScreenController
         labelLocFromInfo.setText(test);
     }
 
+    public void sendTime(String time){
 
+
+    }
 
 }

@@ -1,8 +1,8 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
+<!DOCTYPE html>
+<html>
+<head>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly" defer></script>
-    <link rel="stylesheet" type="text/css" href="style.css" /> 
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script>
         function initMap() {
         const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -27,12 +27,12 @@
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         directionsService.route(
             {
-                origin: { lat: 52.3702157, lng: 4.8951679 },
-                destination: { lat: 52.080329, lng: 4.30965 },
+                origin: { lat: 52.0907374, lng: 5.1214201 },
+                destination: { lat: 52.3702157, lng: 4.8951679 },
                 // Note that Javascript allows us to access the constant
                 // using square brackets and a string value as its
                 // "property."
-                travelMode: 'TRANSIT',
+                travelMode: 'null',
             },
             (response, status) => {
                 if (status == "OK") {

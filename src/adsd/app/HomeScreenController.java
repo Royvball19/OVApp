@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HomeScreenController
@@ -25,27 +26,27 @@ public class HomeScreenController
     @FXML
     private ChoiceBox timeOption;
     @FXML
-    private CheckBox trainBox;
-    @FXML
-    private CheckBox busBox;
-    @FXML
-    private CheckBox metroBox;
-    @FXML
-    private CheckBox carBox;
-    @FXML
     private Button checkTripOptions;
     @FXML
     private ChoiceBox<String> vehicleType;
 
-    @FXML private ListView<String> tripOptions;
+    @FXML private ListView<Trip> tripOptions;
+    @FXML private Button showTripButton;
 
 
     // staat hier zodat er geen errors zitten in de html writer etc. moet later wel nog worden aanepast.
     ChoiceBox tripOption;
+    private Integer resultCount;
+    private Integer posA;
+    private Integer posB;
+    private String vehicle;
 
 
     DataHandler dataHandler = new DataHandler();
-    TripInformationController routeInformationController;
+
+
+
+    //todo maak datahandler attribute van homescreencontroller
 
 
     public void initialize() throws FileNotFoundException
@@ -56,93 +57,116 @@ public class HomeScreenController
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
         locationTo.setPromptText(rb.getString("HSlocTo"));
 
+
         timeOption.getItems().addAll(  "10:30", "10:35");
 
 
         vehicleType.getItems().add(rb.getString("HStrain"));
         vehicleType.getItems().add(rb.getString("HSbus"));
-        vehicleType.getItems().add(rb.getString("HSmetro"));
+
 
         checkTripOptions.setText(rb.getString("HScheckTripOptionsButton"));
+        showTripButton.setText(rb.getString("HSshowTripInfo"));
 
 
     }
 
-    public String toComma(String timeFormat){
-        timeFormat = timeFormat.replace(":", ",");
-        return timeFormat;
+    private String toComma(String time)
+    {
+        time = time.replace(":", ",");
+
+        return time;
     }
 
-    public String toDubbleDot(String timeFormat){
-        timeFormat = timeFormat.replace(",", ":");
-        return timeFormat;
+    public String toDubbleDot(String time)
+    {
+        time = time.replace(",", ":");
+        time = time.replace( "." , ":");
+
+        return time;
     }
 
 
 
-    public void checkTripOptions(ActionEvent event){
+    public void checkTripOptions(ActionEvent event)
+    {
+        if (locationFrom.getText().trim().length() == 0 | locationTo.getText().trim().length() == 0 )
+        {
+            locationFrom.setPromptText("Vul iets in bro");
+            locationTo.setPromptText("Vul iets in bro");
+        } else
+            {
+            resultCount = 0;
 
+            tripOptions.getItems().clear();
+
+            String locFrom = locationFrom.getText();
+            String locTo = locationTo.getText();
+            String time = toComma(timeOption.getSelectionModel().getSelectedItem().toString());
+
+
+            String vehicle = null;
+            switch (vehicleType.getSelectionModel().getSelectedIndex()) {
+                case 0:
+                    vehicle = "TRANSIT";
+                    break;
+                case 1:
+                    vehicle = "DRIVING";
+                    break;
+                default:
+                    System.out.println("Er is geen keuze gemaakt");
+                    break;
+            }
+            searchTrip(locFrom, locTo, time, vehicle);
+        }
+    }
+
+
+    private void searchTrip (String locFrom, String locTo, String time, String vehicle)
+    {
         boolean foundMatch = false;
-
-        // search function
         DecimalFormat df = new DecimalFormat("00.00");
 
-        tripOptions.getItems().clear();
+        for (int i = 0; i < dataHandler.getTripList().size(); i++)
+        {
+            if (dataHandler.getTrip(i).getLocationFrom().toLowerCase().contains(locFrom.toLowerCase())
+                    &&
+                    dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(locTo.toLowerCase()))
+            {
+                for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++)
+                {
+                    if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
+                            &&
+                            String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
+                    {
 
-        String vertrekplaats = locationFrom.getText();
-        String aankomstplaats = locationTo.getText();
-        String time = toComma(timeOption.getSelectionModel().getSelectedItem().toString());
 
+                        posA = i;
+                        posB = k;
+                        vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
+//                        tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
+                        System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
 
-        String vehicle = null;
-        switch (vehicleType.getSelectionModel().getSelectedIndex()){
-            case 0:
-                vehicle = "TRANSIT";
-                break;
-            case 1:
-                vehicle = "DRIVING";
-                break;
-            case 2:
-                vehicle = "TRANSIT";
-                break;
-            default:
-                System.out.println("Er is geen keuze gemaakt");
-                break;
+//                        String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
+//                        SearchResult result = new SearchResult(title, i , k);
+//
+//                        tripOptions.getItems().add(result);
+
+//                        tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom());
+
+                        System.out.println(posA + " " + posB);
+//
+
+                        resultCount ++;
+                    }
+
+                }
+            }
+
         }
 
 
-            // search function
-            for (int i = 0; i < dataHandler.getTripList().size(); i++) {
-                if (dataHandler.getTrip(i).getLocationFrom().toLowerCase().contains(vertrekplaats.toLowerCase()) &&
-                        dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(aankomstplaats.toLowerCase())) {
-                    for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++) {
-                        if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase()) &&
-                                String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time)) {
-
-
-                            tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
-                            System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
-                            System.out.println(dataHandler.getTrip(i).getLocationFrom() + " naar " + dataHandler.getTrip(i).getLocationTo() + " om " +
-                                    df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
-                            foundMatch = true;
-                        }
-
-                    }
-                }
-
-            }
-
-            if (foundMatch = false){
-                // run method again with time selector index +1 and -1
-
-
-
-            }
-
-
     }
-
-
 
 
 
@@ -151,7 +175,8 @@ public class HomeScreenController
     public void showTrip(ActionEvent event) throws IOException
     {
 
-        File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
+
+        File f = new File("index.html");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(f)))
         {
 
@@ -185,12 +210,12 @@ public class HomeScreenController
                     "    function calculateAndDisplayRoute(directionsService, directionsRenderer) {\n" +
                     "        directionsService.route(\n" +
                     "            {\n" +
-                    "                origin: { lat: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationFromLat() + ", lng: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationFromLng() + " },\n" +
-                    "                destination: { lat: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationToLat() + ", lng: " + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getLocationToLng() + " },\n" +
+                    "                origin: { lat: " + dataHandler.getTrip(posA).getLocationFromLat() + ", lng: " + dataHandler.getTrip(posA).getLocationFromLng() + " },\n" +
+                    "                destination: { lat: " + dataHandler.getTrip(posA).getLocationToLat() + ", lng: " + dataHandler.getTrip(posA).getLocationToLng() + " },\n" +
                     "                // Note that Javascript allows us to access the constant\n" +
                     "                // using square brackets and a string value as its\n" +
                     "                // \"property.\"\n" +
-                    "                travelMode: '" + dataHandler.getTrip(tripOption.getSelectionModel().getSelectedIndex()).getTripTimesList().get(0).getVehicleType() + "',\n" +
+                    "                travelMode: '" + vehicle + "',\n" +
                     "            },\n" +
                     "            (response, status) => {\n" +
                     "                if (status == \"OK\") {\n" +
@@ -219,21 +244,13 @@ public class HomeScreenController
                     "</html>");
 
             bw.write(""); bw.write(""); bw.close();
+
         } catch (IOException e)
         {
             e.printStackTrace();
         }
 
-
-
-        if (tripOption.getSelectionModel().getSelectedIndex() == -1)
-        {
-            // set text to a box with message: "please select"
-        }
-        else
-            {
-
-                // loads next scene
+        // loads next scene
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("TripInformation.fxml"));
@@ -245,7 +262,7 @@ public class HomeScreenController
 
 
             TripInformationController TripControl = loader.getController();
-            TripControl.sendInput(tripOption.getSelectionModel().getSelectedIndex());
+            TripControl.sendInput(posA, posB);
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -254,7 +271,7 @@ public class HomeScreenController
             window.show();
 
 
-        }
+
 
     }
 

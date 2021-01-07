@@ -176,5 +176,7 @@ public class Trip
         return times;
     }
 
-
+    public TripTimes getTripTimeObj(int i) {
+        return times.get(i);
+    }
 }

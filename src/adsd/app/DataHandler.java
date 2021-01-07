@@ -21,6 +21,8 @@ public class DataHandler
     boolean useDataType = true;
 
 
+
+
     // writeToJSON Method to write data to JSON
     public void writeToExternalData() throws FileNotFoundException, UnsupportedEncodingException
     {

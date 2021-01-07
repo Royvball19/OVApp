@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MyFavoriteTripsController
@@ -23,6 +24,8 @@ public class MyFavoriteTripsController
 
 
     @FXML ToolBar myToolBar;
+
+
 
     public void initialize() throws FileNotFoundException
     {
