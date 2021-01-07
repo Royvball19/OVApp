@@ -30,7 +30,7 @@ public class HomeScreenController
     @FXML
     private ChoiceBox<String> vehicleType;
 
-    @FXML private ListView<Trip> tripOptions;
+    @FXML private ListView<String> tripOptions;
     @FXML private Button showTripButton;
 
 
@@ -40,6 +40,7 @@ public class HomeScreenController
     private Integer posA;
     private Integer posB;
     private String vehicle;
+    private ArrayList<SearchResult> searchResults = new ArrayList<>();
 
 
     DataHandler dataHandler = new DataHandler();
@@ -90,15 +91,18 @@ public class HomeScreenController
 
     public void checkTripOptions(ActionEvent event)
     {
+        tripOptions.getItems().clear();
+        searchResults.clear();
+
         if (locationFrom.getText().trim().length() == 0 | locationTo.getText().trim().length() == 0 )
         {
-            locationFrom.setPromptText("Vul iets in bro");
-            locationTo.setPromptText("Vul iets in bro");
+            locationFrom.setPromptText("Vul iets in");
+            locationTo.setPromptText("Vul iets in");
         } else
             {
             resultCount = 0;
 
-            tripOptions.getItems().clear();
+
 
             String locFrom = locationFrom.getText();
             String locTo = locationTo.getText();
@@ -119,6 +123,10 @@ public class HomeScreenController
             }
             searchTrip(locFrom, locTo, time, vehicle);
         }
+
+        if(resultCount == 0){
+            tripOptions.getItems().add("Geen resultaten gevonden");
+        }
     }
 
 
@@ -126,6 +134,7 @@ public class HomeScreenController
     {
         boolean foundMatch = false;
         DecimalFormat df = new DecimalFormat("00.00");
+
 
         for (int i = 0; i < dataHandler.getTripList().size(); i++)
         {
@@ -139,23 +148,21 @@ public class HomeScreenController
                             &&
                             String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
                     {
-
-
-                        posA = i;
-                        posB = k;
+//                        posA = i;
+//                        posB = k;
                         vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
-//                        tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
+                        tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
                         System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
 
-//                        String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
-//                        SearchResult result = new SearchResult(title, i , k);
-//
-//                        tripOptions.getItems().add(result);
+                        String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
+                        SearchResult result = new SearchResult(title, i , k);
 
-//                        tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom());
+
+                        searchResults.add(result);
+
 
                         System.out.println(posA + " " + posB);
-//
+
 
                         resultCount ++;
                     }
@@ -174,6 +181,10 @@ public class HomeScreenController
 
     public void showTrip(ActionEvent event) throws IOException
     {
+
+        tripOptions.getSelectionModel().getSelectedIndex();
+        posA = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosA();
+        posB = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosB();
 
 
         File f = new File("index.html");
