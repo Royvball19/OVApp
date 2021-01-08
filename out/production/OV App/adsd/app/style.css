@@ -244,3 +244,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .homeScreenButton {
     -fx-spacing: 4px;
 }
+
+.homeScreenButton {
+    -fx-spacing: 4px;
+}

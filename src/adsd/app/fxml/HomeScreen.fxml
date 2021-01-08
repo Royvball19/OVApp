@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.HomeScreenController">
+<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.HomeScreenController">
    <children>
-      <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@style.css">
+      <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
         <items>
-          <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-            <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
-            <Button id="langOptionButton" fx:id="langOptionButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@style.css" />
+          <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+            <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+            <Button id="langOptionButton" fx:id="langOptionButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
         </items>
       </ToolBar>
       <GridPane layoutX="20.0" layoutY="102.0" prefHeight="263.0" prefWidth="225.0">
@@ -36,9 +36,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label id="departureRoute" fx:id="departureRoute" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="127.0" stylesheets="@style.css" GridPane.halignment="CENTER" />
+            <Label id="departureRoute" fx:id="departureRoute" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="127.0" stylesheets="@../style.css" GridPane.halignment="CENTER" />
             <Label fx:id="departureTime" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="checkTripOptions" alignment="CENTER" mnemonicParsing="false" onAction="#checkTripOptions" prefHeight="27.0" prefWidth="215.0" styleClass="homeScreenButton" stylesheets="@style.css" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <Button fx:id="checkTripOptions" alignment="CENTER" mnemonicParsing="false" onAction="#checkTripOptions" prefHeight="27.0" prefWidth="215.0" styleClass="homeScreenButton" stylesheets="@../style.css" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></Button>
@@ -56,7 +56,7 @@
                <GridPane.margin>
                   <Insets top="3.0" />
                </GridPane.margin></ChoiceBox>
-            <Button fx:id="showTripButton" mnemonicParsing="false" onAction="#showTrip" prefWidth="215.0" styleClass="homeScreenButton" stylesheets="@style.css" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+            <Button fx:id="showTripButton" mnemonicParsing="false" onAction="#showTrip" prefWidth="215.0" styleClass="homeScreenButton" stylesheets="@../style.css" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin></Button>

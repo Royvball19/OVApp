@@ -187,7 +187,8 @@ public class HomeScreenController
         posB = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosB();
 
 
-        File f = new File("index.html");
+        File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
+/*        File f = new File("src/adsd/app/index.html");*/
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(f)))
         {
 
@@ -226,7 +227,7 @@ public class HomeScreenController
                     "                // Note that Javascript allows us to access the constant\n" +
                     "                // using square brackets and a string value as its\n" +
                     "                // \"property.\"\n" +
-                    "                travelMode: '" + vehicle + "',\n" +
+                    "                travelMode: '" + dataHandler.getTrip(posA).getTripTimesList().get(posB).getVehicleType() + "',\n" +
                     "            },\n" +
                     "            (response, status) => {\n" +
                     "                if (status == \"OK\") {\n" +
@@ -264,7 +265,7 @@ public class HomeScreenController
         // loads next scene
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("TripInformation.fxml"));
+            loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
             Parent tripInfoParent = loader.load();
 
             Scene tripInfoScene = new Scene(tripInfoParent);
@@ -288,7 +289,7 @@ public class HomeScreenController
 
     public void showMyProfileButton(ActionEvent event) throws IOException
     {
-        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
+        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
         Scene myProfileScene = new Scene(homeScreenParent2);
 
         myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
@@ -302,7 +303,7 @@ public class HomeScreenController
 
     public void showMyFavoriteTrips(ActionEvent event) throws IOException
     {
-        Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
+        Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent3);
 
         myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -47,17 +48,25 @@ public class MyProfileController
 
     }
 
-    public void showProfileDetails(ActionEvent event)
-    {
+    public void showProfileDetails(ActionEvent event) {
 
         labelFirstNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getFirstName());
         labelLastNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getLastName());
 
+        try {
+            FileWriter myWriter = new FileWriter("currentuser.txt");
+            myWriter.write(String.valueOf(profileSelector.getSelectionModel().getSelectedIndex()));
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public void showHomeScreen(ActionEvent event) throws IOException
     {
-        Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
         Scene MyProfileScene = new Scene(HomeScreenParent);
 
         // Gets stage information
@@ -73,7 +82,7 @@ public class MyProfileController
 
     public void showMyFavoriteTrips (ActionEvent event) throws IOException
     {
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
+        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent);
 
         myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());

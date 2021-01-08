@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html> 
+<html> 
+<head> 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly" defer></script>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" /> 
     <script>
         function initMap() {
         const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -32,7 +32,7 @@
                 // Note that Javascript allows us to access the constant
                 // using square brackets and a string value as its
                 // "property."
-                travelMode: 'null',
+                travelMode: 'DRIVING',
             },
             (response, status) => {
                 if (status == "OK") {

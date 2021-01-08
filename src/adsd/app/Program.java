@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class Program extends Application
 {
@@ -20,7 +19,7 @@ public class Program extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/HomeScreen.fxml"));
         Parent startScherm = loader.load();
         primaryStage.setTitle("TravelYroute OV App");
         primaryStage.setScene(new Scene(startScherm));
@@ -28,7 +27,6 @@ public class Program extends Application
         primaryStage.setResizable(false);
 
         startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
     }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
@@ -47,6 +45,7 @@ public class Program extends Application
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
+
         // Application.launch(GUI.class, args);
         launch(args);
 
@@ -58,9 +57,7 @@ public class Program extends Application
 
 
 
-
         // Datahandler writeToJSON always at the end of the application
-        datahandler.writeToExternalData();
 
     }
 }

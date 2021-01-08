@@ -1,5 +1,6 @@
 package adsd.app;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -17,6 +18,7 @@ public class DataHandler
 
     private ArrayList<Profile> profiles = new ArrayList<>();
     private ArrayList<Trip> trips = new ArrayList<>();
+    private ArrayList<Integer> temporaryUser = new ArrayList<Integer>();
     // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
     boolean useDataType = true;
 
@@ -210,6 +212,11 @@ public class DataHandler
     public ArrayList<Trip> getTripList()
     {
         return trips;
+    }
+
+    public ArrayList<Integer> getTemporaryUserList()
+    {
+        return temporaryUser;
     }
 
 }

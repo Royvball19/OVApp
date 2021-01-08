@@ -36,6 +36,13 @@ public class Trip
 
     }
 
+    public Trip(String locationFrom, String locationTo)
+    {
+        this.locationFrom = locationFrom;
+        this.locationTo   = locationTo;
+        this.times = new ArrayList<TripTimes>();
+    }
+
     // JSON Constructor
     public Trip(JSONObject object)
     {

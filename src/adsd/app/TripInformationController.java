@@ -6,16 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class TripInformationController extends HomeScreenController
 {
@@ -36,8 +40,12 @@ public class TripInformationController extends HomeScreenController
     @FXML private Label labelArrivalTime;
     @FXML private Label labelArrivalTimeInfo;
     @FXML private Label labelTitle;
+    @FXML private Button addFavoriteTripButton;
+    int userID;
+
 
     DataHandler dataHandler;
+    MyProfileController myProfileController;
 
 
 
@@ -50,8 +58,12 @@ public class TripInformationController extends HomeScreenController
         dataHandler.readFromExternalData();
 
         WebEngine webEngine = mapWebView.getEngine();
-        String url = "index.html";
+        String url = "file:///C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html";
         webEngine.load(url);
+
+/*        WebEngine webEngine = mapWebView.getEngine();
+        URL url = this.getClass().getResource("/adsd/app/index.html");
+        webEngine.load(url.toString());*/
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
@@ -59,8 +71,6 @@ public class TripInformationController extends HomeScreenController
 
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
-
-
 
 
 
@@ -81,7 +91,7 @@ public class TripInformationController extends HomeScreenController
 
     public void showHomeScreen(ActionEvent event) throws IOException
     {
-        Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
         Scene MyProfileScene = new Scene(HomeScreenParent);
 
         // Gets stage information
@@ -98,7 +108,7 @@ public class TripInformationController extends HomeScreenController
 
     public void showMyFavoriteTrips (ActionEvent event) throws IOException
     {
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("MyFavoriteTrips.fxml"));
+        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent);
 
         myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
@@ -112,7 +122,7 @@ public class TripInformationController extends HomeScreenController
 
     public void showMyProfileButton (ActionEvent event) throws IOException
     {
-        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("MyProfile.fxml"));
+        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
         Scene myProfileScene = new Scene(homeScreenParent2);
 
         myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
@@ -122,6 +132,24 @@ public class TripInformationController extends HomeScreenController
 
         window.setScene(myProfileScene);
         window.show();
+    }
+
+    public void addFavoriteTripButton (ActionEvent event) throws IOException
+    {
+        myProfileController = new MyProfileController();
+        try {
+            File myObj = new File("currentuser.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                dataHandler.getProfile(Integer.parseInt(data)).addTrip(0, labelLocFromInfo.getText(), labelLocToInfo.getText(), "0", 0, 0, 0, 0);
+                dataHandler.writeToExternalData();
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public void setLocFrom(String test)
