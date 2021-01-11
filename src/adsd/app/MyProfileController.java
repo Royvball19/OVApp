@@ -109,4 +109,18 @@ public class MyProfileController
         window.setScene(myFavoriteTrips);
         window.show();
     }
+
+    public void toRegistration() throws IOException {
+
+        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/UserRegistration.fxml"));
+        Scene myFavoriteTrips = new Scene(homeScreenParent);
+
+        homeScreenParent.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        // This line gets the stage information
+        Stage window = (Stage) myToolBar.getScene().getWindow();
+
+        window.setScene(myFavoriteTrips);
+        window.show();
+
+    }
 }

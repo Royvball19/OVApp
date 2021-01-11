@@ -244,3 +244,42 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .homeScreenButton {
     -fx-spacing: 4px;
 }
+
+#registrationPane1 {
+    -fx-background-image: url("Images/registrationPic.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: left center;
+
+}
+
+#registrationPane2 {
+    -fx-background-color: #03396c;
+}
+
+#registratieHeader1 {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20px;
+}
+
+#registratieHeader {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+#registrationLabel {
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+
+#registrationPane {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-opacity: 0.84;
+}
+
+#registrationText {
+    -fx-text-fill: black;
+}
