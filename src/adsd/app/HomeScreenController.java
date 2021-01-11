@@ -11,10 +11,12 @@ import javafx.scene.media.Media;
 
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.MalformedURLException;
 
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -60,13 +62,19 @@ public class HomeScreenController {
 
     DataHandler dataHandler = new DataHandler();
 
+    MediaPlayer mediaPlayer;
+
+    public void music(){
+        String bip = "src/adsd/app/secret.mp3";
+        Media hit = new Media(Paths.get(bip).toUri().toString());
+        mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.play();
+    }
 
 
     public void initialize() throws FileNotFoundException, MalformedURLException {
 
-        String uriString = new File("src/adsd/app/secret.mp3").toURI().toString();
-        MediaPlayer player = new MediaPlayer( new Media(uriString));
-        player.setAutoPlay(true);
+        music();
 
         dataHandler.readFromExternalData();
 
