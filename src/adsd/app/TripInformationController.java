@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
@@ -51,19 +52,32 @@ public class TripInformationController extends HomeScreenController
 
 
 
-    public void initialize() throws FileNotFoundException
-    {
+    public void initialize() throws FileNotFoundException, MalformedURLException {
 
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
-//        WebEngine webEngine = mapWebView.getEngine();
-//        String url = "file://Users/yannickvdbos/Downloads/OVApp/src/adsd/app/index.html";
-//        webEngine.load(url);
+/*        Roy old line
+        WebEngine webEngine = mapWebView.getEngine();
+        String url = "file:///C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html";
+        webEngine.load(url);*/
 
+/*        Yannick old line
+        WebEngine webEngine = mapWebView.getEngine();
+        String url = "file://Users/yannickvdbos/Downloads/OVApp/src/adsd/app/index.html";
+        webEngine.load(url);*/
+
+        String path = "src/adsd/app/index.html";
+        WebEngine webEngine = mapWebView.getEngine();
+        URL url = new File(path).toURI().toURL();
+        webEngine.load(url.toString());
+
+
+/*
+        Old line where it doesnt update the map
         WebEngine webEngine = mapWebView.getEngine();
         URL url = this.getClass().getResource("index.html");
-        webEngine.load(url.toString());
+        webEngine.load(url.toString());*/
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));

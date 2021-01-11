@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +58,7 @@ public class HomeScreenController {
 
 
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() throws FileNotFoundException, MalformedURLException {
 
         dataHandler.readFromExternalData();
 

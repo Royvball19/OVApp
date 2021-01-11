@@ -271,7 +271,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #registrationPane2 {
-    -fx-background-color: #03396c;
+    -fx-background-color: orange;
 }
 
 #registratieHeader1 {
@@ -282,7 +282,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 #registratieHeader {
     -fx-font-family: "Arial Black";
     -fx-font-size: 20px;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 #registrationLabel {
@@ -299,4 +299,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 
 #registrationText {
     -fx-text-fill: black;
+}
+
+#errorLabel {
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: #ab0606;
 }
