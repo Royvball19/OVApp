@@ -133,19 +133,19 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
-.choice-box
+.combo-box
 {
     -fx-background-color: linear-gradient(#000000, #000000);
     -fx-text-fill: #ffffff;
     -fx-mark-color: orange;
 }
 
-.choice-box .menu-item > .label
+.combo-box .menu-item > .label
 {
     -fx-text-fill: #000000;
 }
 
-.choice-box .menu-item:focused
+.combo-box .menu-item:focused
 {
     -fx-background-color: orange;
 }
@@ -154,6 +154,23 @@
     -fx-font-size: 14px;
 }
 
+.spinners
+{
+    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-text-fill: #ffffff;
+    -fx-mark-color: orange;
+}
+
+#tripOptions .list-cell:even, #tripOptions .list-cell:odd
+{
+    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-text-fill: #ffffff;
+}
+
+#tripOptions
+{
+    -fx-border-style: none;
+}
 
 #myToolBar
 {
