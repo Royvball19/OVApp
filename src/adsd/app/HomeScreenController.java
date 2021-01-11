@@ -12,56 +12,95 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.Set;
 
-public class HomeScreenController
-{
+public class HomeScreenController {
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @FXML
-    private TextField locationFrom;
+    private ComboBox locationFrom;
     @FXML
-    private TextField locationTo;
+    private ComboBox locationTo;
     @FXML
-    private ChoiceBox timeOption;
+    private Spinner timeSpinnerHour;
+    @FXML
+    private Spinner timeSpinnerMin;
     @FXML
     private Button checkTripOptions;
     @FXML
-    private ChoiceBox<String> vehicleType;
+    private ComboBox<String> vehicleType;
+    @FXML
+    private Label hourLabel;
+    @FXML
+    private Label minLabel;
+    @FXML
+    private ListView<String> tripOptions;
+    @FXML
+    private Button showTripButton;
 
-    @FXML private ListView<String> tripOptions;
-    @FXML private Button showTripButton;
 
-
-    // staat hier zodat er geen errors zitten in de html writer etc. moet later wel nog worden aanepast.
+    // staat hier zodat er geen errors zitten in de html writer etc. moet later wel nog worden aangepast.
     ChoiceBox tripOption;
     private Integer resultCount;
     private Integer posA;
     private Integer posB;
     private String vehicle;
     private ArrayList<SearchResult> searchResults = new ArrayList<>();
+    private ArrayList<String> locationFromList = new ArrayList<>();
+    private ArrayList<String> locationToList = new ArrayList<>();
 
 
     DataHandler dataHandler = new DataHandler();
 
 
 
-    //todo maak datahandler attribute van homescreencontroller
-
-
-    public void initialize() throws FileNotFoundException
-    {
+    public void initialize() throws FileNotFoundException {
 
         dataHandler.readFromExternalData();
 
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
         locationTo.setPromptText(rb.getString("HSlocTo"));
+        vehicleType.setPromptText(rb.getString("HSvehicletype"));
 
+        for (int i = 0; i < dataHandler.getTripList().size(); i++) {
+            locationFromList.add(dataHandler.getTrip(i).getLocationFrom());
+            locationToList.add(dataHandler.getTrip(i).getLocationTo());
+        }
 
-        timeOption.getItems().addAll(  "10:30", "10:35");
+        //The Hashset makes sure there are no duplicate locations
+        Set<String> set = new HashSet<>(locationFromList);
+        locationFromList.clear();
+        locationFromList.addAll(set);
 
+        Set<String> set2 = new HashSet<>(locationToList);
+        locationToList.clear();
+        locationToList.addAll(set2);
+
+        for (int i = 0; i < locationFromList.size(); i++) {
+            locationFrom.getItems().add(locationFromList.get(i));
+        }
+
+        for (int i = 0; i < locationToList.size(); i++) {
+            locationTo.getItems().add(locationToList.get(i));
+        }
+
+        //timeOption.getItems().addAll(  "10:30", "10:35");
+
+        SpinnerValueFactory<Integer> hourValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24);
+        this.timeSpinnerHour.setValueFactory(hourValueFactory);
+        hourValueFactory.setWrapAround(true);
+        timeSpinnerHour.setEditable(true);
+
+        SpinnerValueFactory<Integer> minValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59);
+        this.timeSpinnerMin.setValueFactory(minValueFactory);
+        minValueFactory.setWrapAround(true);
+        timeSpinnerMin.setEditable(true);
+
+        hourLabel.setText(rb.getString("HShour"));
+        minLabel.setText(rb.getString("HSminute"));
 
         vehicleType.getItems().add(rb.getString("HStrain"));
         vehicleType.getItems().add(rb.getString("HSbus"));
@@ -70,45 +109,44 @@ public class HomeScreenController
         checkTripOptions.setText(rb.getString("HScheckTripOptionsButton"));
         showTripButton.setText(rb.getString("HSshowTripInfo"));
 
-        }
 
+    }
 
-    private String toComma(String time)
-    {
+    private String toComma(String time) {
         time = time.replace(":", ",");
+        time = time.replace(".", ",");
 
         return time;
     }
 
-    public String toDubbleDot(String time)
-    {
+    public String toDubbleDot(String time) {
         time = time.replace(",", ":");
-        time = time.replace( "." , ":");
+        time = time.replace(".", ":");
 
         return time;
     }
 
 
-
-    public void checkTripOptions(ActionEvent event)
-    {
+    public void checkTripOptions(ActionEvent event) {
         tripOptions.getItems().clear();
         searchResults.clear();
+        resultCount = 0;
 
-        if (locationFrom.getText().trim().length() == 0 | locationTo.getText().trim().length() == 0 )
-        {
-            locationFrom.setPromptText("Vul iets in");
-            locationTo.setPromptText("Vul iets in");
-        } else
-            {
-            resultCount = 0;
+        if (locationFrom.getSelectionModel().getSelectedIndex() == -1 | locationTo.getSelectionModel().getSelectedIndex() == -1 | vehicleType.getSelectionModel().getSelectedIndex() == -1) {
+            locationFrom.setPromptText(rb.getString("HSpromptFrom"));
+            locationTo.setPromptText(rb.getString("HSpromptTo"));
+            vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
+        } else {
 
+            String locFrom = locationFrom.getSelectionModel().getSelectedItem().toString();
+            String locTo = locationTo.getSelectionModel().getSelectedItem().toString();
 
+            Double selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
+            Double selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
 
-            String locFrom = locationFrom.getText();
-            String locTo = locationTo.getText();
-            String time = toComma(timeOption.getSelectionModel().getSelectedItem().toString());
+            Double selectedTime = selectedHour + selectedMin;
 
+            String time = toComma(selectedTime.toString());
 
             String vehicle = null;
             switch (vehicleType.getSelectionModel().getSelectedIndex()) {
@@ -119,36 +157,36 @@ public class HomeScreenController
                     vehicle = "DRIVING";
                     break;
                 default:
-                    System.out.println("Er is geen keuze gemaakt");
+                    vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
                     break;
             }
             searchTrip(locFrom, locTo, time, vehicle);
+
+            tripOptions.setVisible(true);
+            showTripButton.setVisible(true);
+
         }
 
-        if(resultCount == 0){
-            tripOptions.getItems().add("Geen resultaten gevonden");
+        if (resultCount == 0) {
+            tripOptions.getItems().add(rb.getString("HSresult"));
+            tripOptions.setVisible(true);
         }
     }
 
 
-    private void searchTrip (String locFrom, String locTo, String time, String vehicle)
-    {
+    private void searchTrip(String locFrom, String locTo, String time, String vehicle) {
         boolean foundMatch = false;
         DecimalFormat df = new DecimalFormat("00.00");
 
 
-        for (int i = 0; i < dataHandler.getTripList().size(); i++)
-        {
+        for (int i = 0; i < dataHandler.getTripList().size(); i++) {
             if (dataHandler.getTrip(i).getLocationFrom().toLowerCase().contains(locFrom.toLowerCase())
                     &&
-                    dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(locTo.toLowerCase()))
-            {
-                for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++)
-                {
+                    dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(locTo.toLowerCase())) {
+                for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++) {
                     if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
                             &&
-                            String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
-                    {
+                            String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time)) {
 //                        posA = i;
 //                        posB = k;
                         vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
@@ -156,7 +194,7 @@ public class HomeScreenController
                         System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
 
                         String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
-                        SearchResult result = new SearchResult(title, i , k);
+                        SearchResult result = new SearchResult(title, i, k);
 
 
                         searchResults.add(result);
@@ -165,7 +203,7 @@ public class HomeScreenController
                         System.out.println(posA + " " + posB);
 
 
-                        resultCount ++;
+                        resultCount++;
                     }
 
                 }
@@ -177,11 +215,7 @@ public class HomeScreenController
     }
 
 
-
-
-
-    public void showTrip(ActionEvent event) throws IOException
-    {
+    public void showTrip(ActionEvent event) throws IOException {
 
         tripOptions.getSelectionModel().getSelectedIndex();
         posA = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosA();
@@ -189,9 +223,8 @@ public class HomeScreenController
 
 
         File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
-/*        File f = new File("src/adsd/app/index.html");*/
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f)))
-        {
+        /*        File f = new File("src/adsd/app/index.html");*/
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
 
             //Writer to HTML to change the Locations and Vehicletype
             bw.write("<!DOCTYPE html> \n" +
@@ -256,40 +289,38 @@ public class HomeScreenController
                     "</body>\n" +
                     "</html>");
 
-            bw.write(""); bw.write(""); bw.close();
+            bw.write("");
+            bw.write("");
+            bw.close();
 
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         // loads next scene
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
-            Parent tripInfoParent = loader.load();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
+        Parent tripInfoParent = loader.load();
 
-            Scene tripInfoScene = new Scene(tripInfoParent);
-            // this loads the correct text into labels
-            tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
-
-            TripInformationController TripControl = loader.getController();
-            TripControl.sendInput(posA, posB);
-
-            // This line gets the stage information
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            window.setScene(tripInfoScene);
-            window.show();
+        Scene tripInfoScene = new Scene(tripInfoParent);
+        // this loads the correct text into labels
+        tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
 
+        TripInformationController TripControl = loader.getController();
+        TripControl.sendInput(posA, posB);
+
+        // This line gets the stage information
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tripInfoScene);
+        window.show();
 
 
     }
 
-    public void showMyProfileButton(ActionEvent event) throws IOException
-    {
+    public void showMyProfileButton(ActionEvent event) throws IOException {
         Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
         Scene myProfileScene = new Scene(homeScreenParent2);
 
@@ -302,8 +333,7 @@ public class HomeScreenController
         window.show();
     }
 
-    public void showMyFavoriteTrips(ActionEvent event) throws IOException
-    {
+    public void showMyFavoriteTrips(ActionEvent event) throws IOException {
         Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent3);
 
