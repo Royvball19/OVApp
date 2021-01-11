@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyFavoriteTripsController">
+    <children>
+        <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
+            <items>
+                <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@../style.css" />
+                <Button id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfile" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+                <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+                <Button id="langOptionButton" fx:id="chooseLangButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+            </items>
+        </ToolBar>
+      <Button id="planFavTripButton" fx:id="planFavTripButton" layoutX="96.0" layoutY="361.0" mnemonicParsing="false" text="Plan reis in" />
+      <Button id="removeFavTripButton" fx:id="removeFavTripButton" layoutX="77.0" layoutY="331.0" mnemonicParsing="false" onAction="#removeFavTripButton" text="Verwijder Favoriet" />
+      <TableView id="favTrips" fx:id="favTrips" layoutX="33.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="favTripsFromCollum" prefWidth="98.0" text="Locatie van" />
+          <TableColumn fx:id="favTripsToCollum" prefWidth="101.0" text="Locatie naar" />
+        </columns>
+      </TableView>
+    </children>
+</AnchorPane>

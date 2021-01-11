@@ -133,28 +133,48 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
-.choice-box
+.combo-box
 {
     -fx-background-color: linear-gradient(#000000, #000000);
     -fx-text-fill: #ffffff;
     -fx-mark-color: orange;
 }
 
-.choice-box .menu-item > .label
+.combo-box .menu-item > .label
 {
     -fx-text-fill: #000000;
 }
 
-.choice-box .menu-item:focused
+.combo-box .menu-item:focused
 {
     -fx-background-color: orange;
 }
 
+#labelLocFrom, #labelLocFromInfo, #labelLocTo, #labelLocToInfo, #labelTravelTime, #labelTravelTimeInfo, #labelPrice, #labelPriceInfo, #labelDepartureTime, #labelDepartureTimeInfo, #labelArrivalTime, #labelArrivalTimeInfo {
+    -fx-font-size: 14px;
+}
 
-#toolbar
+.spinners
+{
+    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-text-fill: #ffffff;
+    -fx-mark-color: orange;
+}
+
+#tripOptions .list-cell:even, #tripOptions .list-cell:odd
+{
+    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-text-fill: #ffffff;
+}
+
+#tripOptions
+{
+    -fx-border-style: none;
+}
+
+#myToolBar
 {
     -fx-background-color: null;
-    -fx-min-height: 60;
     -fx-alignment: center;
 }
 
@@ -183,10 +203,20 @@
 
 
 /*Map CSS*/
+#mapWebView {
+    -fx-opacity: 0.70;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0), 5, 0, 0, 0);
+}
+
+#mapWebView:hover {
+    -fx-opacity: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
+}
+
 
 #map {
     height: 400px;
-    width: 265px;
+    width: 256px;
 }
 
 header,
@@ -226,4 +256,47 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 .gmnoprint div {
     background:none !important;
+}
+
+.homeScreenButton {
+    -fx-spacing: 4px;
+}
+
+#registrationPane1 {
+    -fx-background-image: url("Images/registrationPic.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: left center;
+
+}
+
+#registrationPane2 {
+    -fx-background-color: #03396c;
+}
+
+#registratieHeader1 {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20px;
+}
+
+#registratieHeader {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+#registrationLabel {
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+
+#registrationPane {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-opacity: 0.84;
+}
+
+#registrationText {
+    -fx-text-fill: black;
 }

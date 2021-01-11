@@ -1,70 +1,116 @@
 package adsd.app;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Trip {
+public class Trip
+{
     // Attributes
+    private Integer ID;
     private String locationFrom;
     private String locationTo;
-    private String price;
     private String distance;
-    private String travelTime;
     private double locationFromLat;
     private double locationFromLng;
     private double locationToLat;
     private double locationToLng;
-
-    DataHandler dataHandler = new DataHandler();
+    private ArrayList<TripTimes> times;
 
 
     // Standard Constructor
-    public Trip(String locationFrom, String locationTo, String price, String distance, String travelTime, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng) {
-        this.locationFrom = locationFrom;
-        this.locationTo = locationTo;
-        this.price = price;
-        this.distance = distance;
-        this.travelTime = travelTime;
+    public Trip(Integer ID, String locationFrom, String locationTo, String distance, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng)
+    {
+        this.ID              = ID;
+        this.locationFrom    = locationFrom;
+        this.locationTo      = locationTo;
+        this.distance        = distance;
         this.locationFromLat = locationFromLat;
         this.locationFromLng = locationFromLng;
-        this.locationToLat = locationToLat;
-        this.locationToLng = locationToLng;
+        this.locationToLat   = locationToLat;
+        this.locationToLng   = locationToLng;
+        this.times = new ArrayList<TripTimes>();
+
+    }
+
+    public Trip(String locationFrom, String locationTo)
+    {
+        this.locationFrom = locationFrom;
+        this.locationTo   = locationTo;
+        this.times = new ArrayList<TripTimes>();
     }
 
     // JSON Constructor
-    public Trip(JSONObject object) {
+    public Trip(JSONObject object)
+    {
+        ID = object.getInt("ID");
         locationFrom = object.getString("locationFrom");
         locationTo = object.getString("locationTo");
-        price = object.getString("price");
         distance = object.getString("distance");
-        travelTime = object.getString("travelTime");
         locationFromLat = object.getDouble("locationFromLat");
-        locationFromLng = object.getDouble("locationFromLon");
+        locationFromLng = object.getDouble("locationFromLng");
         locationToLat = object.getDouble("locationToLat");
-        locationToLng = object.getDouble("locationToLon");
+        locationToLng = object.getDouble("locationToLng");
+
+        times = new ArrayList<TripTimes>();
+        JSONArray time = object.getJSONArray("tripTimes");
+        for (int i=0; i<time.length(); i++)
+        {
+            TripTimes p = new TripTimes ((JSONObject) time.get(i));
+
+            times.add(p);
+        }
 
     }
 
     // toJSON Method
-    public JSONObject toJSON() {
+    public JSONObject toJSON()
+    {
+
         JSONObject jobj = new JSONObject();
 
+        jobj.put("ID", ID);
         jobj.put("locationFrom", locationFrom);
         jobj.put("locationTo", locationTo);
-        jobj.put("price", price);
         jobj.put("distance", distance);
-        jobj.put("travelTime", travelTime);
         jobj.put("locationFromLat", locationFromLat);
-        jobj.put("locationFromLon", locationFromLng);
+        jobj.put("locationFromLng", locationFromLng);
         jobj.put("locationToLat", locationToLat);
-        jobj.put("locationToLon", locationToLng);
+        jobj.put("locationToLng", locationToLng);
+
+        JSONArray ja = new JSONArray();
+        for (TripTimes t : times)
+        {
+            ja.put(t.toJSON());
+
+        }
+        jobj.put("tripTimes", ja);
+
         return jobj;
     }
 
+    public void addTime(double depTime, double arivTime, String vehicleType, Integer travelTime)
+    {
+        times.add(new TripTimes(depTime, arivTime, vehicleType, travelTime));
+    }
+
     // Getters and Setters
-    public String getLocationFrom() {
+    public int getID()
+    {
+        return this.ID;
+    }
+
+    public void setID(Integer ID)
+    {
+        this.ID = ID;
+    }
+
+
+    public String getLocationFrom()
+    {
         return this.locationFrom;
     }
 
@@ -72,80 +118,72 @@ public class Trip {
         this.locationFrom = locationFrom;
     }
 
-    public String getLocationTo() {
+    public String getLocationTo()
+    {
         return this.locationTo;
     }
 
-    public void setLocationTo(String locationTo) {
+    public void setLocationTo(String locationTo)
+    {
         this.locationTo = locationTo;
     }
 
-    public String getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getDistance() {
+    public String getDistance()
+    {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(String distance)
+    {
         this.distance = distance;
     }
 
-    public String getTravelTime() {
-        return this.travelTime;
-    }
-
-    public void setTravelTime(String travelTime) {
-        this.travelTime = travelTime;
-    }
-
-    public double getLocationFromLat() {
+    public double getLocationFromLat()
+    {
         return locationFromLat;
     }
 
-    public void setLocationFromLat(double locationFromLat) {
+    public void setLocationFromLat(double locationFromLat)
+    {
         this.locationFromLat = locationFromLat;
     }
 
-    public double getLocationFromLng() {
+    public double getLocationFromLng()
+    {
         return locationFromLng;
     }
 
-    public void setLocationFromLng(double locationFromLng) {
+    public void setLocationFromLng(double locationFromLng)
+    {
         this.locationFromLng = locationFromLng;
     }
 
-    public double getLocationToLat() {
+    public double getLocationToLat()
+    {
         return locationToLat;
     }
 
-    public void setLocationToLat(double locationToLat) {
+    public void setLocationToLat(double locationToLat)
+    {
         this.locationToLat = locationToLat;
     }
 
-    public double getLocationToLng() {
+    public double getLocationToLng()
+    {
         return locationToLng;
     }
 
-    public void setLocationToLng(double locationToLng) {
+    public void setLocationToLng(double locationToLng)
+    {
         this.locationToLng = locationToLng;
     }
 
-    public void printTripDetails() {
-        Locale.setDefault(new Locale("nl", "NL"));
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
+    public ArrayList<TripTimes> getTripTimesList()
+    {
+        return times;
+    }
 
-        System.out.println(rb.getString("detailsPrint"));
-        System.out.println(rb.getString("fromPrint")+ locationFrom );
-        System.out.println(rb.getString("toPrint")+ locationTo);
-        System.out.println(rb.getString("pricePrint")+ price);
-        System.out.println(rb.getString("distancePrint")+ distance+ " " + rb.getString("kmPrint"));
-        System.out.println(rb.getString("traveltimePrint")+ travelTime+ " " + rb.getString("minPrint"));
-
+    public TripTimes getTripTimeObj(int i) {
+        return times.get(i);
     }
 }
