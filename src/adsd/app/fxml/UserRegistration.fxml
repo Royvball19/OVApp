@@ -12,65 +12,67 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.UserRegistrationController">
    <children>
-      <Pane id="registrationPane1" prefHeight="452.0" prefWidth="266.5">
+      <Pane id="registrationPane1" prefHeight="452.0" prefWidth="284.0">
          <children>
-            <Label id="registratieHeader" layoutX="61.0" layoutY="39.0" text="De voordelen">
+            <Label id="registratieHeader" layoutX="70.0" layoutY="39.0" text="De voordelen" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="20.0" />
                </font>
             </Label>
-            <AnchorPane id="registrationPane" layoutX="9.0" layoutY="97.0" prefHeight="277.0" prefWidth="249.0" stylesheets="@../style.css" />
-            <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="29.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/favorite.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="29.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+            <AnchorPane id="registrationPane" layoutX="18.0" layoutY="96.0" prefHeight="277.0" prefWidth="249.0" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="19.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/favorite.png" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="36.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/profile-user-3.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="29.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="36.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/clock.png" />
                </image>
             </ImageView>
-            <Label id="registrationLabel" layoutX="86.0" layoutY="124.0" text="Favorieten opslaan">
+            <Label id="registrationLabel" layoutX="89.0" layoutY="127.0" text="Favorieten opslaan">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
-            <Label id="registrationLabel" layoutX="86.0" layoutY="185.0" text="Persoonlijk profiel">
+            <Label id="registrationLabel" layoutX="89.0" layoutY="188.0" text="Persoonlijk profiel">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
-            <Label id="registrationLabel" layoutX="86.0" layoutY="245.0" text="Tijd besparen">
+            <Label id="registrationLabel" layoutX="89.0" layoutY="248.0" text="Tijd besparen">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
-            <Text id="registrationText" fill="BLACK" layoutX="24.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registreer geheel gratis, duizenden mensen gingen je voor!" textAlignment="CENTER" wrappingWidth="229.5">
+            <Text id="registrationText" fill="BLACK" layoutX="29.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registreer geheel gratis, duizenden mensen gingen je voor!" textAlignment="CENTER" wrappingWidth="229.5">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane id="registrationPane2" layoutX="267.0" prefHeight="452.0" prefWidth="266.5">
+      <Pane id="registrationPane2" layoutX="285.0" prefHeight="452.0" prefWidth="249.0">
          <children>
-            <TextField fx:id="firstName" layoutX="53.0" layoutY="119.0" promptText="Voornaam" />
-            <TextField fx:id="lastName" layoutX="53.0" layoutY="159.0" promptText="Achternaam" />
-            <TextField fx:id="userName" layoutX="53.0" layoutY="237.0" promptText="Gebruikersnaam" />
-            <Label id="registratieHeader1" layoutX="72.0" layoutY="40.0" text="Registreren">
+            <TextField fx:id="firstName" layoutX="44.0" layoutY="119.0" promptText="Voornaam" />
+            <TextField fx:id="lastName" layoutX="44.0" layoutY="159.0" promptText="Achternaam" />
+            <TextField fx:id="userName" layoutX="44.0" layoutY="237.0" promptText="Gebruikersnaam" />
+            <Label id="registratieHeader1" layoutX="63.0" layoutY="40.0" text="Registreren">
                <font>
                   <Font name="Arial Black" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="age" layoutX="53.0" layoutY="199.0" promptText="Leeftijd" />
-            <TextField fx:id="password" layoutX="53.0" layoutY="275.0" promptText="Wachtwoord" />
-            <Button layoutX="93.0" layoutY="317.0" mnemonicParsing="false" onAction="#userRegistration" text="Registreren" />
-            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="371.0" prefHeight="20.0" prefWidth="212.0" textFill="#ab2323">
+            <TextField fx:id="age" layoutX="44.0" layoutY="199.0" promptText="Leeftijd" />
+            <TextField fx:id="password" layoutX="44.0" layoutY="275.0" promptText="Wachtwoord" />
+            <Button layoutX="84.0" layoutY="317.0" mnemonicParsing="false" onAction="#userRegistration" text="Registreren" />
+            <Label id="errorLabel" fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="370.0" prefHeight="20.0" prefWidth="212.0" textFill="#ab2323">
                <font>
                   <Font name="Arial Black" size="13.0" />
                </font>

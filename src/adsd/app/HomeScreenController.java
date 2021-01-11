@@ -222,8 +222,8 @@ public class HomeScreenController {
         posB = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosB();
 
 
-        File f = new File("C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html");
-        /*        File f = new File("src/adsd/app/index.html");*/
+        File f = new File("src/adsd/app/index.html");
+//        File f = new File("src/adsd/app/index.html");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
 
             //Writer to HTML to change the Locations and Vehicletype

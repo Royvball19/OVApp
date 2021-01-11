@@ -57,13 +57,13 @@ public class TripInformationController extends HomeScreenController
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
-        WebEngine webEngine = mapWebView.getEngine();
-        String url = "file:///C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html";
-        webEngine.load(url);
+//        WebEngine webEngine = mapWebView.getEngine();
+//        String url = "file://Users/yannickvdbos/Downloads/OVApp/src/adsd/app/index.html";
+//        webEngine.load(url);
 
-/*        WebEngine webEngine = mapWebView.getEngine();
-        URL url = this.getClass().getResource("/adsd/app/index.html");
-        webEngine.load(url.toString());*/
+        WebEngine webEngine = mapWebView.getEngine();
+        URL url = this.getClass().getResource("index.html");
+        webEngine.load(url.toString());
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
@@ -71,10 +71,6 @@ public class TripInformationController extends HomeScreenController
 
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
-
-
-
-
 
     }
 
