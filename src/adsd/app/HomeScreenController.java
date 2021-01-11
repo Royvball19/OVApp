@@ -13,6 +13,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class HomeScreenController
 {
@@ -69,8 +70,8 @@ public class HomeScreenController
         checkTripOptions.setText(rb.getString("HScheckTripOptionsButton"));
         showTripButton.setText(rb.getString("HSshowTripInfo"));
 
+        }
 
-    }
 
     private String toComma(String time)
     {

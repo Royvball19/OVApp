@@ -1,5 +1,6 @@
 package adsd.app;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -20,48 +22,62 @@ public class MyProfileController
 
     DataHandler dataHandler;
 
-    @FXML Label labelFirstName;
-    @FXML Label labelLastName;
-    @FXML Label labelFirstNameInfo;
-    @FXML Label labelLastNameInfo;
-    @FXML Button showHomeScreen;
     @FXML ToolBar myToolBar;
-    @FXML ComboBox profileSelector;
+    @FXML Label welcomeText;
     @FXML Button showSelectedProfile;
+    @FXML TextField userName;
+    @FXML TextField password;
 
     public void initialize() throws FileNotFoundException
     {
-
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
-        labelFirstName.setText(rb.getString("labelFirstName"));
-        labelLastName.setText(rb.getString("labelLastName"));
-
-        for (int i = 0; i < dataHandler.getProfileList().size(); i++ )
-        {
-            profileSelector.getItems().add(dataHandler.getProfile(i).getFirstName());
-        }
-
-//        firstName.setText(dataHandler.getProfile(i).getFirstName());
-//        lastName.setText(dataHandler.getProfile(i).getLastName());
-
     }
 
-    public void showProfileDetails(ActionEvent event) {
+    public int login(ActionEvent login) throws IOException {
 
-        labelFirstNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getFirstName());
-        labelLastNameInfo.setText(dataHandler.getProfile(profileSelector.getSelectionModel().getSelectedIndex()).getLastName());
+        for (int i = 0; i < dataHandler.getProfileList().size(); i++) {
 
-        try {
-            FileWriter myWriter = new FileWriter("currentuser.txt");
-            myWriter.write(String.valueOf(profileSelector.getSelectionModel().getSelectedIndex()));
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+
+            if (dataHandler.getProfileList().get(i).getUserName().equals(userName.getText()) && dataHandler.getProfileList().get(i).getPassword().equals(password.getText())) {
+
+                welcomeText.setText("Welkom " + dataHandler.getProfile(i).getFirstName());
+
+                FileWriter myWriter = new FileWriter("currentuser.txt");
+                myWriter.write(String.valueOf(i));
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+
+
+                PauseTransition delay = new PauseTransition(Duration.seconds(2));
+                delay.setOnFinished( event -> {
+
+                    Parent homeScreenParent = null;
+
+                    try {
+                        homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Scene myFavoriteTrips = new Scene(homeScreenParent);
+                    myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+                    Stage window = (Stage) myToolBar.getScene().getWindow();
+
+                    window.setScene(myFavoriteTrips);
+                    window.show();
+                });
+
+                delay.play();
+
+                return i;
+
+            } else {
+                welcomeText.setText("Deze gebruiker bestaat niet!");
+            }
         }
+        return 0;
     }
 
     public void showHomeScreen(ActionEvent event) throws IOException
