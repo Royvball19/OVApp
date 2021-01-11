@@ -7,10 +7,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.media.Media;
+
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.MalformedURLException;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,6 +63,10 @@ public class HomeScreenController {
 
 
     public void initialize() throws FileNotFoundException, MalformedURLException {
+
+        String uriString = new File("src/adsd/app/secret.mp3").toURI().toString();
+        MediaPlayer player = new MediaPlayer( new Media(uriString));
+        player.setAutoPlay(true);
 
         dataHandler.readFromExternalData();
 

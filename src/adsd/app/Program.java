@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -45,17 +47,11 @@ public class Program extends Application
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
-
         // Application.launch(GUI.class, args);
         launch(args);
 
         Locale.setDefault(new Locale("nl", "NL"));
         ResourceBundle rb = ResourceBundle.getBundle("lang");
-
-
-
-
-
 
         // Datahandler writeToJSON always at the end of the application
 
