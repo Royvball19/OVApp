@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import java.io.*;
 import java.net.MalformedURLException;
 
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -45,6 +46,8 @@ public class HomeScreenController {
     @FXML
     private Button showTripButton;
 
+    private String lang;
+    private String country;
 
     // staat hier zodat er geen errors zitten in de html writer etc. moet later wel nog worden aangepast.
     ChoiceBox tripOption;
@@ -59,22 +62,13 @@ public class HomeScreenController {
 
     DataHandler dataHandler = new DataHandler();
 
-    MediaPlayer mediaPlayer;
-
-    public void music(){
-        String bip = "src/adsd/app/secret.mp3";
-        Media hit = new Media(Paths.get(bip).toUri().toString());
-        mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-    }
-
-
-    public void initialize() throws FileNotFoundException, MalformedURLException {
-
-        music();
-
-
+    public void initialize() throws IOException {
         dataHandler.readFromExternalData();
+
+        lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
+        country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
+        Locale.setDefault(new Locale(lang, country));
+
 
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
         locationTo.setPromptText(rb.getString("HSlocTo"));
@@ -361,5 +355,25 @@ public class HomeScreenController {
         window.show();
     }
 
+    public void changeLangEng(ActionEvent event) throws IOException
+    {
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "en");
+        lines.set(1, "US");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
 
+        initialize();
+
+    }
+
+    public void changeLangNed(ActionEvent event) throws IOException {
+
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "nl");
+        lines.set(1, "NL");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+        initialize();
+
+    }
 }

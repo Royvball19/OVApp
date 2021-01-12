@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -21,7 +24,6 @@ public class MyFavoriteTripsController
 {
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
-
 
     DataHandler dataHandler;
     @FXML TableView<Trip> favTrips;
@@ -34,19 +36,29 @@ public class MyFavoriteTripsController
 
     int currentUser;
 
+    private String lang;
+    private String country;
 
-    public void initialize() throws FileNotFoundException
 
+
+    public void initialize() throws IOException
     {
 
-         favTripsFromCollum.setText(rb.getString("MFTfavTripFrom"));
-         favTripsToCollum.setText(rb.getString("MFTfavTripTo"));
-         removeFavTripButton.setText(rb.getString("MFTdeleteFavTrip"));
-         planFavTripButton.setText(rb.getString("MFTplanFavTrip"));
+        lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
+        country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
+        Locale.setDefault(new Locale(lang, country));
 
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
+
+
+        favTripsFromCollum.setText(rb.getString("MFTfavTripFrom"));
+        favTripsToCollum.setText(rb.getString("MFTfavTripTo"));
+        removeFavTripButton.setText(rb.getString("MFTdeleteFavTrip"));
+        planFavTripButton.setText(rb.getString("MFTplanFavTrip"));
 
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
+
 
         favTripsFromCollum.setCellValueFactory( new PropertyValueFactory<>("locationFrom"));
         favTripsToCollum.setCellValueFactory( new PropertyValueFactory<>("locationTo"));
@@ -107,10 +119,26 @@ public class MyFavoriteTripsController
         dataHandler.writeToExternalData();
     }
 
-   public void btnMenuLangEnglish (ActionEvent event){
 
-        Locale locale = new Locale("US", "eng");
+ public void changeLangEng(ActionEvent event) throws IOException
+ {
+     List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+     lines.set(0, "en");
+     lines.set(1, "US");
+     Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+     initialize();
 
  }
 
+    public void changeLangNed(ActionEvent event) throws IOException {
+
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "nl");
+        lines.set(1, "NL");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+        initialize();
+
+    }
 }

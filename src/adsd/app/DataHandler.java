@@ -22,9 +22,6 @@ public class DataHandler
     // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
     boolean useDataType = true;
 
-
-
-
     // writeToJSON Method to write data to JSON
     public void writeToExternalData() throws FileNotFoundException, UnsupportedEncodingException
     {
