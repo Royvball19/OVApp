@@ -71,8 +71,7 @@ public class HomeScreenController {
 
     public void initialize() throws FileNotFoundException, MalformedURLException {
 
-        music();
-
+        //music();
 
         dataHandler.readFromExternalData();
 
