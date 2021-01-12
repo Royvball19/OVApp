@@ -11,10 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class HomeScreenController {
 
@@ -58,6 +55,7 @@ public class HomeScreenController {
 
 
     public void initialize() throws FileNotFoundException {
+
 
         dataHandler.readFromExternalData();
 

@@ -24,12 +24,19 @@ public class MyProfileController
 
     @FXML ToolBar myToolBar;
     @FXML Label welcomeText;
+    @FXML Label profileNotExist;
     @FXML Button showSelectedProfile;
     @FXML TextField userName;
     @FXML TextField password;
+    @FXML Hyperlink noAccount;
 
     public void initialize() throws FileNotFoundException
     {
+
+        userName.setPromptText(rb.getString("MPuserName"));
+        password.setPromptText(rb.getString("MPpassword"));
+        noAccount.setText(rb.getString("MPnoAccount"));
+
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
@@ -42,7 +49,7 @@ public class MyProfileController
 
             if (dataHandler.getProfileList().get(i).getUserName().equals(userName.getText()) && dataHandler.getProfileList().get(i).getPassword().equals(password.getText())) {
 
-                welcomeText.setText("Welkom " + dataHandler.getProfile(i).getFirstName());
+                welcomeText.setText(rb.getString("MPwelcomeText") + dataHandler.getProfile(i).getFirstName());
 
                 FileWriter myWriter = new FileWriter("currentuser.txt");
                 myWriter.write(String.valueOf(i));
@@ -74,7 +81,7 @@ public class MyProfileController
                 return i;
 
             } else {
-                welcomeText.setText("Deze gebruiker bestaat niet!");
+                profileNotExist.setText(rb.getString("MPnoProfile"));
             }
         }
         return 0;
@@ -110,7 +117,8 @@ public class MyProfileController
         window.show();
     }
 
-    public void toRegistration() throws IOException {
+    public void toRegistration() throws IOException
+    {
 
         Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/UserRegistration.fxml"));
         Scene myFavoriteTrips = new Scene(homeScreenParent);
@@ -123,4 +131,5 @@ public class MyProfileController
         window.show();
 
     }
+
 }
