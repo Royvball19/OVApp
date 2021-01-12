@@ -1,27 +1,42 @@
 package adsd.app;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class Program extends Application
 {
 
     private static DataHandler datahandler;
 
+    private String lang;
+    private String country;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception
     {
 
+        lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
+        country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
+        Locale.setDefault(new Locale(lang, country));
+
+
         ResourceBundle rb = ResourceBundle.getBundle("lang");
-        Locale.setDefault(new Locale("nl", "NL"));
+//        Locale.setDefault(new Locale("nl", "NL"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/HomeScreen.fxml"));
         Parent startScherm = loader.load();
@@ -52,12 +67,27 @@ public class Program extends Application
         datahandler.readFromExternalData();
 
 
-
         // Application.launch(GUI.class, args);
         launch(args);
 
 
+    }
+
+    public void changeLangEng(ActionEvent event) throws IOException
+    {
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "en");
+        lines.set(1, "US");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
 
     }
 
+    public void changeLangNed(ActionEvent event) throws IOException {
+
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "nl");
+        lines.set(1, "NL");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+    }
 }

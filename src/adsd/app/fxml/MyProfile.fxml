@@ -19,10 +19,10 @@
                 <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@../style.css" />
                 <Button id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
                 <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-            <MenuButton fx:id="langOptionButton" mnemonicParsing="false">
+            <MenuButton fx:id="myLangButton" mnemonicParsing="false">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLangNed" text="Nederlands" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLangEng" text="Engels" />
               </items>
             </MenuButton>
             </items>
