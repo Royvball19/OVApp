@@ -15,14 +15,7 @@
 
 <AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.HomeScreenController">
     <children>
-        <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="24.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
-            <items>
-                <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-                <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-                <Button id="langOptionButton" fx:id="langOptionButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-            </items>
-        </ToolBar>
-        <GridPane layoutX="20.0" layoutY="100.0" prefHeight="263.0" prefWidth="225.0">
+        <GridPane layoutX="12.0" layoutY="84.0" prefHeight="279.0" prefWidth="242.0" stylesheets="@../style.css">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -37,19 +30,16 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label id="departureRoute" fx:id="departureRoute" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="127.0" stylesheets="@../style.css" GridPane.halignment="CENTER" />
-                <Label fx:id="departureTime" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                 <Button fx:id="checkTripOptions" alignment="CENTER" mnemonicParsing="false" onAction="#checkTripOptions" prefHeight="27.0" prefWidth="215.0" styleClass="homeScreenButton" stylesheets="@../style.css" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets />
                     </GridPane.margin></Button>
-                <ComboBox fx:id="locationFrom" prefWidth="215.0" GridPane.halignment="CENTER" />
-                <ComboBox fx:id="locationTo" prefWidth="215.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                <ListView id="tripOptions" fx:id="tripOptions" prefHeight="50.0" prefWidth="200.0" stylesheets="@../style.css" visible="false" GridPane.rowIndex="5" GridPane.rowSpan="2">
+                <ComboBox fx:id="locationTo" prefWidth="215.0" styleClass="HScomboBox" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <ListView fx:id="tripOptions" prefHeight="50.0" prefWidth="200.0" styleClass="tripOptions" stylesheets="@../style.css" visible="false" GridPane.rowIndex="5" GridPane.rowSpan="2">
                     <GridPane.margin>
                         <Insets top="3.0" />
                     </GridPane.margin></ListView>
-                <ComboBox fx:id="vehicleType" prefWidth="215.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                <ComboBox fx:id="vehicleType" prefWidth="215.0" styleClass="HScomboBox" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                     <GridPane.margin>
                         <Insets top="3.0" />
                     </GridPane.margin></ComboBox>
@@ -57,9 +47,10 @@
                     <GridPane.margin>
                         <Insets top="10.0" />
                     </GridPane.margin></Button>
+                <ComboBox fx:id="locationFrom" prefWidth="215.0" styleClass="HScomboBox" stylesheets="@../style.css" GridPane.halignment="CENTER" />
                 <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                     <children>
-                        <Label fx:id="hourLabel" prefHeight="33.0" prefWidth="44.0">
+                        <Label fx:id="hourLabel" prefHeight="33.0" prefWidth="44.0" stylesheets="@../style.css">
                             <padding>
                                 <Insets left="6.0" />
                             </padding>
@@ -78,5 +69,12 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </GridPane>
+        <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="24.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
+            <items>
+                <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+                <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+                <Button id="langOptionButton" fx:id="langOptionButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+            </items>
+        </ToolBar>
     </children>
 </AnchorPane>

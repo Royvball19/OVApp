@@ -164,22 +164,39 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
-.combo-box
-{
+.combo-box {
     -fx-background-color: linear-gradient(#000000, #000000);
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: white;
     -fx-mark-color: orange;
+    -fx-prompt-text-fill: white;
+
+
 }
 
-.combo-box .menu-item > .label
-{
-    -fx-text-fill: #000000;
+.blackbox {
+    -fx-background-color: black;
+    -fx-opacity: 0.5;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 2px;
 }
 
-.combo-box .menu-item:focused
-{
-    -fx-background-color: orange;
+.combo-box > .list-cell {
+    -fx-background: black;
+    -fx-background-color: black;
+    -fx-text-fill: white;
 }
+
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: black ;
+    -fx-text-fill: white ;
+
+}
+.combo-box .combo-box-popup .list-cell:hover {
+    -fx-text-fill: black;
+    -fx-background-color: orange ;
+}
+
+
 
 #labelLocFrom, #labelLocFromInfo, #labelLocTo, #labelLocToInfo, #labelTravelTime, #labelTravelTimeInfo, #labelPrice, #labelPriceInfo, #labelDepartureTime, #labelDepartureTimeInfo, #labelArrivalTime, #labelArrivalTimeInfo {
     -fx-font-size: 14px;
@@ -187,18 +204,56 @@
 
 .spinners
 {
-    -fx-background-color: linear-gradient(#000000, #000000);
+    -fx-background-color: black;
     -fx-text-fill: #ffffff;
     -fx-mark-color: orange;
+    -fx-outer-border: none;
+
 }
 
-#tripOptions .list-cell:even, #tripOptions .list-cell:odd
+.spinner .text-field{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: black;
+    -fx-effect: none;
+
+}
+
+
+
+
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    /* interpolate color between yellow and red based on first color brightness */
+    -fx-body-color: ladder(#444, yellow 0%, red 100%);
+}
+
+.spinner .increment-arrow-button:hover:pressed,
+.spinner .decrement-arrow-button:hover:pressed,
+.spinner .increment-arrow-button:pressed,
+.spinner .decrement-arrow-button:pressed {
+    /* interpolate color between yellow and red based on first color brightness */
+    -fx-body-color: ladder(#AAA, yellow 0%, red 100%);
+}
+
+.tripOptions .list-cell:even, #tripOptions .list-cell:odd
 {
     -fx-background-color: linear-gradient(#000000, #000000);
     -fx-text-fill: #ffffff;
 }
 
-#tripOptions
+.tripOptions .list-cell:even:selected, #tripOptions .list-cell:odd:selected
+{
+    -fx-background-color: orange;
+    -fx-text-fill: black;
+}
+
+.tripOptions
 {
     -fx-border-style: none;
 }

@@ -26,12 +26,13 @@ public class Program extends Application
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/HomeScreen.fxml"));
         Parent startScherm = loader.load();
         primaryStage.setTitle("TravelYroute OV App");
+        startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(new Scene(startScherm));
         primaryStage.show();
         primaryStage.setResizable(false);
 
 
-        startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
     }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException

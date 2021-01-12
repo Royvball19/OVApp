@@ -140,27 +140,38 @@ public class HomeScreenController {
         return time;
     }
 
+    private String toDot(String time) {
+        time = time.replace(",", ".");
+
+        return time;
+    }
+
 
     public void checkTripOptions(ActionEvent event) {
+
         tripOptions.getItems().clear();
         searchResults.clear();
         resultCount = 0;
 
-        if (locationFrom.getSelectionModel().getSelectedIndex() == -1 | locationTo.getSelectionModel().getSelectedIndex() == -1 | vehicleType.getSelectionModel().getSelectedIndex() == -1) {
+        if (locationFrom.getSelectionModel().getSelectedIndex() == -1
+                | locationTo.getSelectionModel().getSelectedIndex() == -1
+                | vehicleType.getSelectionModel().getSelectedIndex() == -1)
+        {
             locationFrom.setPromptText(rb.getString("HSpromptFrom"));
             locationTo.setPromptText(rb.getString("HSpromptTo"));
             vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
+
         } else {
 
             String locFrom = locationFrom.getSelectionModel().getSelectedItem().toString();
             String locTo = locationTo.getSelectionModel().getSelectedItem().toString();
 
-            Double selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
-            Double selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
+            double selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
+            double selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
 
-            Double selectedTime = selectedHour + selectedMin;
+            double selectedTime = selectedHour + selectedMin;
 
-            String time = toComma(selectedTime.toString());
+            String time = toComma(Double.toString(selectedTime));
 
             String vehicle = null;
             switch (vehicleType.getSelectionModel().getSelectedIndex()) {
@@ -170,11 +181,16 @@ public class HomeScreenController {
                 case 1:
                     vehicle = "DRIVING";
                     break;
-                default:
-                    vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
-                    break;
+
             }
+
+            System.out.println("de tijd is " + time);
+
+            double test = 10.31;
+            System.out.println(test);
+
             searchTrip(locFrom, locTo, time, vehicle);
+
 
             tripOptions.setVisible(true);
             showTripButton.setVisible(true);
@@ -185,7 +201,13 @@ public class HomeScreenController {
             tripOptions.getItems().add(rb.getString("HSresult"));
             tripOptions.setVisible(true);
         }
+
+
+
+
     }
+
+
 
 
     private void searchTrip(String locFrom, String locTo, String time, String vehicle) {
@@ -219,14 +241,12 @@ public class HomeScreenController {
 
                         resultCount++;
                     }
-
                 }
             }
-
         }
-
-
     }
+
+
 
 
     public void showTrip(ActionEvent event) throws IOException {
