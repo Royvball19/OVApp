@@ -24,8 +24,8 @@
                 <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
             <MenuButton id="myLangButton" fx:id="myLangButton" mnemonicParsing="false">
               <items>
-                <MenuItem mnemonicParsing="false" text="Nederlands" />
-                <MenuItem mnemonicParsing="false" text="English" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLangNed" text="Nederlands" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLangEng" text="English" />
               </items>
             </MenuButton>
             </items>
