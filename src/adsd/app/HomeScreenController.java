@@ -18,10 +18,7 @@ import java.net.MalformedURLException;
 
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class HomeScreenController {
 
@@ -75,6 +72,7 @@ public class HomeScreenController {
     public void initialize() throws FileNotFoundException, MalformedURLException {
 
         music();
+
 
         dataHandler.readFromExternalData();
 

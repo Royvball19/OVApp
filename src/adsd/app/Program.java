@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -21,6 +19,10 @@ public class Program extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
+        Locale.setDefault(new Locale("nl", "NL"));
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/HomeScreen.fxml"));
         Parent startScherm = loader.load();
         primaryStage.setTitle("TravelYroute OV App");
@@ -28,32 +30,33 @@ public class Program extends Application
         primaryStage.show();
         primaryStage.setResizable(false);
 
+
         startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
     }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
-        System.out.println("Loading driver...");
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver loaded!\n");
-        } catch (ClassNotFoundException e)
-        {
-            throw new IllegalStateException("Cannot find the driver in the classpath!", e);
-        }
+//        System.out.println("Loading driver...");
+//        try
+//        {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            System.out.println("Driver loaded!\n");
+//        } catch (ClassNotFoundException e)
+//        {
+//            throw new IllegalStateException("Cannot find the driver in the classpath!", e);
+//        }
 
         // Datahandler import
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
+
+
         // Application.launch(GUI.class, args);
         launch(args);
 
-        Locale.setDefault(new Locale("nl", "NL"));
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-        // Datahandler writeToJSON always at the end of the application
 
     }
+
 }

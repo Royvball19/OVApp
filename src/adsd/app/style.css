@@ -97,6 +97,7 @@
 #langOptionButton {
     -fx-background-color: none;
     -fx-background-image: url("Images/world.png");
+
     -fx-background-repeat: no-repeat;
     -fx-background-size: 90%;
     -fx-min-height: 40;
@@ -107,6 +108,19 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
+
+#myLangButton {
+
+    -fx-background-color: none;
+    -fx-background-image: url("Images/world.png");
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90%;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
+
+}
+
 #myRecentTripButton {
     -fx-background-color: none;
     -fx-background-image: url("Images/clock.png");
@@ -115,6 +129,23 @@
     -fx-min-height: 40;
     -fx-min-width: 40;
 }
+#backButton {
+
+    -fx-background-color: none;
+    -fx-background-image: url("Images/arrow.png");
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90%;
+    -fx-min-height: 40;
+    -fx-min-width: 40;
+
+}
+#backButton:hover {
+
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
+
+}
+
 
 #myRecentTripButton:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
@@ -271,7 +302,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #registrationPane2 {
-    -fx-background-color: orange;
+    -fx-background-color: #03396c;
+
+    /*-fx-background-color: white;*/
 }
 
 #registratieHeader1 {
@@ -282,7 +315,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 #registratieHeader {
     -fx-font-family: "Arial Black";
     -fx-font-size: 20px;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #registrationLabel {
@@ -299,9 +332,4 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 
 #registrationText {
     -fx-text-fill: black;
-}
-
-#errorLabel {
-    -fx-font-family: "Arial Black";
-    -fx-text-fill: #ab0606;
 }

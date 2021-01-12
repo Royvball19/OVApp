@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -21,17 +22,29 @@ public class MyFavoriteTripsController
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
+
     DataHandler dataHandler;
     @FXML TableView<Trip> favTrips;
     @FXML TableColumn<Trip, String> favTripsFromCollum;
     @FXML TableColumn<Trip, String> favTripsToCollum;
     @FXML ToolBar myToolBar;
+    @FXML MenuButton myLangButton;
+    @FXML Button removeFavTripButton;
+    @FXML Button planFavTripButton;
 
     int currentUser;
 
 
     public void initialize() throws FileNotFoundException
+
     {
+
+         favTripsFromCollum.setText(rb.getString("MFTfavTripFrom"));
+         favTripsToCollum.setText(rb.getString("MFTfavTripTo"));
+         removeFavTripButton.setText(rb.getString("MFTdeleteFavTrip"));
+         planFavTripButton.setText(rb.getString("MFTplanFavTrip"));
+
+
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
@@ -93,4 +106,11 @@ public class MyFavoriteTripsController
         favTrips.getItems().remove(favTrips.getSelectionModel().getSelectedIndex());
         dataHandler.writeToExternalData();
     }
+
+   public void btnMenuLangEnglish (ActionEvent event){
+
+        Locale locale = new Locale("US", "eng");
+
+ }
+
 }
