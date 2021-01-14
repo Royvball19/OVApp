@@ -245,15 +245,10 @@ public class HomeScreenController {
                 for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++)
                 {
 
-
-                    System.out.println((df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
-
-                    System.out.println(time);
-
                     if (lang.equals("en"))
                     {
-                        System.out.println("ik pak de engelse methode");
-                        // lang en US
+
+                        // ENG Method
                         if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
                                 &&
                                 toComma(String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()))).contains(time))
@@ -274,7 +269,7 @@ public class HomeScreenController {
                         }
                         } else
                         {
-                            System.out.println("ik pak de nederlandse methode");
+                            // NL method
                             if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
                                     &&
                                     String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))

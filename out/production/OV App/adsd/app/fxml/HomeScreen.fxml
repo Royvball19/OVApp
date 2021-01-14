@@ -13,6 +13,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.HomeScreenController">
     <children>
         <GridPane layoutX="12.0" layoutY="84.0" prefHeight="279.0" prefWidth="242.0" stylesheets="@../style.css">
@@ -73,7 +75,12 @@
             <items>
                 <Button id="myProfileButton" fx:id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
                 <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-                <Button id="langOptionButton" fx:id="langOptionButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+                <MenuButton id="myLangButton" fx:id="myLangButton" mnemonicParsing="false">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#changeLangNed" text="Nederlands" />
+                        <MenuItem mnemonicParsing="false" onAction="#changeLangEng" text="English" />
+                    </items>
+                </MenuButton>
             </items>
         </ToolBar>
     </children>
