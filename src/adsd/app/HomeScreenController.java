@@ -60,9 +60,15 @@ public class HomeScreenController {
     private ArrayList<String> locationToList = new ArrayList<>();
 
 
+
+
     DataHandler dataHandler = new DataHandler();
 
     public void initialize() throws IOException {
+
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
+
+        clearInputBoxes();
         dataHandler.readFromExternalData();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
@@ -141,12 +147,22 @@ public class HomeScreenController {
         return time;
     }
 
+    private void clearInputBoxes()
+    {
+        locationFrom.getItems().clear();
+        locationTo.getItems().clear();
+        vehicleType.getItems().clear();
 
-    public void checkTripOptions(ActionEvent event) {
+    }
+
+    public void checkTripOptions(ActionEvent event) throws IOException
+    {
 
         tripOptions.getItems().clear();
         searchResults.clear();
         resultCount = 0;
+
+
 
         if (locationFrom.getSelectionModel().getSelectedIndex() == -1
                 | locationTo.getSelectionModel().getSelectedIndex() == -1
@@ -179,10 +195,15 @@ public class HomeScreenController {
 
             }
 
-            System.out.println("de tijd is " + time);
+            time = "10,3";
+            System.out.println("tijd is: " + time);
 
-            double test = 10.31;
-            System.out.println(test);
+
+            System.out.println("location from: " + locFrom);
+            System.out.println("Location to: " + locTo);
+            System.out.println("time: " + time);
+            System.out.println("vehicle: " + vehicle);
+            System.out.println(vehicleType.getSelectionModel().getSelectedIndex());
 
             searchTrip(locFrom, locTo, time, vehicle);
 
@@ -205,45 +226,79 @@ public class HomeScreenController {
 
 
 
-    private void searchTrip(String locFrom, String locTo, String time, String vehicle) {
+    private void searchTrip(String locFrom, String locTo, String time, String vehicle) throws IOException
+    {
         boolean foundMatch = false;
         DecimalFormat df = new DecimalFormat("00.00");
 
+        lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
 
-        for (int i = 0; i < dataHandler.getTripList().size(); i++) {
+
+        for (int i = 0; i < dataHandler.getTripList().size(); i++)
+        {
+
             if (dataHandler.getTrip(i).getLocationFrom().toLowerCase().contains(locFrom.toLowerCase())
                     &&
-                    dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(locTo.toLowerCase())) {
-                for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++) {
-                    if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
-                            &&
-                            String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time)) {
-//                        posA = i;
-//                        posB = k;
-                        vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
-                        tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
-                        System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
+                    dataHandler.getTrip(i).getLocationTo().toLowerCase().contains(locTo.toLowerCase()))
+            {
 
-                        String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
-                        SearchResult result = new SearchResult(title, i, k);
+                for (int k = 0; k < dataHandler.getTrip(i).getTripTimesList().size(); k++)
+                {
 
 
-                        searchResults.add(result);
+                    System.out.println((df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
+
+                    System.out.println(time);
+
+                    if (lang.equals("en"))
+                    {
+                        System.out.println("ik pak de engelse methode");
+                        // lang en US
+                        if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
+                                &&
+                                toComma(String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()))).contains(time))
+                        {
+                            vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
+                            tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
+                            System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
+
+                            String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
+                            SearchResult result = new SearchResult(title, i, k);
 
 
-                        System.out.println(posA + " " + posB);
+                            searchResults.add(result);
 
 
-                        resultCount++;
+                            System.out.println(posA + " " + posB);
+                            resultCount++;
+                        }
+                        } else
+                        {
+                            System.out.println("ik pak de nederlandse methode");
+                            if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
+                                    &&
+                                    String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
+                            {
+                                vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
+                                tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
+                                System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
+
+                                String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
+                                SearchResult result = new SearchResult(title, i, k);
+
+
+                                searchResults.add(result);
+
+
+                                System.out.println(posA + " " + posB);
+                                resultCount++;
+                            }
+                        }
                     }
-
                 }
             }
-
-        }
-
-
     }
+
 
 
     public void showTrip(ActionEvent event) throws IOException {
@@ -379,23 +434,23 @@ public class HomeScreenController {
 
     public void changeLangEng(ActionEvent event) throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-        lines.set(0, "en");
-        lines.set(1, "US");
-        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-
-        initialize();
+//        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+//        lines.set(0, "en");
+//        lines.set(1, "US");
+//        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+//
+//        initialize();
 
     }
 
     public void changeLangNed(ActionEvent event) throws IOException {
 
-        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-        lines.set(0, "nl");
-        lines.set(1, "NL");
-        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-
-        initialize();
+//        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+//        lines.set(0, "nl");
+//        lines.set(1, "NL");
+//        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+//
+//        initialize();
 
     }
 }
