@@ -7,14 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.media.Media;
 
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.*;
-import java.net.MalformedURLException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -65,15 +61,14 @@ public class HomeScreenController {
     DataHandler dataHandler = new DataHandler();
 
     public void initialize() throws IOException {
-
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
-
         clearInputBoxes();
         dataHandler.readFromExternalData();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
         Locale.setDefault(new Locale(lang, country));
+
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
 
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
@@ -402,16 +397,32 @@ public class HomeScreenController {
     }
 
     public void showMyProfileButton(ActionEvent event) throws IOException {
-        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
-        Scene myProfileScene = new Scene(homeScreenParent2);
+        File myObj = new File("currentuser.txt");
+        if(myObj.length() == 0)
+        {
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
 
-        myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-        // This line gets the stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(myProfileScene);
-        window.show();
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
     }
 
     public void showMyFavoriteTrips(ActionEvent event) throws IOException {
@@ -429,23 +440,23 @@ public class HomeScreenController {
 
     public void changeLangEng(ActionEvent event) throws IOException
     {
-//        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-//        lines.set(0, "en");
-//        lines.set(1, "US");
-//        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-//
-//        initialize();
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "en");
+        lines.set(1, "US");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+        initialize();
 
     }
 
     public void changeLangNed(ActionEvent event) throws IOException {
 
-//        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-//        lines.set(0, "nl");
-//        lines.set(1, "NL");
-//        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-//
-//        initialize();
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "nl");
+        lines.set(1, "NL");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+        initialize();
 
     }
 }
