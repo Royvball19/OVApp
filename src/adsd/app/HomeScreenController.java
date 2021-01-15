@@ -119,6 +119,8 @@ public class HomeScreenController {
 
         vehicleType.getItems().add(rb.getString("HStrain"));
         vehicleType.getItems().add(rb.getString("HSbus"));
+        vehicleType.getItems().add(rb.getString("HSmetro"));
+        vehicleType.getItems().add(rb.getString("HStram"));
 
 
         checkTripOptions.setText(rb.getString("HScheckTripOptionsButton"));
@@ -184,26 +186,21 @@ public class HomeScreenController {
 
             String time = toComma(Double.toString(selectedTime));
 
-            String vehicle = null;
-            switch (vehicleType.getSelectionModel().getSelectedIndex()) {
-                case 0:
-                    vehicle = "TRANSIT";
-                    break;
-                case 1:
-                    vehicle = "DRIVING";
-                    break;
+            String vehicle = switch (vehicleType.getSelectionModel().getSelectedIndex())
+                    {
+                        case 0  -> "trein";
+                        case 1  -> "bus";
+                        case 2  -> "metro";
+                        case 3  -> "tram";
+                        default -> null;
+                    };
 
-            }
 
-            time = "10,3";
             System.out.println("tijd is: " + time);
-
-
             System.out.println("location from: " + locFrom);
             System.out.println("Location to: " + locTo);
             System.out.println("time: " + time);
             System.out.println("vehicle: " + vehicle);
-            System.out.println(vehicleType.getSelectionModel().getSelectedIndex());
 
             searchTrip(locFrom, locTo, time, vehicle);
 
@@ -249,28 +246,23 @@ public class HomeScreenController {
                     {
 
                         // ENG Method
-                        if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
+                        if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle)
                                 &&
                                 toComma(String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()))).contains(time))
                         {
                             vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
                             tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
                             System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
-
                             String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
                             SearchResult result = new SearchResult(title, i, k);
-
-
                             searchResults.add(result);
-
-
-                            System.out.println(posA + " " + posB);
                             resultCount++;
                         }
+
                         } else
                         {
                             // NL method
-                            if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle.toUpperCase())
+                            if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle)
                                     &&
                                     String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
                             {
@@ -302,6 +294,15 @@ public class HomeScreenController {
         posA = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosA();
         posB = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosB();
 
+        String mapType = switch (dataHandler.getTrip(posA).getTripTimesList().get(posB).getVehicleType())
+                {
+                    case "trein"    -> "TRANSIT";
+                    case "bus"      -> "DRIVING";
+                    case "metro"    -> "TRANSIT";
+                    case "tram"     -> "DRIVING";
+                    default         -> "geen";
+                };
+        System.out.println(mapType);
 
         File f = new File("src/adsd/app/index.html");
 //        File f = new File("src/adsd/app/index.html");
@@ -342,7 +343,7 @@ public class HomeScreenController {
                     "                // Note that Javascript allows us to access the constant\n" +
                     "                // using square brackets and a string value as its\n" +
                     "                // \"property.\"\n" +
-                    "                travelMode: '" + dataHandler.getTrip(posA).getTripTimesList().get(posB).getVehicleType() + "',\n" +
+                    "                travelMode: '" + mapType + "',\n" +
                     "            },\n" +
                     "            (response, status) => {\n" +
                     "                if (status == \"OK\") {\n" +
