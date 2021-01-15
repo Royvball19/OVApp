@@ -59,6 +59,14 @@ public class HomeScreenController {
     private ArrayList<String> locationFromList = new ArrayList<>();
     private ArrayList<String> locationToList = new ArrayList<>();
 
+    private String locFromInput;
+    private String locToInput;
+    private double selectedHour;
+    private double selectedMin;
+    private double selectedTime;
+
+    DecimalFormat df = new DecimalFormat("00.00");
+
 
 
 
@@ -159,36 +167,35 @@ public class HomeScreenController {
 
     }
 
+    //todo if else als er geen selectie is gemaakt in list view
+    //todo if else als loc from en loc to hetzelfde zijn.
+
     public void checkTripOptions(ActionEvent event) throws IOException
     {
-
+        // clear possible trips and reset result count
         tripOptions.getItems().clear();
         searchResults.clear();
         resultCount = 0;
 
 
-
         if (locationFrom.getSelectionModel().getSelectedIndex() == -1
                 | locationTo.getSelectionModel().getSelectedIndex() == -1
                 | vehicleType.getSelectionModel().getSelectedIndex() == -1)
-        {
+        // set message for empty fields
+            {
             locationFrom.setPromptText(rb.getString("HSpromptFrom"));
             locationTo.setPromptText(rb.getString("HSpromptTo"));
             vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
 
-        } else {
-
-            String locFrom = locationFrom.getSelectionModel().getSelectedItem().toString();
-            String locTo = locationTo.getSelectionModel().getSelectedItem().toString();
-            double selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
-            double selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
+            } else
+            // set input
+            {
+                setInput();
 
             do
+                // loop searchTrip function until three results are given
                 {
-                    double selectedTime = selectedHour + selectedMin;
-
-                    String time = toComma(Double.toString(selectedTime));
-
+                    String time = toComma(df.format(selectedTime));
                     String vehicle = switch (vehicleType.getSelectionModel().getSelectedIndex())
                             {
                                 case 0 -> "trein";
@@ -197,20 +204,16 @@ public class HomeScreenController {
                                 case 3 -> "tram";
                                 default -> null;
                             };
+                    searchTrip(locFromInput, locToInput, time, vehicle);
+
+                    selectedTime += 0.01;
+
+                    if(selectedTime > 24.00){
+                        selectedTime = 0.0;
+                    }
 
 
-                    System.out.println("tijd is: " + time);
-                    System.out.println("location from: " + locFrom);
-                    System.out.println("Location to: " + locTo);
-                    System.out.println("time: " + time);
-                    System.out.println("vehicle: " + vehicle);
-                    System.out.println("resultcount: " + resultCount);
-
-                    searchTrip(locFrom, locTo, time, vehicle);
-
-                    selectedMin += 0.01;
-
-            }while (searchResults.size() < 3);
+            }while (resultCount < 3);
 
             tripOptions.setVisible(true);
             showTripButton.setVisible(true);
@@ -227,13 +230,24 @@ public class HomeScreenController {
 
     }
 
+    private void setInput(){
+
+        locFromInput = locationFrom.getSelectionModel().getSelectedItem().toString();
+        locToInput = locationTo.getSelectionModel().getSelectedItem().toString();
+        selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
+        selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
+       selectedTime = selectedHour + selectedMin;
+    }
+
+
+
 
 
 
     private void searchTrip(String locFrom, String locTo, String time, String vehicle) throws IOException
     {
         boolean foundMatch = false;
-        DecimalFormat df = new DecimalFormat("00.00");
+
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
 
