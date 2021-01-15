@@ -67,8 +67,10 @@ public class HomeScreenController {
     public void initialize() throws IOException {
 
         ResourceBundle rb = ResourceBundle.getBundle("lang");
-
+        dataHandler.clearTempData();
         clearInputBoxes();
+
+
         dataHandler.readFromExternalData();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
@@ -178,32 +180,37 @@ public class HomeScreenController {
 
             String locFrom = locationFrom.getSelectionModel().getSelectedItem().toString();
             String locTo = locationTo.getSelectionModel().getSelectedItem().toString();
-
             double selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
             double selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
 
-            double selectedTime = selectedHour + selectedMin;
+            do
+                {
+                    double selectedTime = selectedHour + selectedMin;
 
-            String time = toComma(Double.toString(selectedTime));
+                    String time = toComma(Double.toString(selectedTime));
 
-            String vehicle = switch (vehicleType.getSelectionModel().getSelectedIndex())
-                    {
-                        case 0  -> "trein";
-                        case 1  -> "bus";
-                        case 2  -> "metro";
-                        case 3  -> "tram";
-                        default -> null;
-                    };
+                    String vehicle = switch (vehicleType.getSelectionModel().getSelectedIndex())
+                            {
+                                case 0 -> "trein";
+                                case 1 -> "bus";
+                                case 2 -> "metro";
+                                case 3 -> "tram";
+                                default -> null;
+                            };
 
 
-            System.out.println("tijd is: " + time);
-            System.out.println("location from: " + locFrom);
-            System.out.println("Location to: " + locTo);
-            System.out.println("time: " + time);
-            System.out.println("vehicle: " + vehicle);
+                    System.out.println("tijd is: " + time);
+                    System.out.println("location from: " + locFrom);
+                    System.out.println("Location to: " + locTo);
+                    System.out.println("time: " + time);
+                    System.out.println("vehicle: " + vehicle);
+                    System.out.println("resultcount: " + resultCount);
 
-            searchTrip(locFrom, locTo, time, vehicle);
+                    searchTrip(locFrom, locTo, time, vehicle);
 
+                    selectedMin += 0.01;
+
+            }while (searchResults.size() < 3);
 
             tripOptions.setVisible(true);
             showTripButton.setVisible(true);
@@ -272,12 +279,7 @@ public class HomeScreenController {
 
                                 String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
                                 SearchResult result = new SearchResult(title, i, k);
-
-
                                 searchResults.add(result);
-
-
-                                System.out.println(posA + " " + posB);
                                 resultCount++;
                             }
                         }
@@ -430,23 +432,23 @@ public class HomeScreenController {
 
     public void changeLangEng(ActionEvent event) throws IOException
     {
-//        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-//        lines.set(0, "en");
-//        lines.set(1, "US");
-//        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-//
-//        initialize();
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "en");
+        lines.set(1, "US");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+        initialize();
 
     }
 
     public void changeLangNed(ActionEvent event) throws IOException {
 
-//        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-//        lines.set(0, "nl");
-//        lines.set(1, "NL");
-//        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-//
-//        initialize();
+        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
+        lines.set(0, "nl");
+        lines.set(1, "NL");
+        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
+
+        initialize();
 
     }
 }
