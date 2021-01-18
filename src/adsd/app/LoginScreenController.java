@@ -4,12 +4,14 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -114,16 +116,32 @@ public class LoginScreenController
 
     public void showMyFavoriteTrips (ActionEvent event) throws IOException
     {
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent);
+        File myObj = new File("currentuser.txt");
+        if (myObj.length() == 0)
+        {
+            Parent loginScreenParent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(loginScreenParent);
 
-        myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-        // This line gets the stage information
-        Stage window = (Stage) myToolBar.getScene().getWindow();
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(myFavoriteTrips);
-        window.show();
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
+            Scene myProfileScene = new Scene(favTripParent);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
     }
 
     public void toRegistration() throws IOException

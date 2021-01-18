@@ -51,8 +51,6 @@ public class Program extends Application
         primaryStage.show();
         primaryStage.setResizable(false);
 
-
-
     }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
@@ -66,14 +64,6 @@ public class Program extends Application
 //        {
 //            throw new IllegalStateException("Cannot find the driver in the classpath!", e);
 //        }
-
-        // Datahandler import
-        datahandler = new DataHandler();
-        datahandler.readFromExternalData();
-
-        System.out.println(datahandler.getProfile(0).getFirstName());
-
-        System.out.println(datahandler.getTrip(0).getLocationFrom());
 
         // Application.launch(GUI.class, args);
         launch(args);

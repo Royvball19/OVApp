@@ -32,27 +32,45 @@ public class TripInformationController extends HomeScreenController
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-    @FXML ToolBar myToolBar;
-    @FXML WebView mapWebView;
+    @FXML
+    ToolBar myToolBar;
+    @FXML
+    WebView mapWebView;
 
-    @FXML private Label labelLocFrom;
-    @FXML private Label labelLocFromInfo;
-    @FXML private Label labelLocTo;
-    @FXML private Label labelLocToInfo;
-    @FXML private Label labelTravelTime;
-    @FXML private Label labelTravelTimeInfo;
-    @FXML private Label labelDepartureTime;
-    @FXML private Label labelDepartureTimeInfo;
-    @FXML private Label labelArrivalTime;
-    @FXML private Label labelArrivalTimeInfo;
-    @FXML private Label labelVehicleType;
-    @FXML private Label labelVehicleTypeInfo;
-    @FXML private Label tooltipVehicleTypeLabel;
+    @FXML
+    private Label labelLocFrom;
+    @FXML
+    private Label labelLocFromInfo;
+    @FXML
+    private Label labelLocTo;
+    @FXML
+    private Label labelLocToInfo;
+    @FXML
+    private Label labelTravelTime;
+    @FXML
+    private Label labelTravelTimeInfo;
+    @FXML
+    private Label labelDepartureTime;
+    @FXML
+    private Label labelDepartureTimeInfo;
+    @FXML
+    private Label labelArrivalTime;
+    @FXML
+    private Label labelArrivalTimeInfo;
+    @FXML
+    private Label labelVehicleType;
+    @FXML
+    private Label labelVehicleTypeInfo;
+    @FXML
+    private Label tooltipVehicleTypeLabel;
 
-    @FXML private Tooltip tooltipVehicleTypeInfo;
+    @FXML
+    private Tooltip tooltipVehicleTypeInfo;
 
-    @FXML private Label labelTitle;
-    @FXML private Button addFavoriteTripButton;
+    @FXML
+    private Label labelTitle;
+    @FXML
+    private Button addFavoriteTripButton;
     int userID;
 
 
@@ -63,8 +81,8 @@ public class TripInformationController extends HomeScreenController
     private String country;
 
 
-
-    public void initialize() throws IOException {
+    public void initialize() throws IOException
+    {
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
@@ -113,37 +131,43 @@ public class TripInformationController extends HomeScreenController
 
         labelLocFromInfo.setText(dataHandler.getTrip(posA).getLocationFrom());
         labelLocToInfo.setText(dataHandler.getTrip(posA).getLocationTo());
-        labelTravelTimeInfo.setText(dataHandler.getTrip(posA).getTripTimeObj(posB).getTravelTime().toString() + " "+ rb.getString("minutes"));
+        labelTravelTimeInfo.setText(dataHandler.getTrip(posA).getTripTimeObj(posB).getTravelTime().toString() + " " + rb.getString("minutes"));
         labelDepartureTimeInfo.setText(toDubbleDot(String.valueOf(df.format(dataHandler.getTrip(posA).getTripTimeObj(posB).getDepTime()))));
         labelArrivalTimeInfo.setText(toDubbleDot(String.valueOf(df.format(dataHandler.getTrip(posA).getTripTimeObj(posB).getArivTime()))));
         labelVehicleTypeInfo.setText(dataHandler.getTrip(posA).getTripTimeObj(posB).getVehicleType());
 
-        String bicycleSpots = null;
-        boolean spots = dataHandler.getTrip(posA).getTripExtrasList().get(0).getBicycleSpots();
-        if (spots)
-        {
-            bicycleSpots = rb.getString("available");
-        } else if (!(spots) )
-        {
-            bicycleSpots = rb.getString("notAvailable");
-        }
 
-        String toilet = null;
-        boolean toilets = dataHandler.getTrip(posA).getTripExtrasList().get(0).getToilet();
-        if (toilets)
+        if (dataHandler.getTrip(posA).getTripExtrasList().size() > 0)
         {
-            toilet = rb.getString("available");
-        } else if (!(toilets))
-        {
-            toilet = rb.getString("notAvailable");
-        }
+            String bicycleSpots = null;
+            boolean spots = dataHandler.getTrip(posA).getTripExtrasList().get(0).getBicycleSpots();
+            if (spots)
+            {
+                bicycleSpots = rb.getString("available");
+            } else if (!(spots))
+            {
+                bicycleSpots = rb.getString("notAvailable");
+            }
 
-        tooltipVehicleTypeInfo.setText(rb.getString("trainClass") + dataHandler.getTrip(posA).getTripExtrasList().get(0).getTrainClass()
-                + "\n" + rb.getString("bicycleAvailable") + bicycleSpots
-                + "\n" + rb.getString("toiletAvailable") +  toilet);
-        labelVehicleTypeInfo.setTooltip(tooltipVehicleTypeInfo);
+            String toilet = null;
+            boolean toilets = dataHandler.getTrip(posA).getTripExtrasList().get(0).getToilet();
+            if (toilets)
+            {
+                toilet = rb.getString("available");
+            } else if (!(toilets))
+            {
+                toilet = rb.getString("notAvailable");
+            }
+
+            tooltipVehicleTypeInfo.setText(rb.getString("trainClass") + dataHandler.getTrip(posA).getTripExtrasList().get(0).getTrainClass()
+                    + "\n" + rb.getString("bicycleAvailable") + bicycleSpots
+                    + "\n" + rb.getString("toiletAvailable") + toilet);
+            labelVehicleTypeInfo.setTooltip(tooltipVehicleTypeInfo);
+        } else
+        {
+            tooltipVehicleTypeInfo.setText("Geen extra reisinformatie");
+        }
     }
-
 
 
     public void showHomeScreen(ActionEvent event) throws IOException
@@ -162,25 +186,40 @@ public class TripInformationController extends HomeScreenController
         window.show();
     }
 
-
-    public void showMyFavoriteTrips (ActionEvent event) throws IOException
-    {
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent);
-
-        myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
-        // This line gets the stage information
-        Stage window = (Stage) myToolBar.getScene().getWindow();
-
-        window.setScene(myFavoriteTrips);
-        window.show();
-    }
-
-    public void showMyProfileButton (ActionEvent event) throws IOException
+    public void showMyFavoriteTrips(ActionEvent event) throws IOException
     {
         File myObj = new File("currentuser.txt");
-        if(myObj.length() == 0)
+        if (myObj.length() == 0)
+        {
+            Parent loginScreenParent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(loginScreenParent);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
+            Scene myProfileScene = new Scene(favTripParent);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
+    }
+
+    public void showMyProfileButton(ActionEvent event) throws IOException
+    {
+        File myObj = new File("currentuser.txt");
+        if (myObj.length() == 0)
         {
             Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
             Scene myProfileScene = new Scene(homeScreenParent2);
@@ -207,19 +246,22 @@ public class TripInformationController extends HomeScreenController
         }
     }
 
-    public void addFavoriteTripButton (ActionEvent event) throws IOException
+    public void addFavoriteTripButton(ActionEvent event) throws IOException
     {
         loginScreenController = new LoginScreenController();
-        try {
+        try
+        {
             File myObj = new File("currentuser.txt");
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
+            while (myReader.hasNextLine())
+            {
                 String data = myReader.nextLine();
                 dataHandler.getProfile(Integer.parseInt(data)).addTrip(0, labelLocFromInfo.getText(), labelLocToInfo.getText(), "0", 0, 0, 0, 0);
                 dataHandler.writeToExternalData();
             }
             myReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e)
+        {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
@@ -230,7 +272,8 @@ public class TripInformationController extends HomeScreenController
         labelLocFromInfo.setText(test);
     }
 
-    public void sendTime(String time){
+    public void sendTime(String time)
+    {
 
 
     }
@@ -256,7 +299,8 @@ public class TripInformationController extends HomeScreenController
         window.show();
     }
 
-    public void changeLangNed(ActionEvent event) throws IOException {
+    public void changeLangNed(ActionEvent event) throws IOException
+    {
 
         List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
         lines.set(0, "nl");

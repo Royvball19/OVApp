@@ -34,6 +34,7 @@ public class MyFavoriteTripsController
     @FXML MenuButton myLangButton;
     @FXML Button removeFavTripButton;
     @FXML Button planFavTripButton;
+    @FXML Label noFavTripSelected;
 
     int currentUser;
 
@@ -44,6 +45,7 @@ public class MyFavoriteTripsController
 
     public void initialize() throws IOException
     {
+
         favTrips.getItems().clear();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
@@ -52,6 +54,8 @@ public class MyFavoriteTripsController
 
         ResourceBundle rb = ResourceBundle.getBundle("lang");
 
+        noFavTripSelected.setText(rb.getString("MFTnoFavSelect"));
+        noFavTripSelected.setVisible(false);
 
         favTripsFromCollum.setText(rb.getString("MFTfavTripFrom"));
         favTripsToCollum.setText(rb.getString("MFTfavTripTo"));
@@ -157,6 +161,37 @@ public class MyFavoriteTripsController
         Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
 
         initialize();
+
+    }
+    public void planFavTripButton(ActionEvent event) throws IOException{
+
+
+        if (favTrips.getSelectionModel().getSelectedIndex() > -1)
+        {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("fxml/HomeScreen.fxml"));
+            Parent homeScreenParent = loader.load();
+
+            Scene homeScreenScene = new Scene(homeScreenParent);
+            // this loads the correct text into labels
+            homeScreenScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            HomeScreenController homeScreenController = loader.getController();
+            homeScreenController.planFavTrip(favTrips.getSelectionModel().getSelectedItem().getLocationFrom(),
+                    favTrips.getSelectionModel().getSelectedItem().getLocationTo());
+
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(homeScreenScene);
+            window.show();
+        }
+        else {
+            noFavTripSelected.setVisible(true);
+        }
+
 
     }
 }

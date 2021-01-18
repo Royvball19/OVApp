@@ -29,6 +29,12 @@ public class MyProfileController
     @FXML Label ageInfo;
     @FXML Label residenceInfo;
 
+    @FXML Label userNameLabel;
+    @FXML Label nameLabel;
+    @FXML Label ageLabel;
+    @FXML Label residenceLabel;
+
+
     private String lang;
     private String country;
 
@@ -45,6 +51,12 @@ public class MyProfileController
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
         Locale.setDefault(new Locale(lang, country));
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
+
+        userNameLabel.setText(rb.getString("MPuserNameLabel"));
+        nameLabel.setText(rb.getString("MPnameLabel"));
+        ageLabel.setText(rb.getString("MPageLabel"));
+        residenceLabel.setText(rb.getString("MPresidenceLabel"));
 
         try
         {
@@ -83,17 +95,32 @@ public class MyProfileController
     public void showMyFavoriteTrips(ActionEvent event) throws IOException
     {
 
-        //todo fix if else if not logged in
-        Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent3);
+        File myObj = new File("currentuser.txt");
+        if (myObj.length() == 0)
+        {
+            Parent loginScreenParent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(loginScreenParent);
 
-        myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-        // This line gets the stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(myFavoriteTrips);
-        window.show();
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
+            Scene myProfileScene = new Scene(favTripParent);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
     }
 
     public void logOut(ActionEvent event) throws IOException

@@ -17,7 +17,8 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class HomeScreenController {
+public class HomeScreenController
+{
 
 
     ResourceBundle rb = ResourceBundle.getBundle("lang");
@@ -68,13 +69,11 @@ public class HomeScreenController {
     DecimalFormat df = new DecimalFormat("00.00");
 
 
-
-
     DataHandler dataHandler = new DataHandler();
 
-    public void initialize() throws IOException {
+    public void initialize() throws IOException
+    {
 
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
         dataHandler.clearTempData();
         clearInputBoxes();
         dataHandler.readFromExternalData();
@@ -83,12 +82,14 @@ public class HomeScreenController {
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
         Locale.setDefault(new Locale(lang, country));
 
+        ResourceBundle rb = ResourceBundle.getBundle("lang");
 
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
         locationTo.setPromptText(rb.getString("HSlocTo"));
         vehicleType.setPromptText(rb.getString("HSvehicletype"));
 
-        for (int i = 0; i < dataHandler.getTripList().size(); i++) {
+        for (int i = 0; i < dataHandler.getTripList().size(); i++)
+        {
             locationFromList.add(dataHandler.getTrip(i).getLocationFrom());
             locationToList.add(dataHandler.getTrip(i).getLocationTo());
         }
@@ -102,11 +103,13 @@ public class HomeScreenController {
         locationToList.clear();
         locationToList.addAll(set2);
 
-        for (int i = 0; i < locationFromList.size(); i++) {
+        for (int i = 0; i < locationFromList.size(); i++)
+        {
             locationFrom.getItems().add(locationFromList.get(i));
         }
 
-        for (int i = 0; i < locationToList.size(); i++) {
+        for (int i = 0; i < locationToList.size(); i++)
+        {
             locationTo.getItems().add(locationToList.get(i));
         }
 
@@ -137,21 +140,24 @@ public class HomeScreenController {
 
     }
 
-    private String toComma(String time) {
+    private String toComma(String time)
+    {
         time = time.replace(":", ",");
         time = time.replace(".", ",");
 
         return time;
     }
 
-    public String toDubbleDot(String time) {
+    public String toDubbleDot(String time)
+    {
         time = time.replace(",", ":");
         time = time.replace(".", ":");
 
         return time;
     }
 
-    private String toDot(String time) {
+    private String toDot(String time)
+    {
         time = time.replace(",", ".");
 
         return time;
@@ -176,7 +182,6 @@ public class HomeScreenController {
         messageLabel.setVisible(false);
 
 
-
         // check if input is given
         if (locationFrom.getSelectionModel().getSelectedIndex() == -1
                 | locationTo.getSelectionModel().getSelectedIndex() == -1
@@ -184,69 +189,66 @@ public class HomeScreenController {
 //                | locationTo.getSelectionModel().getSelectedItem().toString().equals(locationFrom.getSelectionModel().getSelectedItem().toString())
         )
         // set message for empty fields
-            {
+        {
             locationFrom.setPromptText(rb.getString("HSpromptFrom"));
             locationTo.setPromptText(rb.getString("HSpromptTo"));
             vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
 
-            } else if( locationTo.getSelectionModel().getSelectedItem().toString().equals(locationFrom.getSelectionModel().getSelectedItem().toString()))
-            {
-                messageLabel.setVisible(true);
-                messageLabel.setText(rb.getString("HSmessageDubble"));
-            } else
-            {
-                setInput();
+        } else if (locationTo.getSelectionModel().getSelectedItem().toString().equals(locationFrom.getSelectionModel().getSelectedItem().toString()))
+        {
+            messageLabel.setVisible(true);
+            messageLabel.setText(rb.getString("HSmessageDubble"));
+        } else
+        {
+            setInput();
 
             do
-                // loop searchTrip function until three results are given
+            // loop searchTrip function until three results are given
+            {
+                String time = toComma(df.format(selectedTime));
+                String vehicle = switch (vehicleType.getSelectionModel().getSelectedIndex())
+                        {
+                            case 0 -> "trein";
+                            case 1 -> "bus";
+                            case 2 -> "metro";
+                            case 3 -> "tram";
+                            default -> null;
+                        };
+                searchTrip(locFromInput, locToInput, time, vehicle);
+
+                selectedTime += 0.01;
+
+                if (selectedTime > 24.00)
                 {
-                    String time = toComma(df.format(selectedTime));
-                    String vehicle = switch (vehicleType.getSelectionModel().getSelectedIndex())
-                            {
-                                case 0 -> "trein";
-                                case 1 -> "bus";
-                                case 2 -> "metro";
-                                case 3 -> "tram";
-                                default -> null;
-                            };
-                    searchTrip(locFromInput, locToInput, time, vehicle);
-
-                    selectedTime += 0.01;
-
-                    if(selectedTime > 24.00){
-                        selectedTime = 0.0;
-                    }
+                    selectedTime = 0.0;
+                }
 
 
-            }while (resultCount < 3);
+            } while (resultCount < 3);
 
             tripOptions.setVisible(true);
             showTripButton.setVisible(true);
 
         }
 
-        if (resultCount == 0) {
+        if (resultCount == 0)
+        {
             tripOptions.getItems().add(rb.getString("HSresult"));
             tripOptions.setVisible(true);
         }
 
 
-
-
     }
 
-    private void setInput(){
+    private void setInput()
+    {
 
         locFromInput = locationFrom.getSelectionModel().getSelectedItem().toString();
         locToInput = locationTo.getSelectionModel().getSelectedItem().toString();
         selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
         selectedMin = Double.parseDouble(timeSpinnerMin.getValue().toString()) / 100;
-       selectedTime = selectedHour + selectedMin;
+        selectedTime = selectedHour + selectedMin;
     }
-
-
-
-
 
 
     private void searchTrip(String locFrom, String locTo, String time, String vehicle) throws IOException
@@ -275,7 +277,7 @@ public class HomeScreenController {
                         {
                             vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
                             tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
-                            System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
+//
                             String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
                             SearchResult result = new SearchResult(title, i, k);
                             searchResults.add(result);
@@ -283,27 +285,25 @@ public class HomeScreenController {
                         }
 
                     } else
+                    {
+                        // NL method
+                        if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle)
+                                &&
+                                String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
                         {
-                            // NL method
-                            if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle)
-                                    &&
-                                    String.valueOf(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())).contains(time))
-                            {
-                                vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
-                                tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
-                                System.out.println("Locatie in triplist: " + i + ", triptimelist: " + k);
+                            vehicle = dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType();
+                            tripOptions.getItems().add(dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime())));
 
-                                String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
-                                SearchResult result = new SearchResult(title, i, k);
-                                searchResults.add(result);
-                                resultCount++;
-                            }
+                            String title = dataHandler.getTrip(i).getLocationFrom() + " -> " + dataHandler.getTrip(i).getLocationTo() + " om " + toDubbleDot(df.format(dataHandler.getTrip(i).getTripTimesList().get(k).getDepTime()));
+                            SearchResult result = new SearchResult(title, i, k);
+                            searchResults.add(result);
+                            resultCount++;
                         }
                     }
                 }
             }
+        }
     }
-
 
 
     public void showTrip(ActionEvent event) throws IOException
@@ -328,7 +328,6 @@ public class HomeScreenController {
                         case "tram" -> "DRIVING";
                         default -> "geen";
                     };
-            System.out.println(mapType);
 
             File f = new File("src/adsd/app/index.html");
 //        File f = new File("src/adsd/app/index.html");
@@ -433,8 +432,9 @@ public class HomeScreenController {
 
     public void showMyProfileButton(ActionEvent event) throws IOException
     {
+
         File myObj = new File("currentuser.txt");
-        if(myObj.length() == 0)
+        if (myObj.length() == 0)
         {
             Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
             Scene myProfileScene = new Scene(homeScreenParent2);
@@ -461,17 +461,34 @@ public class HomeScreenController {
         }
     }
 
-    public void showMyFavoriteTrips(ActionEvent event) throws IOException {
-        Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent3);
+    public void showMyFavoriteTrips(ActionEvent event) throws IOException
+    {
+        File myObj = new File("currentuser.txt");
+        if (myObj.length() == 0)
+        {
+            Parent loginScreenParent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(loginScreenParent);
 
-        myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-        // This line gets the stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(myFavoriteTrips);
-        window.show();
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
+            Scene myProfileScene = new Scene(favTripParent);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
     }
 
     public void changeLangEng(ActionEvent event) throws IOException
@@ -485,7 +502,8 @@ public class HomeScreenController {
 
     }
 
-    public void changeLangNed(ActionEvent event) throws IOException {
+    public void changeLangNed(ActionEvent event) throws IOException
+    {
 
         List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
         lines.set(0, "nl");
@@ -493,6 +511,14 @@ public class HomeScreenController {
         Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
 
         initialize();
+
+    }
+
+    public void planFavTrip(String from, String to)
+    {
+
+        locationFrom.getSelectionModel().select(from);
+        locationTo.getSelectionModel().select(to);
 
     }
 }

@@ -1,4 +1,4 @@
-{"firstName":"Klaas","lastName":"Bruinsma","password":"Test","myFavoriteTrip":[],"ID":0,"userName":"Test","residence":"Test","age":1}
+{"firstName":"Klaas","lastName":"Bruinsma","password":"Test","myFavoriteTrip":[{"locationToLat":0,"distance":"0","locationTo":"Amersfoort","tripTimes":[],"locationFromLng":0,"locationToLng":0,"ID":0,"tripExtras":[],"locationFrom":"Utrecht","locationFromLat":0}],"ID":0,"userName":"Test","residence":"Test","age":1}
 {"firstName":"Donald","lastName":"Duck","password":"gerrit","myFavoriteTrip":[],"ID":1,"userName":"gerrit","residence":"","age":1}
 {"firstName":"Yannick","lastName":"fdfd","password":"fdfd","myFavoriteTrip":[],"ID":2,"userName":"fdfdf","residence":"0","age":23}
 {"firstName":"Yannick","lastName":"van den Bos","password":"doodle","myFavoriteTrip":[],"ID":3,"userName":"yankee","residence":"0","age":24}

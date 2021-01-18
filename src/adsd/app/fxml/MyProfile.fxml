@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyProfileController">
+<AnchorPane prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyProfileController">
     <children>
         <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
             <items>
@@ -23,13 +23,13 @@
             </items>
         </ToolBar>
         <Button fx:id="logOutButton" layoutX="103.0" layoutY="347.0" mnemonicParsing="false" onAction="#logOut" text="Log uit" />
-      <Label contentDisplay="RIGHT" layoutX="50.0" layoutY="108.0" text="Username:" />
-      <Label contentDisplay="RIGHT" layoutX="71.0" layoutY="128.0" text="Naam:" />
-      <Label contentDisplay="RIGHT" layoutX="63.0" layoutY="149.0" text="Leeftijd:" />
-      <Label contentDisplay="RIGHT" layoutX="39.0" layoutY="169.0" text="Woonplaats:" />
-      <Label fx:id="userNameInfo" layoutX="129.0" layoutY="108.0" prefHeight="17.0" prefWidth="75.0" />
-      <Label fx:id="nameInfo" layoutX="129.0" layoutY="128.0" prefHeight="17.0" prefWidth="75.0" />
-      <Label fx:id="ageInfo" layoutX="129.0" layoutY="149.0" prefHeight="17.0" prefWidth="75.0" />
-      <Label fx:id="residenceInfo" layoutX="129.0" layoutY="169.0" prefHeight="17.0" prefWidth="75.0" />
+      <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="108.0" />
+      <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="71.0" layoutY="128.0" />
+      <Label fx:id="ageLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="63.0" layoutY="149.0" />
+      <Label fx:id="residenceLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="39.0" layoutY="169.0" />
+      <Label fx:id="userNameInfo" layoutX="129.0" layoutY="108.0" prefHeight="17.0" prefWidth="98.0" />
+      <Label fx:id="nameInfo" layoutX="129.0" layoutY="128.0" prefHeight="17.0" prefWidth="98.0" />
+      <Label fx:id="ageInfo" layoutX="129.0" layoutY="149.0" prefHeight="17.0" prefWidth="98.0" />
+      <Label fx:id="residenceInfo" layoutX="129.0" layoutY="169.0" prefHeight="17.0" prefWidth="98.0" />
     </children>
 </AnchorPane>

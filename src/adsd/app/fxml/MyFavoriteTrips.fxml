@@ -31,6 +31,7 @@
             </items>
         </ToolBar>
       <Button id="removeFavTripButton" fx:id="removeFavTripButton" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="324.0" mnemonicParsing="false" onAction="#removeFavTripButton" prefHeight="27.0" prefWidth="153.0" text="Test" />
-      <Button id="planFavTripButton" fx:id="planFavTripButton" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" text="Test" />
+      <Button id="planFavTripButton" fx:id="planFavTripButton" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" text="Test" onAction="#planFavTripButton"/>
+      <Label fx:id="noFavTripSelected" alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="300.0" prefHeight="17.0" prefWidth="97.0" />
     </children>
 </AnchorPane>
