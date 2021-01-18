@@ -265,6 +265,11 @@
     -fx-alignment: center;
 }
 
+.message-text {
+    -fx-text-fill: red;
+    -fx-font-size: 15px;
+}
+
 #showMapPane {
     -fx-background-color: black;
     -fx-background-size: cover;

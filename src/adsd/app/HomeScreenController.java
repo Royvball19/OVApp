@@ -23,6 +23,7 @@ import java.util.*;
 
 public class HomeScreenController {
 
+
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @FXML
@@ -45,6 +46,9 @@ public class HomeScreenController {
     private ListView<String> tripOptions;
     @FXML
     private Button showTripButton;
+    @FXML
+    private Label messageLabel;
+
 
     private String lang;
     private String country;
@@ -89,6 +93,7 @@ public class HomeScreenController {
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
         locationTo.setPromptText(rb.getString("HSlocTo"));
         vehicleType.setPromptText(rb.getString("HSvehicletype"));
+
 
         for (int i = 0; i < dataHandler.getTripList().size(); i++) {
             locationFromList.add(dataHandler.getTrip(i).getLocationFrom());
@@ -172,23 +177,33 @@ public class HomeScreenController {
 
     public void checkTripOptions(ActionEvent event) throws IOException
     {
+
+
         // clear possible trips and reset result count
         tripOptions.getItems().clear();
         searchResults.clear();
         resultCount = 0;
+        messageLabel.setVisible(false);
 
 
+
+        // check if input is given
         if (locationFrom.getSelectionModel().getSelectedIndex() == -1
                 | locationTo.getSelectionModel().getSelectedIndex() == -1
-                | vehicleType.getSelectionModel().getSelectedIndex() == -1)
+                | vehicleType.getSelectionModel().getSelectedIndex() == -1
+//                | locationTo.getSelectionModel().getSelectedItem().toString().equals(locationFrom.getSelectionModel().getSelectedItem().toString())
+        )
         // set message for empty fields
             {
             locationFrom.setPromptText(rb.getString("HSpromptFrom"));
             locationTo.setPromptText(rb.getString("HSpromptTo"));
             vehicleType.setPromptText(rb.getString("HSpromptVehicle"));
 
+            } else if( locationTo.getSelectionModel().getSelectedItem().toString().equals(locationFrom.getSelectionModel().getSelectedItem().toString()))
+            {
+                messageLabel.setVisible(true);
+                messageLabel.setText(rb.getString("HSmessageDubble"));
             } else
-            // set input
             {
                 setInput();
 
@@ -246,11 +261,7 @@ public class HomeScreenController {
 
     private void searchTrip(String locFrom, String locTo, String time, String vehicle) throws IOException
     {
-        boolean foundMatch = false;
-
-
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
-
 
         for (int i = 0; i < dataHandler.getTripList().size(); i++)
         {
@@ -280,7 +291,7 @@ public class HomeScreenController {
                             resultCount++;
                         }
 
-                        } else
+                    } else
                         {
                             // NL method
                             if (dataHandler.getTrip(i).getTripTimesList().get(k).getVehicleType().contains(vehicle)
@@ -306,73 +317,80 @@ public class HomeScreenController {
 
     public void showTrip(ActionEvent event) throws IOException {
 
-        tripOptions.getSelectionModel().getSelectedIndex();
-        posA = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosA();
-        posB = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosB();
+        if (tripOptions.getSelectionModel().getSelectedIndex() == -1){
+            messageLabel.setVisible(true);
+            messageLabel.setText(rb.getString("HSmessage"));
+        } else
+        {
 
-        String mapType = switch (dataHandler.getTrip(posA).getTripTimesList().get(posB).getVehicleType())
-                {
-                    case "trein"    -> "TRANSIT";
-                    case "bus"      -> "DRIVING";
-                    case "metro"    -> "TRANSIT";
-                    case "tram"     -> "DRIVING";
-                    default         -> "geen";
-                };
-        System.out.println(mapType);
+            tripOptions.getSelectionModel().getSelectedIndex();
+            posA = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosA();
+            posB = searchResults.get(tripOptions.getSelectionModel().getSelectedIndex()).getPosB();
 
-        File f = new File("src/adsd/app/index.html");
+            String mapType = switch (dataHandler.getTrip(posA).getTripTimesList().get(posB).getVehicleType())
+                    {
+                        case "trein" -> "TRANSIT";
+                        case "bus" -> "DRIVING";
+                        case "metro" -> "TRANSIT";
+                        case "tram" -> "DRIVING";
+                        default -> "geen";
+                    };
+            System.out.println(mapType);
+
+            File f = new File("src/adsd/app/index.html");
 //        File f = new File("src/adsd/app/index.html");
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(f)))
+            {
 
-            //Writer to HTML to change the Locations and Vehicletype
-            bw.write("<!DOCTYPE html> \n" +
-                    "<html> \n" +
-                    "<head> \n" +
-                    "<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly\" defer></script>\n" +
-                    "    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" /> \n" +
-                    "    <script>\n" +
-                    "        function initMap() {\n" +
-                    "        const directionsRenderer = new google.maps.DirectionsRenderer();\n" +
-                    "        const directionsService = new google.maps.DirectionsService();\n" +
-                    "        const map = new google.maps.Map(document.getElementById(\"map\"), {\n" +
-                    "            mapTypeControl: false,\n" +
-                    "            streetViewControl: false,\n" +
-                    "            zoom: 14,\n" +
-                    "            restriction: {\n" +
-                    "                latLngBounds: {\n" +
-                    "                    north: 53.79305,\n" +
-                    "                    south: 50.66916,\n" +
-                    "                    east: 7.45822,\n" +
-                    "                    west: 2.88242,\n" +
-                    "                },\n" +
-                    "            },\n" +
-                    "        });\n" +
-                    "        directionsRenderer.setMap(map);\n" +
-                    "        calculateAndDisplayRoute(directionsService, directionsRenderer);\n" +
-                    "    }\n" +
-                    "\n" +
-                    "    function calculateAndDisplayRoute(directionsService, directionsRenderer) {\n" +
-                    "        directionsService.route(\n" +
-                    "            {\n" +
-                    "                origin: { lat: " + dataHandler.getTrip(posA).getLocationFromLat() + ", lng: " + dataHandler.getTrip(posA).getLocationFromLng() + " },\n" +
-                    "                destination: { lat: " + dataHandler.getTrip(posA).getLocationToLat() + ", lng: " + dataHandler.getTrip(posA).getLocationToLng() + " },\n" +
-                    "                // Note that Javascript allows us to access the constant\n" +
-                    "                // using square brackets and a string value as its\n" +
-                    "                // \"property.\"\n" +
-                    "                travelMode: '" + mapType + "',\n" +
-                    "            },\n" +
-                    "            (response, status) => {\n" +
-                    "                if (status == \"OK\") {\n" +
-                    "                    directionsRenderer.setDirections(response);\n" +
-                    "                } else {\n" +
-                    "                    window.alert(\"Directions request failed due to \" + status);\n" +
-                    "                }\n" +
-                    "            }\n" +
-                    "        );\n" +
-                    "        }\n" +
-                    "    </script>\n" +
-                    "</head>\n" +
-                    "<body>\n" +
+                //Writer to HTML to change the Locations and Vehicletype
+                bw.write("<!DOCTYPE html> \n" +
+                        "<html> \n" +
+                        "<head> \n" +
+                        "<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly\" defer></script>\n" +
+                        "    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" /> \n" +
+                        "    <script>\n" +
+                        "        function initMap() {\n" +
+                        "        const directionsRenderer = new google.maps.DirectionsRenderer();\n" +
+                        "        const directionsService = new google.maps.DirectionsService();\n" +
+                        "        const map = new google.maps.Map(document.getElementById(\"map\"), {\n" +
+                        "            mapTypeControl: false,\n" +
+                        "            streetViewControl: false,\n" +
+                        "            zoom: 14,\n" +
+                        "            restriction: {\n" +
+                        "                latLngBounds: {\n" +
+                        "                    north: 53.79305,\n" +
+                        "                    south: 50.66916,\n" +
+                        "                    east: 7.45822,\n" +
+                        "                    west: 2.88242,\n" +
+                        "                },\n" +
+                        "            },\n" +
+                        "        });\n" +
+                        "        directionsRenderer.setMap(map);\n" +
+                        "        calculateAndDisplayRoute(directionsService, directionsRenderer);\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    function calculateAndDisplayRoute(directionsService, directionsRenderer) {\n" +
+                        "        directionsService.route(\n" +
+                        "            {\n" +
+                        "                origin: { lat: " + dataHandler.getTrip(posA).getLocationFromLat() + ", lng: " + dataHandler.getTrip(posA).getLocationFromLng() + " },\n" +
+                        "                destination: { lat: " + dataHandler.getTrip(posA).getLocationToLat() + ", lng: " + dataHandler.getTrip(posA).getLocationToLng() + " },\n" +
+                        "                // Note that Javascript allows us to access the constant\n" +
+                        "                // using square brackets and a string value as its\n" +
+                        "                // \"property.\"\n" +
+                        "                travelMode: '" + mapType + "',\n" +
+                        "            },\n" +
+                        "            (response, status) => {\n" +
+                        "                if (status == \"OK\") {\n" +
+                        "                    directionsRenderer.setDirections(response);\n" +
+                        "                } else {\n" +
+                        "                    window.alert(\"Directions request failed due to \" + status);\n" +
+                        "                }\n" +
+                        "            }\n" +
+                        "        );\n" +
+                        "        }\n" +
+                        "    </script>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
     /*                "<div id=\"floating-panel\">\n" +
                     "    <b>Van: </b>\n" +
                     "    <select id=\"start\">\n" +
@@ -383,38 +401,39 @@ public class HomeScreenController {
                     "        <option value=\"Amersfoort Centraal\">Amersfoort</option>\n" +
                     "    </select>\n" +
                     "</div>\n" +*/
-                    "<div id=\"map\"></div>\n" +
-                    "</body>\n" +
-                    "</html>");
+                        "<div id=\"map\"></div>\n" +
+                        "</body>\n" +
+                        "</html>");
 
-            bw.write("");
-            bw.write("");
-            bw.close();
+                bw.write("");
+                bw.write("");
+                bw.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            // loads next scene
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
+            Parent tripInfoParent = loader.load();
+
+            Scene tripInfoScene = new Scene(tripInfoParent);
+            // this loads the correct text into labels
+            tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+
+            TripInformationController TripControl = loader.getController();
+            TripControl.sendInput(posA, posB);
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(tripInfoScene);
+            window.show();
         }
-
-        // loads next scene
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
-        Parent tripInfoParent = loader.load();
-
-        Scene tripInfoScene = new Scene(tripInfoParent);
-        // this loads the correct text into labels
-        tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
-
-        TripInformationController TripControl = loader.getController();
-        TripControl.sendInput(posA, posB);
-
-        // This line gets the stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(tripInfoScene);
-        window.show();
-
 
     }
 
