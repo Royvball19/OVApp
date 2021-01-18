@@ -306,9 +306,11 @@ public class HomeScreenController {
 
 
 
-    public void showTrip(ActionEvent event) throws IOException {
+    public void showTrip(ActionEvent event) throws IOException
+    {
 
-        if (tripOptions.getSelectionModel().getSelectedIndex() == -1){
+        if (tripOptions.getSelectionModel().getSelectedIndex() == -1)
+        {
             messageLabel.setVisible(true);
             messageLabel.setText(rb.getString("HSmessage"));
         } else
@@ -405,30 +407,32 @@ public class HomeScreenController {
                 e.printStackTrace();
             }
 
-        // loads next scene
+            // loads next scene
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
-        Parent tripInfoParent = loader.load();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
+            Parent tripInfoParent = loader.load();
 
-        Scene tripInfoScene = new Scene(tripInfoParent);
-        // this loads the correct text into labels
-        tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
-
-        TripInformationController TripControl = loader.getController();
-        TripControl.sendInput(posA, posB);
-
-        // This line gets the stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(tripInfoScene);
-        window.show();
+            Scene tripInfoScene = new Scene(tripInfoParent);
+            // this loads the correct text into labels
+            tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
 
+            TripInformationController TripControl = loader.getController();
+            TripControl.sendInput(posA, posB);
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(tripInfoScene);
+            window.show();
+
+
+        }
     }
 
-    public void showMyProfileButton(ActionEvent event) throws IOException {
+    public void showMyProfileButton(ActionEvent event) throws IOException
+    {
         File myObj = new File("currentuser.txt");
         if(myObj.length() == 0)
         {

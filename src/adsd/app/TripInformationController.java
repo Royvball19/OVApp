@@ -123,7 +123,7 @@ public class TripInformationController extends HomeScreenController
         if (spots)
         {
             bicycleSpots = rb.getString("available");
-        } else if (!(spots))
+        } else if (!(spots) )
         {
             bicycleSpots = rb.getString("notAvailable");
         }
