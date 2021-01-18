@@ -1,146 +1,116 @@
 package adsd.app;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class MyProfileController
 {
-
     ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-    DataHandler dataHandler;
-
     @FXML ToolBar myToolBar;
-    @FXML Label welcomeText;
-    @FXML Label profileNotExist;
-    @FXML Button showSelectedProfile;
-    @FXML TextField userName;
-    @FXML TextField password;
-    @FXML Hyperlink noAccount;
+
+    @FXML Label userNameInfo;
+    @FXML Label nameInfo;
+    @FXML Label ageInfo;
+    @FXML Label residenceInfo;
 
     private String lang;
     private String country;
 
+
+
+    private DataHandler dataHandler;
+
+
     public void initialize() throws IOException
     {
+        dataHandler = new DataHandler();
+        dataHandler.readFromExternalData();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
         Locale.setDefault(new Locale(lang, country));
 
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
-
-        userName.setPromptText(rb.getString("MPuserName"));
-        password.setPromptText(rb.getString("MPpassword"));
-        noAccount.setText(rb.getString("MPnoAccount"));
-
-        dataHandler = new DataHandler();
-        dataHandler.readFromExternalData();
-
-    }
-
-    public int login(ActionEvent login) throws IOException {
-
-        for (int i = 0; i < dataHandler.getProfileList().size(); i++) {
-
-
-            if (dataHandler.getProfileList().get(i).getUserName().equals(userName.getText()) && dataHandler.getProfileList().get(i).getPassword().equals(password.getText())) {
-
-                welcomeText.setText(rb.getString("MPwelcomeText") + dataHandler.getProfile(i).getFirstName());
-
-                FileWriter myWriter = new FileWriter("currentuser.txt");
-                myWriter.write(String.valueOf(i));
-                myWriter.close();
-                System.out.println("Successfully wrote to the file.");
-
-
-                PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished( event -> {
-
-                    Parent homeScreenParent = null;
-
-                    try {
-                        homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Scene myFavoriteTrips = new Scene(homeScreenParent);
-                    myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-                    Stage window = (Stage) myToolBar.getScene().getWindow();
-
-                    window.setScene(myFavoriteTrips);
-                    window.show();
-                });
-
-                delay.play();
-
-                return i;
-
-            } else {
-                profileNotExist.setText(rb.getString("MPnoProfile"));
+        try
+        {
+            File myObj = new File("currentuser.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine())
+            {
+                String data = myReader.nextLine();
+                userNameInfo.setText(dataHandler.getProfile(Integer.parseInt((data))).getUserName());
+                nameInfo.setText(dataHandler.getProfile(Integer.parseInt((data))).getFirstName() + " " + dataHandler.getProfile(Integer.parseInt((data))).getLastName());
+                ageInfo.setText(String.valueOf(dataHandler.getProfile(Integer.parseInt((data))).getAge()));
+                residenceInfo.setText(dataHandler.getProfile(Integer.parseInt((data))).getResidence());
             }
+            myReader.close();
+        } catch (FileNotFoundException e)
+        {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
-        return 0;
     }
 
     public void showHomeScreen(ActionEvent event) throws IOException
     {
-        Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-        Scene MyProfileScene = new Scene(HomeScreenParent);
+        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+        Scene routeInfoScene = new Scene(tripInfoParent);
 
         // Gets stage information
-
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        MyProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
+        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         // Set scene to go back
-        window.setScene(MyProfileScene);
+        window.setScene(routeInfoScene);
         window.show();
     }
 
-    public void showMyFavoriteTrips (ActionEvent event) throws IOException
+    public void showMyFavoriteTrips(ActionEvent event) throws IOException
     {
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent);
+
+        //todo fix if else if not logged in
+        Parent homeScreenParent3 = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
+        Scene myFavoriteTrips = new Scene(homeScreenParent3);
 
         myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
         // This line gets the stage information
-        Stage window = (Stage) myToolBar.getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(myFavoriteTrips);
         window.show();
     }
 
-    public void toRegistration() throws IOException
+    public void logOut(ActionEvent event) throws IOException
     {
+        FileWriter myWriter = new FileWriter("currentuser.txt");
+        myWriter.write("");
+        myWriter.close();
 
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/UserRegistration.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent);
+        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+        Scene routeInfoScene = new Scene(tripInfoParent);
 
-        homeScreenParent.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-        // This line gets the stage information
+        // Gets stage information
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        window.setScene(myFavoriteTrips);
+        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        // Set scene to go back
+        window.setScene(routeInfoScene);
         window.show();
 
     }
@@ -156,7 +126,8 @@ public class MyProfileController
 
     }
 
-    public void changeLangNed(ActionEvent event) throws IOException {
+    public void changeLangNed(ActionEvent event) throws IOException
+    {
 
         List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
         lines.set(0, "nl");

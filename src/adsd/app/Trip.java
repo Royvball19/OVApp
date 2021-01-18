@@ -19,6 +19,7 @@ public class Trip
     private double locationToLat;
     private double locationToLng;
     private ArrayList<TripTimes> times;
+    private ArrayList<TripExtra> extras;
 
 
     // Standard Constructor
@@ -32,7 +33,8 @@ public class Trip
         this.locationFromLng = locationFromLng;
         this.locationToLat   = locationToLat;
         this.locationToLng   = locationToLng;
-        this.times = new ArrayList<TripTimes>();
+        this.times  = new ArrayList<TripTimes>();
+        this.extras = new ArrayList<TripExtra>();
 
     }
 
@@ -40,7 +42,8 @@ public class Trip
     {
         this.locationFrom = locationFrom;
         this.locationTo   = locationTo;
-        this.times = new ArrayList<TripTimes>();
+        this.times        = new ArrayList<TripTimes>();
+        this.extras       = new ArrayList<TripExtra>();
     }
 
     // JSON Constructor
@@ -62,6 +65,15 @@ public class Trip
             TripTimes p = new TripTimes ((JSONObject) time.get(i));
 
             times.add(p);
+        }
+
+        extras = new ArrayList<TripExtra>();
+        JSONArray extra = object.getJSONArray("tripExtras");
+        for (int i=0; i<extra.length(); i++)
+        {
+            TripExtra e = new TripExtra ((JSONObject) extra.get(i));
+
+            extras.add(e);
         }
 
     }
@@ -88,6 +100,14 @@ public class Trip
 
         }
         jobj.put("tripTimes", ja);
+
+        JSONArray nee = new JSONArray();
+        for (TripExtra e : extras)
+        {
+            nee.put(e.toJSON());
+
+        }
+        jobj.put("tripExtras", nee);
 
         return jobj;
     }
@@ -181,6 +201,11 @@ public class Trip
     public ArrayList<TripTimes> getTripTimesList()
     {
         return times;
+    }
+
+    public ArrayList<TripExtra> getTripExtrasList()
+    {
+        return extras;
     }
 
     public TripTimes getTripTimeObj(int i) {

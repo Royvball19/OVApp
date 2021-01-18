@@ -189,6 +189,11 @@ public class DataHandler
         }
     }
 
+    public void clearTempData(){
+        profiles.clear();
+        trips.clear();
+    }
+
     // getProfile Method to get index from ArrayList
     public Profile getProfile(int index)
     {
