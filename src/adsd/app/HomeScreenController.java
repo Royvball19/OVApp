@@ -7,14 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.media.Media;
 
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.*;
-import java.net.MalformedURLException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -81,8 +77,6 @@ public class HomeScreenController {
         ResourceBundle rb = ResourceBundle.getBundle("lang");
         dataHandler.clearTempData();
         clearInputBoxes();
-
-
         dataHandler.readFromExternalData();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
@@ -93,7 +87,6 @@ public class HomeScreenController {
         locationFrom.setPromptText(rb.getString("HSlocFrom"));
         locationTo.setPromptText(rb.getString("HSlocTo"));
         vehicleType.setPromptText(rb.getString("HSvehicletype"));
-
 
         for (int i = 0; i < dataHandler.getTripList().size(); i++) {
             locationFromList.add(dataHandler.getTrip(i).getLocationFrom());
@@ -171,9 +164,6 @@ public class HomeScreenController {
         vehicleType.getItems().clear();
 
     }
-
-    //todo if else als er geen selectie is gemaakt in list view
-    //todo if else als loc from en loc to hetzelfde zijn.
 
     public void checkTripOptions(ActionEvent event) throws IOException
     {
@@ -262,6 +252,7 @@ public class HomeScreenController {
     private void searchTrip(String locFrom, String locTo, String time, String vehicle) throws IOException
     {
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
+
 
         for (int i = 0; i < dataHandler.getTripList().size(); i++)
         {
@@ -414,40 +405,56 @@ public class HomeScreenController {
                 e.printStackTrace();
             }
 
-            // loads next scene
+        // loads next scene
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
-            Parent tripInfoParent = loader.load();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
+        Parent tripInfoParent = loader.load();
 
-            Scene tripInfoScene = new Scene(tripInfoParent);
-            // this loads the correct text into labels
-            tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        Scene tripInfoScene = new Scene(tripInfoParent);
+        // this loads the correct text into labels
+        tripInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
 
-            TripInformationController TripControl = loader.getController();
-            TripControl.sendInput(posA, posB);
-
-            // This line gets the stage information
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            window.setScene(tripInfoScene);
-            window.show();
-        }
-
-    }
-
-    public void showMyProfileButton(ActionEvent event) throws IOException {
-        Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
-        Scene myProfileScene = new Scene(homeScreenParent2);
-
-        myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        TripInformationController TripControl = loader.getController();
+        TripControl.sendInput(posA, posB);
 
         // This line gets the stage information
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(myProfileScene);
+        window.setScene(tripInfoScene);
         window.show();
+
+
+    }
+
+    public void showMyProfileButton(ActionEvent event) throws IOException {
+        File myObj = new File("currentuser.txt");
+        if(myObj.length() == 0)
+        {
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
     }
 
     public void showMyFavoriteTrips(ActionEvent event) throws IOException {

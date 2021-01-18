@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
@@ -30,6 +31,9 @@ public class Program extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        FileWriter myWriter = new FileWriter("currentuser.txt");
+        myWriter.write("");
+        myWriter.close();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
@@ -67,6 +71,9 @@ public class Program extends Application
         datahandler = new DataHandler();
         datahandler.readFromExternalData();
 
+        System.out.println(datahandler.getProfile(0).getFirstName());
+
+        System.out.println(datahandler.getTrip(0).getLocationFrom());
 
         // Application.launch(GUI.class, args);
         launch(args);

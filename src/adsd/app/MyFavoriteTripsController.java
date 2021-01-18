@@ -3,6 +3,7 @@ package adsd.app;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -43,6 +44,7 @@ public class MyFavoriteTripsController
 
     public void initialize() throws IOException
     {
+        favTrips.getItems().clear();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
@@ -100,16 +102,32 @@ public class MyFavoriteTripsController
 
     public void showMyProfile(ActionEvent event) throws IOException
     {
-        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
-        Scene routeInfoScene = new Scene(tripInfoParent);
+        File myObj = new File("currentuser.txt");
+        if(myObj.length() == 0)
+        {
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
 
-        // Gets stage information
-        Stage window = (Stage) myToolBar.getScene().getWindow();
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-        // Set scene to go back
-        window.setScene(routeInfoScene);
-        window.show();
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        }
     }
 
     public void removeFavTripButton(ActionEvent event) throws IOException
