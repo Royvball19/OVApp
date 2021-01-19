@@ -30,9 +30,10 @@ public class LoginScreenController
 
     @FXML ToolBar myToolBar;
     @FXML Label profileNotExist;
+    @FXML Label titelLoginLabel;
     @FXML Button showSelectedProfile;
     @FXML TextField userName;
-    @FXML TextField password;
+    @FXML PasswordField password;
     @FXML Hyperlink noAccount;
     @FXML Button logOutButton;
 
@@ -48,6 +49,7 @@ public class LoginScreenController
 
         ResourceBundle rb = ResourceBundle.getBundle("lang");
 
+        titelLoginLabel.setText(rb.getString("LItitel"));
         userName.setPromptText(rb.getString("MPuserName"));
         password.setPromptText(rb.getString("MPpassword"));
         noAccount.setText(rb.getString("MPnoAccount"));
@@ -93,6 +95,7 @@ public class LoginScreenController
 
             } else {
                 profileNotExist.setText(rb.getString("MPnoProfile"));
+                titelLoginLabel.setVisible(false);
             }
         }
         return 0;
