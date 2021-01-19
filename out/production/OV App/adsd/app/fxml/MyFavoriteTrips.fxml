@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyFavoriteTripsController">
+<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyFavoriteTripsController">
     <children>
-      <TableView id="favTrips" fx:id="favTrips" layoutX="33.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
+      <Pane layoutX="13.0" layoutY="83.0" prefHeight="316.0" prefWidth="245.0" styleClass="standardPane" />
+      <TableView id="favTrips" fx:id="favTrips" layoutX="23.0" layoutY="96.0" prefHeight="204.0" prefWidth="228.0" styleClass="favorite-view">
         <columns>
-          <TableColumn fx:id="favTripsFromCollum" prefWidth="98.0" text="Locatie van" />
-          <TableColumn fx:id="favTripsToCollum" prefWidth="101.0" text="Locatie naar" />
+          <TableColumn id="tableColumnTitle" fx:id="favTripsFromCollum" prefWidth="116.0" text="Locatie van" />
+          <TableColumn id="tableColumnTitle" fx:id="favTripsToCollum" prefWidth="110.0" text="Locatie naar" />
         </columns>
       </TableView>
         <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="210.0" styleClass="toolbar" stylesheets="@../style.css">
@@ -30,8 +32,8 @@
             </MenuButton>
             </items>
         </ToolBar>
-      <Button id="removeFavTripButton" fx:id="removeFavTripButton" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="324.0" mnemonicParsing="false" onAction="#removeFavTripButton" prefHeight="27.0" prefWidth="153.0" text="Test" />
-      <Button id="planFavTripButton" fx:id="planFavTripButton" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" text="Test" onAction="#planFavTripButton"/>
+      <Button id="removeFavTripButton" fx:id="removeFavTripButton" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="324.0" mnemonicParsing="false" onAction="#removeFavTripButton" prefHeight="27.0" prefWidth="200.0" text="Test" />
+      <Button id="planFavTripButton" fx:id="planFavTripButton" layoutX="100.0" layoutY="359.0" mnemonicParsing="false" onAction="#planFavTripButton" prefHeight="27.0" prefWidth="66.0" text="Test" />
       <Label fx:id="noFavTripSelected" alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="300.0" prefHeight="17.0" prefWidth="97.0" />
     </children>
 </AnchorPane>

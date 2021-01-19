@@ -31,9 +31,9 @@ public class Program extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        FileWriter myWriter = new FileWriter("currentuser.txt");
-        myWriter.write("");
-        myWriter.close();
+//        FileWriter myWriter = new FileWriter("currentuser.txt");
+//        myWriter.write("");
+//        myWriter.close();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
         country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
