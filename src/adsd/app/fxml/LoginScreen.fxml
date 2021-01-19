@@ -8,9 +8,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.LoginScreenController">
+<AnchorPane maxHeight="400.0" maxWidth="265.0" minHeight="400.0" minWidth="265.0" prefHeight="400.0" prefWidth="265.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.LoginScreenController">
     <children>
+      <Pane layoutX="25.0" layoutY="103.0" prefHeight="249.0" prefWidth="214.0" styleClass="standardPane" />
         <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
             <items>
                 <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@../style.css" />
