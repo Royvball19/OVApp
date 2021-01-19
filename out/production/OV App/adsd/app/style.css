@@ -356,7 +356,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #registrationPane2 {
-    -fx-background-color: snows;
+    -fx-background-color: snow;
 
     /*-fx-background-color: white;*/
 }
