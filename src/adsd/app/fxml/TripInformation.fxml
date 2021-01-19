@@ -30,18 +30,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Label fx:id="labelLocFrom" contentDisplay="RIGHT" styleClass="importantTripInfo" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label fx:id="labelLocFromInfo" nodeOrientation="LEFT_TO_RIGHT" styleClass="importantTripInfo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label fx:id="labelLocTo" contentDisplay="RIGHT" styleClass="importantTripInfo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label fx:id="labelLocToInfo" nodeOrientation="LEFT_TO_RIGHT" styleClass="importantTripInfo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label fx:id="labelTravelTime" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label fx:id="labelTravelTimeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label fx:id="labelDepartureTime" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label fx:id="labelDepartureTimeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label fx:id="labelArrivalTime" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label fx:id="labelArrivalTimeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label fx:id="labelVehicleType" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Label fx:id="labelVehicleTypeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Label fx:id="labelLocFrom" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="125.0" styleClass="importantTripInfo" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="labelLocFromInfo" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="75.0" styleClass="importantTripInfo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="labelLocTo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="125.0" styleClass="importantTripInfo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label fx:id="labelLocToInfo" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="75.0" styleClass="importantTripInfo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label fx:id="labelTravelTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label fx:id="labelTravelTimeInfo" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label fx:id="labelDepartureTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label fx:id="labelDepartureTimeInfo" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label fx:id="labelArrivalTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label fx:id="labelArrivalTimeInfo" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label fx:id="labelVehicleType" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Label fx:id="labelVehicleTypeInfo" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <tooltip>
                   <Tooltip fx:id="tooltipVehicleTypeInfo" text="Test" />
                </tooltip>
