@@ -363,13 +363,14 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #registrationPane2 {
-    -fx-background-color: #03396c;
+    -fx-background-color: snows;
 
     /*-fx-background-color: white;*/
 }
 
 #registratieHeader1 {
     -fx-font-family: "Arial Black";
+    -fx-text-fill: black;
     -fx-font-size: 20px;
 }
 
