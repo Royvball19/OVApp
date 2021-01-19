@@ -9,25 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane maxHeight="452.0" maxWidth="533.0" minHeight="400.0" minWidth="265.0" prefHeight="452.0" prefWidth="533.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.TripInformationController">
 <children>
-    <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
-        <items>
-            <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@../style.css" />
-            <Button id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-            <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
-            <MenuButton fx:id="myLangButton" mnemonicParsing="false">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#changeLangNed" text="Nederlands" />
-                <MenuItem mnemonicParsing="false" onAction="#changeLangEng" text="Engels" />
-              </items>
-            </MenuButton>
-        </items>
-    </ToolBar>
-    <GridPane id="tripInfoPane" layoutX="27.0" layoutY="106.0" prefHeight="274.0" prefWidth="221.0" stylesheets="@../style.css">
+      <Pane layoutX="15.0" layoutY="99.0" prefHeight="293.0" prefWidth="232.0" styleClass="standardPane" />
+    <GridPane id="tripInfoPane" layoutX="22.0" layoutY="110.0" prefHeight="274.0" prefWidth="221.0" stylesheets="@../style.css">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="115.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="106.0" />
@@ -41,24 +30,38 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Label fx:id="labelLocFrom" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
-            <Label fx:id="labelLocFromInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
-            <Label fx:id="labelLocTo" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label fx:id="labelLocToInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label fx:id="labelTravelTime" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label fx:id="labelTravelTimeInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label fx:id="labelDepartureTime" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label fx:id="labelDepartureTimeInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label fx:id="labelArrivalTime" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label fx:id="labelArrivalTimeInfo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label fx:id="labelVehicleType" GridPane.rowIndex="5" />
-            <Label fx:id="labelVehicleTypeInfo" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label fx:id="labelLocFrom" contentDisplay="RIGHT" styleClass="importantTripInfo" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="labelLocFromInfo" nodeOrientation="LEFT_TO_RIGHT" styleClass="importantTripInfo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="labelLocTo" contentDisplay="RIGHT" styleClass="importantTripInfo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label fx:id="labelLocToInfo" nodeOrientation="LEFT_TO_RIGHT" styleClass="importantTripInfo" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label fx:id="labelTravelTime" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label fx:id="labelTravelTimeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label fx:id="labelDepartureTime" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label fx:id="labelDepartureTimeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label fx:id="labelArrivalTime" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label fx:id="labelArrivalTimeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label fx:id="labelVehicleType" contentDisplay="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Label fx:id="labelVehicleTypeInfo" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <tooltip>
                   <Tooltip fx:id="tooltipVehicleTypeInfo" text="Test" />
-               </tooltip></Label>
+               </tooltip>
+            </Label>
         </children>
     </GridPane>
+    <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
+        <items>
+            <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@../style.css" />
+            <Button id="myProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showMyProfileButton" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+            <Button id="myFavoriteButton" fx:id="myFavoriteButton" mnemonicParsing="false" onAction="#showMyFavoriteTrips" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style.css" />
+            <MenuButton fx:id="myLangButton" mnemonicParsing="false">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#changeLangNed" text="Nederlands" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLangEng" text="Engels" />
+              </items>
+            </MenuButton>
+        </items>
+    </ToolBar>
       <WebView id="mapWebView" fx:id="mapWebView" layoutX="257.0" layoutY="26.0" prefHeight="400.0" prefWidth="256.0" stylesheets="@../style.css" />
-      <Button id="addFavoriteButton" fx:id="addFavoriteButton" layoutX="57.0" layoutY="393.0" mnemonicParsing="false" onAction="#addFavoriteTripButton" text="Toevoegen aan Favoriet" />
+      <Button id="addFavoriteButton" fx:id="addFavoriteButton" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="415.0" mnemonicParsing="false" onAction="#addFavoriteTripButton" prefHeight="23.0" prefWidth="173.0" text="Favorite" />
 </children>
 </AnchorPane>

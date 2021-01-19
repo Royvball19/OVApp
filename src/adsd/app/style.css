@@ -197,12 +197,6 @@
     -fx-background-color: orange ;
 }
 
-
-
-#labelLocFrom, #labelLocFromInfo, #labelLocTo, #labelLocToInfo, #labelTravelTime, #labelTravelTimeInfo, #labelPrice, #labelPriceInfo, #labelDepartureTime, #labelDepartureTimeInfo, #labelArrivalTime, #labelArrivalTimeInfo {
-    -fx-font-size: 14px;
-}
-
 .spinners
 {
     -fx-background-color: black;
@@ -427,4 +421,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     -fx-background-color: black;
     -fx-background-radius: 10px;
     -fx-opacity: 0.4;
+}
+
+.importantTripInfo {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
 }

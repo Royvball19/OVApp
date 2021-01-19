@@ -70,7 +70,7 @@ public class TripInformationController extends HomeScreenController
     @FXML
     private Label labelTitle;
     @FXML
-    private Button addFavoriteTripButton;
+    private Button addFavoriteButton;
     int userID;
 
 
@@ -114,6 +114,8 @@ public class TripInformationController extends HomeScreenController
         WebEngine webEngine = mapWebView.getEngine();
         URL url = this.getClass().getResource("index.html");
         webEngine.load(url.toString());*/
+
+        addFavoriteButton.setText(rb.getString("favoriteTripButton"));
 
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
@@ -248,22 +250,37 @@ public class TripInformationController extends HomeScreenController
 
     public void addFavoriteTripButton(ActionEvent event) throws IOException
     {
-        loginScreenController = new LoginScreenController();
-        try
+        File myObj = new File("currentuser.txt");
+        if (myObj.length() == 0)
         {
-            File myObj = new File("currentuser.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine())
+            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(homeScreenParent2);
+
+            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+            // This line gets the stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(myProfileScene);
+            window.show();
+        } else
+        {
+            loginScreenController = new LoginScreenController();
+            try
             {
-                String data = myReader.nextLine();
-                dataHandler.getProfile(Integer.parseInt(data)).addTrip(0, labelLocFromInfo.getText(), labelLocToInfo.getText(), "0", 0, 0, 0, 0);
-                dataHandler.writeToExternalData();
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine())
+                {
+                    String data = myReader.nextLine();
+                    dataHandler.getProfile(Integer.parseInt(data)).addTrip(0, labelLocFromInfo.getText(), labelLocToInfo.getText(), "0", 0, 0, 0, 0);
+                    dataHandler.writeToExternalData();
+                }
+                myReader.close();
+            } catch (FileNotFoundException e)
+            {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
-            myReader.close();
-        } catch (FileNotFoundException e)
-        {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
     }
 
