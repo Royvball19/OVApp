@@ -34,6 +34,8 @@ public class MyProfileController
     @FXML Label ageLabel;
     @FXML Label residenceLabel;
 
+    @FXML Label profileWelcome;
+
 
     private String lang;
     private String country;
@@ -57,6 +59,7 @@ public class MyProfileController
         nameLabel.setText(rb.getString("MPnameLabel"));
         ageLabel.setText(rb.getString("MPageLabel"));
         residenceLabel.setText(rb.getString("MPresidenceLabel"));
+        profileWelcome.setText(rb.getString("MPwelcomeText"));
 
         try
         {

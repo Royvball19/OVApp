@@ -425,8 +425,6 @@ public class HomeScreenController
 
             window.setScene(tripInfoScene);
             window.show();
-
-
         }
     }
 

@@ -6,9 +6,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyProfileController">
+<AnchorPane prefHeight="400.0" prefWidth="265.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.app.MyProfileController">
     <children>
+      <Pane layoutX="17.0" layoutY="132.0" prefHeight="168.0" prefWidth="234.0" styleClass="standardPane" />
         <ToolBar fx:id="myToolBar" layoutX="29.0" layoutY="28.0" minHeight="53.0" prefHeight="60.0" prefWidth="207.0" styleClass="toolbar" stylesheets="@../style.css">
             <items>
                 <Button id="homeScreenButton" mnemonicParsing="false" onAction="#showHomeScreen" prefHeight="28.0" prefWidth="31.0" stylesheets="@../style.css" />
@@ -22,14 +25,44 @@
                 </MenuButton>
             </items>
         </ToolBar>
-        <Button fx:id="logOutButton" layoutX="103.0" layoutY="347.0" mnemonicParsing="false" onAction="#logOut" text="Log uit" />
-      <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="108.0" />
-      <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="71.0" layoutY="128.0" />
-      <Label fx:id="ageLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="63.0" layoutY="149.0" />
-      <Label fx:id="residenceLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="39.0" layoutY="169.0" />
-      <Label fx:id="userNameInfo" layoutX="129.0" layoutY="108.0" prefHeight="17.0" prefWidth="98.0" />
-      <Label fx:id="nameInfo" layoutX="129.0" layoutY="128.0" prefHeight="17.0" prefWidth="98.0" />
-      <Label fx:id="ageInfo" layoutX="129.0" layoutY="149.0" prefHeight="17.0" prefWidth="98.0" />
-      <Label fx:id="residenceInfo" layoutX="129.0" layoutY="169.0" prefHeight="17.0" prefWidth="98.0" />
+      <Label fx:id="userNameLabel" layoutX="35.0" layoutY="169.0" prefHeight="17.0" prefWidth="104.0">
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font>
+      </Label>
+        <Button fx:id="logOutButton" layoutX="102.0" layoutY="320.0" mnemonicParsing="false" onAction="#logOut" text="Log uit" />
+      <Label fx:id="nameLabel" contentDisplay="RIGHT" layoutX="36.0" layoutY="188.0" prefHeight="16.0" prefWidth="98.0">
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font></Label>
+      <Label fx:id="ageLabel" layoutX="36.0" layoutY="209.0" prefHeight="17.0" prefWidth="104.0">
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font></Label>
+      <Label fx:id="residenceLabel" layoutX="37.0" layoutY="229.0" prefHeight="16.0" prefWidth="112.0">
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font></Label>
+      <Label fx:id="userNameInfo" layoutX="151.0" layoutY="168.0" prefHeight="17.0" prefWidth="84.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="nameInfo" layoutX="151.0" layoutY="188.0" prefHeight="17.0" prefWidth="98.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="ageInfo" layoutX="151.0" layoutY="207.0" prefHeight="17.0" prefWidth="98.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="residenceInfo" layoutX="151.0" layoutY="227.0" prefHeight="17.0" prefWidth="98.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label id="profileHeader" fx:id="profileWelcome" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="94.0" prefHeight="27.0" prefWidth="131.0" stylesheets="@../style.css" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
