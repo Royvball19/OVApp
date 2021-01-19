@@ -356,13 +356,14 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #registrationPane2 {
-    -fx-background-color: #03396c;
+    -fx-background-color: snows;
 
     /*-fx-background-color: white;*/
 }
 
 #registratieHeader1 {
     -fx-font-family: "Arial Black";
+    -fx-text-fill: black;
     -fx-font-size: 20px;
 }
 
@@ -425,18 +426,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .importantTripInfo {
     -fx-font-size: 13px;
     -fx-font-weight: bold;
-}
-
-.standardPane {
-    -fx-background-color: black;
-    -fx-background-radius: 10px;
-    -fx-opacity: 0.4;
-}
-
-.standardPane {
-    -fx-background-color: black;
-    -fx-background-radius: 10px;
-    -fx-opacity: 0.4;
 }
 
 
