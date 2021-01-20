@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
@@ -20,21 +21,22 @@ import java.util.Scanner;
 
 public class MyProfileController
 {
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-    @FXML ToolBar myToolBar;
+    @FXML private ToolBar myToolBar;
 
-    @FXML Label userNameInfo;
-    @FXML Label nameInfo;
-    @FXML Label ageInfo;
-    @FXML Label residenceInfo;
+    @FXML private Label userNameInfo;
+    @FXML private Label nameInfo;
+    @FXML private Label ageInfo;
+    @FXML private Label residenceInfo;
 
-    @FXML Label userNameLabel;
-    @FXML Label nameLabel;
-    @FXML Label ageLabel;
-    @FXML Label residenceLabel;
+    @FXML private Label userNameLabel;
+    @FXML private Label nameLabel;
+    @FXML private Label ageLabel;
+    @FXML private Label residenceLabel;
 
-    @FXML Label profileWelcome;
+    @FXML private Label profileWelcome;
+    @FXML private Button logOutButton;
 
 
     private String lang;
@@ -60,6 +62,8 @@ public class MyProfileController
         ageLabel.setText(rb.getString("MPageLabel"));
         residenceLabel.setText(rb.getString("MPresidenceLabel"));
         profileWelcome.setText(rb.getString("MPwelcomeText"));
+        logOutButton.setText(rb.getString("logOutButton"));
+
 
         try
         {

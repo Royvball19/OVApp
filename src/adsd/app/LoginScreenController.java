@@ -28,14 +28,12 @@ public class LoginScreenController
 
     DataHandler dataHandler;
 
-    @FXML ToolBar myToolBar;
-    @FXML Label profileNotExist;
-    @FXML Label titelLoginLabel;
-    @FXML Button showSelectedProfile;
-    @FXML TextField userName;
-    @FXML PasswordField password;
-    @FXML Hyperlink noAccount;
-    @FXML Button logOutButton;
+    @FXML private ToolBar myToolBar;
+    @FXML private Label profileNotExist;
+    @FXML private Label titelLoginLabel;
+    @FXML private TextField userName;
+    @FXML private PasswordField password;
+    @FXML private Hyperlink noAccount;
 
     private String lang;
     private String country;

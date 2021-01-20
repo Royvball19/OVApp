@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -24,24 +25,24 @@ import java.util.ResourceBundle;
 
 public class UserRegistrationController {
 
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
 
-    @FXML TextField firstName;
-    @FXML TextField lastName;
-    @FXML TextField age;
-    @FXML TextField userName;
-    @FXML TextField password;
-    @FXML Label registerLabel;
-    @FXML Label errorLabel;
-    @FXML Label benefitsLabel;
-    @FXML Label favBenefitLabel;
-    @FXML Label profileBenefitLabel;
-    @FXML Label saveTimeBenefitLabel;
-    @FXML Text  text;
-    @FXML Button register;
+    @FXML private TextField firstName;
+    @FXML private TextField lastName;
+    @FXML private TextField age;
+    @FXML private TextField userName;
+    @FXML private PasswordField password;
+    @FXML private Label registerLabel;
+    @FXML private Label errorLabel;
+    @FXML private Label benefitsLabel;
+    @FXML private Label favBenefitLabel;
+    @FXML private Label profileBenefitLabel;
+    @FXML private Label saveTimeBenefitLabel;
+    @FXML private Text  text;
+    @FXML private Button register;
 
-    DataHandler dataHandler = new DataHandler();
+    private DataHandler dataHandler = new DataHandler();
 
     private String lang;
     private String country;

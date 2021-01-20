@@ -36,7 +36,7 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label fx:id="profileNotExist" prefHeight="17.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="profileNotExist" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="199.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <TextField fx:id="userName" promptText="Gebruikersnaam" GridPane.rowIndex="2" />
             <PasswordField fx:id="password" promptText="Wachtwoord" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Button fx:id="showSelectedProfile" mnemonicParsing="false" onAction="#login" text="Login" GridPane.halignment="CENTER" GridPane.rowIndex="4" />

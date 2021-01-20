@@ -4,8 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class Trip
 {

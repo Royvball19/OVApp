@@ -24,17 +24,16 @@ import java.util.Scanner;
 public class MyFavoriteTripsController
 {
 
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-    DataHandler dataHandler;
-    @FXML TableView<Trip> favTrips;
-    @FXML TableColumn<Trip, String> favTripsFromCollum;
-    @FXML TableColumn<Trip, String> favTripsToCollum;
-    @FXML ToolBar myToolBar;
-    @FXML MenuButton myLangButton;
-    @FXML Button removeFavTripButton;
-    @FXML Button planFavTripButton;
-    @FXML Label noFavTripSelected;
+    private DataHandler dataHandler;
+    @FXML private TableView<Trip> favTrips;
+    @FXML private TableColumn<Trip, String> favTripsFromCollum;
+    @FXML private TableColumn<Trip, String> favTripsToCollum;
+    @FXML private ToolBar myToolBar;
+    @FXML private Button removeFavTripButton;
+    @FXML private Button planFavTripButton;
+    @FXML private Label noFavTripSelected;
 
     int currentUser;
 

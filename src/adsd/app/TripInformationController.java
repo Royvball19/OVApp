@@ -30,12 +30,12 @@ import java.util.Scanner;
 public class TripInformationController extends HomeScreenController
 {
 
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
     @FXML
-    ToolBar myToolBar;
+    private ToolBar myToolBar;
     @FXML
-    WebView mapWebView;
+    private WebView mapWebView;
 
     @FXML
     private Label labelLocFrom;
@@ -120,7 +120,7 @@ public class TripInformationController extends HomeScreenController
         labelLocFrom.setText(rb.getString("locFrom"));
         labelLocTo.setText(rb.getString("locTo"));
         labelTravelTime.setText(rb.getString("travelTime"));
-        labelVehicleType.setText("Voertuigtype:");
+        labelVehicleType.setText(rb.getString("vehicleType"));
 
         labelDepartureTime.setText(rb.getString("RouteInfoDepartureTime"));
         labelArrivalTime.setText(rb.getString("RouteInfoArrivalTime"));
@@ -129,6 +129,9 @@ public class TripInformationController extends HomeScreenController
 
     public void sendInput(int posA, int posB)
     {
+
+        String vehicleType = dataHandler.getTrip(posA).getTripTimeObj(posB).getVehicleType();
+
         DecimalFormat df = new DecimalFormat("00.00");
 
         labelLocFromInfo.setText(dataHandler.getTrip(posA).getLocationFrom());
@@ -136,8 +139,7 @@ public class TripInformationController extends HomeScreenController
         labelTravelTimeInfo.setText(dataHandler.getTrip(posA).getTripTimeObj(posB).getTravelTime().toString() + " " + rb.getString("minutes"));
         labelDepartureTimeInfo.setText(toDubbleDot(String.valueOf(df.format(dataHandler.getTrip(posA).getTripTimeObj(posB).getDepTime()))));
         labelArrivalTimeInfo.setText(toDubbleDot(String.valueOf(df.format(dataHandler.getTrip(posA).getTripTimeObj(posB).getArivTime()))));
-        labelVehicleTypeInfo.setText(dataHandler.getTrip(posA).getTripTimeObj(posB).getVehicleType());
-
+        labelVehicleTypeInfo.setText(vehicleType.substring(0, 1).toUpperCase() + vehicleType.substring(1));
 
         if (dataHandler.getTrip(posA).getTripExtrasList().size() > 0)
         {
