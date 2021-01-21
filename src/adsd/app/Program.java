@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -31,6 +32,7 @@ public class Program extends Application
         primaryStage.setTitle("TravelYroute OV App");
         startScherm.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(new Scene(startScherm));
+        primaryStage.getIcons().add(new Image("https://i.ibb.co/zxym2f8/train.png"));
         primaryStage.show();
         primaryStage.setResizable(false);
 
@@ -48,8 +50,6 @@ public class Program extends Application
 //        {
 //            throw new IllegalStateException("Cannot find the driver in the classpath!", e);
 //        }
-
-        // Application.launch(GUI.class, args);
 
         launch(args);
 
