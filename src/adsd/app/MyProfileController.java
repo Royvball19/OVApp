@@ -21,8 +21,11 @@ import java.util.Scanner;
 
 public class MyProfileController
 {
+
+    // Get resource bundle
     private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
+    // Attributes FXML
     @FXML private ToolBar myToolBar;
 
     @FXML private Label userNameInfo;
@@ -38,14 +41,12 @@ public class MyProfileController
     @FXML private Label profileWelcome;
     @FXML private Button logOutButton;
 
-
+    // Attributes
     private String lang;
     private String country;
 
-
-
+    // Instance of datahandler
     private DataHandler dataHandler;
-
 
     public void initialize() throws IOException
     {
@@ -63,7 +64,6 @@ public class MyProfileController
         residenceLabel.setText(rb.getString("MPresidenceLabel"));
         profileWelcome.setText(rb.getString("MPwelcomeText"));
         logOutButton.setText(rb.getString("logOutButton"));
-
 
         try
         {
@@ -87,15 +87,15 @@ public class MyProfileController
 
     public void showHomeScreen(ActionEvent event) throws IOException
     {
-        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-        Scene routeInfoScene = new Scene(tripInfoParent);
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+        Scene scene = new Scene(parent);
 
         // Gets stage information
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         // Set scene to go back
-        window.setScene(routeInfoScene);
+        window.setScene(scene);
         window.show();
     }
 
@@ -118,14 +118,14 @@ public class MyProfileController
         } else
         {
             Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-            Scene myProfileScene = new Scene(favTripParent);
+            Scene scene = new Scene(favTripParent);
 
-            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(myProfileScene);
+            window.setScene(scene);
             window.show();
         }
     }

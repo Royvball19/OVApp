@@ -19,63 +19,51 @@ import java.util.*;
 
 public class HomeScreenController
 {
+    // Get resource bundle
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
+    // Attributes FXML
+    @FXML private ComboBox locationFrom;
+    @FXML private ComboBox locationTo;
+    @FXML private Spinner timeSpinnerHour;
+    @FXML private Spinner timeSpinnerMin;
+    @FXML private Button checkTripOptions;
+    @FXML private ComboBox<String> vehicleType;
+    @FXML private Label hourLabel;
+    @FXML private Label minLabel;
+    @FXML private ListView<String> tripOptions;
+    @FXML private Button showTripButton;
+    @FXML private Label messageLabel;
 
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
-
-    @FXML
-    private ComboBox locationFrom;
-    @FXML
-    private ComboBox locationTo;
-    @FXML
-    private Spinner timeSpinnerHour;
-    @FXML
-    private Spinner timeSpinnerMin;
-    @FXML
-    private Button checkTripOptions;
-    @FXML
-    private ComboBox<String> vehicleType;
-    @FXML
-    private Label hourLabel;
-    @FXML
-    private Label minLabel;
-    @FXML
-    private ListView<String> tripOptions;
-    @FXML
-    private Button showTripButton;
-    @FXML
-    private Label messageLabel;
-
-
+    // Attributes
     private String lang;
     private String country;
-
-    // staat hier zodat er geen errors zitten in de html writer etc. moet later wel nog worden aangepast.
-    ChoiceBox tripOption;
     private Integer resultCount;
     private Integer posA;
     private Integer posB;
-    private String vehicle;
-    private ArrayList<SearchResult> searchResults = new ArrayList<>();
-    private ArrayList<String> locationFromList = new ArrayList<>();
-    private ArrayList<String> locationToList = new ArrayList<>();
-
     private String locFromInput;
     private String locToInput;
     private double selectedHour;
     private double selectedMin;
     private double selectedTime;
 
-    DecimalFormat df = new DecimalFormat("00.00");
+    // Arraylists
+    private ArrayList<SearchResult> searchResults = new ArrayList<>();
+    private ArrayList<String> locationFromList = new ArrayList<>();
+    private ArrayList<String> locationToList = new ArrayList<>();
 
+    // Decimal formatter
+    private DecimalFormat df = new DecimalFormat("00.00");
 
-    DataHandler dataHandler = new DataHandler();
+    // New instance of datahandler
+    private DataHandler dataHandler = new DataHandler();
 
     public void initialize() throws IOException
     {
 
         dataHandler.clearTempData();
         clearInputBoxes();
+
         dataHandler.readFromExternalData();
 
         lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
@@ -113,8 +101,6 @@ public class HomeScreenController
             locationTo.getItems().add(locationToList.get(i));
         }
 
-        //timeOption.getItems().addAll(  "10:30", "10:35");
-
         SpinnerValueFactory<Integer> hourValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24);
         this.timeSpinnerHour.setValueFactory(hourValueFactory);
         hourValueFactory.setWrapAround(true);
@@ -137,7 +123,6 @@ public class HomeScreenController
         checkTripOptions.setText(rb.getString("HScheckTripOptionsButton"));
         showTripButton.setText(rb.getString("HSshowTripInfo"));
 
-
     }
 
     private String toComma(String time)
@@ -156,13 +141,6 @@ public class HomeScreenController
         return time;
     }
 
-    private String toDot(String time)
-    {
-        time = time.replace(",", ".");
-
-        return time;
-    }
-
     private void clearInputBoxes()
     {
         locationFrom.getItems().clear();
@@ -174,19 +152,17 @@ public class HomeScreenController
     public void checkTripOptions(ActionEvent event) throws IOException
     {
 
-
         // clear possible trips and reset result count
         tripOptions.getItems().clear();
         searchResults.clear();
         resultCount = 0;
         messageLabel.setVisible(false);
 
-
         // check if input is given
         if (locationFrom.getSelectionModel().getSelectedIndex() == -1
                 | locationTo.getSelectionModel().getSelectedIndex() == -1
                 | vehicleType.getSelectionModel().getSelectedIndex() == -1
-//                | locationTo.getSelectionModel().getSelectedItem().toString().equals(locationFrom.getSelectionModel().getSelectedItem().toString())
+
         )
         // set message for empty fields
         {
@@ -407,7 +383,6 @@ public class HomeScreenController
             }
 
             // loads next scene
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("fxml/TripInformation.fxml"));
             Parent tripInfoParent = loader.load();
@@ -434,8 +409,8 @@ public class HomeScreenController
         File myObj = new File("currentuser.txt");
         if (myObj.length() == 0)
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(parent);
 
             myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
@@ -446,8 +421,8 @@ public class HomeScreenController
             window.show();
         } else
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+            Scene myProfileScene = new Scene(parent);
 
             myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 

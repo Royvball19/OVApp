@@ -14,11 +14,9 @@ public class Profile
     private String lastName;
     private String residence;
     private int age;
+
+    // Arraylist
     private ArrayList<Trip> myTripList;
-
- /*   public Profile () {
-
-    }*/
 
     // Standard Constructor
     public Profile(int ID, String userName, String password, String firstName, String lastName, String residence, int age)
@@ -85,10 +83,6 @@ public class Profile
     public void addTrip(Integer ID, String locationFrom, String locationTo, String distance, double locationFromLat, double locationFromLng, double locationToLat, double locationToLng)
     {
         myTripList.add(new Trip(ID,locationFrom, locationTo, distance, locationFromLat, locationFromLng, locationToLat, locationToLng));
-    }
-
-    public void addFavTrip(String locationFrom, String locationTo) {
-        myTripList.add(new Trip(locationFrom, locationTo));
     }
 
     // Getters and Setters

@@ -22,7 +22,6 @@ public class TripExtra
         bicycleSpots = object.getBoolean("bicycleSpots");
         toilet = object.getBoolean("toilet");
         trainClass = object.getString("trainClass");
-
     }
 
     // toJSON Method

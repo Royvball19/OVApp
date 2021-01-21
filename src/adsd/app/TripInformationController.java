@@ -30,53 +30,35 @@ import java.util.Scanner;
 public class TripInformationController extends HomeScreenController
 {
 
+    // Get resource bundle
     private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-    @FXML
-    private ToolBar myToolBar;
-    @FXML
-    private WebView mapWebView;
+    // Attributes FXML
+    @FXML private ToolBar myToolBar;
+    @FXML private WebView mapWebView;
 
-    @FXML
-    private Label labelLocFrom;
-    @FXML
-    private Label labelLocFromInfo;
-    @FXML
-    private Label labelLocTo;
-    @FXML
-    private Label labelLocToInfo;
-    @FXML
-    private Label labelTravelTime;
-    @FXML
-    private Label labelTravelTimeInfo;
-    @FXML
-    private Label labelDepartureTime;
-    @FXML
-    private Label labelDepartureTimeInfo;
-    @FXML
-    private Label labelArrivalTime;
-    @FXML
-    private Label labelArrivalTimeInfo;
-    @FXML
-    private Label labelVehicleType;
-    @FXML
-    private Label labelVehicleTypeInfo;
-    @FXML
-    private Label tooltipVehicleTypeLabel;
+    @FXML private Label labelLocFrom;
+    @FXML private Label labelLocFromInfo;
+    @FXML private Label labelLocTo;
+    @FXML private Label labelLocToInfo;
+    @FXML private Label labelTravelTime;
+    @FXML private Label labelTravelTimeInfo;
+    @FXML private Label labelDepartureTime;
+    @FXML private Label labelDepartureTimeInfo;
+    @FXML private Label labelArrivalTime;
+    @FXML private Label labelArrivalTimeInfo;
+    @FXML private Label labelVehicleType;
+    @FXML private Label labelVehicleTypeInfo;
+    @FXML private Tooltip tooltipVehicleTypeInfo;
+    @FXML private Button addFavoriteButton;
 
-    @FXML
-    private Tooltip tooltipVehicleTypeInfo;
+    // Instance of datahandler
+    private DataHandler dataHandler;
 
-    @FXML
-    private Label labelTitle;
-    @FXML
-    private Button addFavoriteButton;
-    int userID;
+    // Instance of loginscreencontroller
+    private LoginScreenController loginScreenController;
 
-
-    DataHandler dataHandler;
-    LoginScreenController loginScreenController;
-
+    // Attributes
     private String lang;
     private String country;
 
@@ -93,27 +75,10 @@ public class TripInformationController extends HomeScreenController
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
 
-/*        Roy old line
-        WebEngine webEngine = mapWebView.getEngine();
-        String url = "file:///C:/Users/royva/IdeaProjects/OVApp/src/adsd/app/index.html";
-        webEngine.load(url);*/
-
-/*        Yannick old line
-        WebEngine webEngine = mapWebView.getEngine();
-        String url = "file://Users/yannickvdbos/Downloads/OVApp/src/adsd/app/index.html";
-        webEngine.load(url);*/
-
         String path = "src/adsd/app/index.html";
         WebEngine webEngine = mapWebView.getEngine();
         URL url = new File(path).toURI().toURL();
         webEngine.load(url.toString());
-
-
-/*
-        Old line where it doesnt update the map
-        WebEngine webEngine = mapWebView.getEngine();
-        URL url = this.getClass().getResource("index.html");
-        webEngine.load(url.toString());*/
 
         addFavoriteButton.setText(rb.getString("favoriteTripButton"));
 
@@ -177,16 +142,16 @@ public class TripInformationController extends HomeScreenController
     public void showHomeScreen(ActionEvent event) throws IOException
     {
         Parent HomeScreenParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-        Scene MyProfileScene = new Scene(HomeScreenParent);
+        Scene scene = new Scene(HomeScreenParent);
 
         // Gets stage information
 
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        MyProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
         // Set scene to go back
-        window.setScene(MyProfileScene);
+        window.setScene(scene);
         window.show();
     }
 
@@ -196,26 +161,26 @@ public class TripInformationController extends HomeScreenController
         if (myObj.length() == 0)
         {
             Parent loginScreenParent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
-            Scene myProfileScene = new Scene(loginScreenParent);
+            Scene scene = new Scene(loginScreenParent);
 
-            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(myProfileScene);
+            window.setScene(scene);
             window.show();
         } else
         {
             Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-            Scene myProfileScene = new Scene(favTripParent);
+            Scene scene = new Scene(favTripParent);
 
-            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(myProfileScene);
+            window.setScene(scene);
             window.show();
         }
     }
@@ -225,20 +190,20 @@ public class TripInformationController extends HomeScreenController
         File myObj = new File("currentuser.txt");
         if (myObj.length() == 0)
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene scene = new Scene(parent);
 
-            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(myProfileScene);
+            window.setScene(scene);
             window.show();
         } else
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+            Scene myProfileScene = new Scene(parent);
 
             myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
@@ -255,15 +220,15 @@ public class TripInformationController extends HomeScreenController
         File myObj = new File("currentuser.txt");
         if (myObj.length() == 0)
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene scene = new Scene(parent);
 
-            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(myProfileScene);
+            window.setScene(scene);
             window.show();
         } else
         {
@@ -286,17 +251,6 @@ public class TripInformationController extends HomeScreenController
         }
     }
 
-    public void setLocFrom(String test)
-    {
-        labelLocFromInfo.setText(test);
-    }
-
-    public void sendTime(String time)
-    {
-
-
-    }
-
     public void changeLangEng(ActionEvent event) throws IOException
     {
         List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
@@ -306,15 +260,15 @@ public class TripInformationController extends HomeScreenController
 
         JOptionPane.showMessageDialog(null, "Enter trip again!");
 
-        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-        Scene routeInfoScene = new Scene(tripInfoParent);
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+        Scene scene = new Scene(parent);
 
         // Gets stage information
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         // Set scene to go back
-        window.setScene(routeInfoScene);
+        window.setScene(scene);
         window.show();
     }
 
@@ -328,15 +282,15 @@ public class TripInformationController extends HomeScreenController
 
         JOptionPane.showMessageDialog(null, "Voer route opnieuw in!");
 
-        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-        Scene routeInfoScene = new Scene(tripInfoParent);
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+        Scene scene = new Scene(parent);
 
         // Gets stage information
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         // Set scene to go back
-        window.setScene(routeInfoScene);
+        window.setScene(scene);
         window.show();
     }
 }

@@ -1,6 +1,5 @@
 package adsd.app;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -10,17 +9,24 @@ import java.util.ArrayList;
 
 public class DataHandler
 {
-    final String filename = "data.json";
+
+    // Attributes
+    private String filename = "data.json";
 
     private String url = "jdbc:mysql://localhost:3306/database";
     private String username = "db";
     private String password = "wachtwoord";
 
+    // Arraylists
     private ArrayList<Profile> profiles = new ArrayList<>();
     private ArrayList<Trip> trips = new ArrayList<>();
     private ArrayList<Integer> temporaryUser = new ArrayList<Integer>();
+
     // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
-    boolean useDataType = true;
+    private boolean useDataType = true;
+
+    // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
+    private boolean readDataType = true;
 
     // writeToJSON Method to write data to JSON
     public void writeToExternalData() throws FileNotFoundException, UnsupportedEncodingException
@@ -81,10 +87,6 @@ public class DataHandler
                     tripsPreparedStmt.addBatch();
                 }
 
-                //todo FavoriteTrip
-
-                //todo Favorites
-
                 // Execute the java preparedstatement batches
                 usersPreparedStmt.executeBatch();
                 tripsPreparedStmt.executeBatch();
@@ -99,14 +101,9 @@ public class DataHandler
         }
     }
 
-
-
     // readFromJSON Method to read data from JSON
     public void readFromExternalData() throws FileNotFoundException
     {
-
-        // Boolean to read from JSON or MYSQL true = JSON  false = MYSQL
-        boolean readDataType = true;
 
         if (readDataType)
         {

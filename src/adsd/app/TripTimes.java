@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 public class TripTimes
 {
+    // Attributes
     private double depTime;
     private double arivTime;
     private String vehicleType;

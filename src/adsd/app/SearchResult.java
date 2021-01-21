@@ -2,17 +2,19 @@ package adsd.app;
 
 public class SearchResult {
 
-
+    // Attributes
     private String title;
     private Integer posA;
     private Integer posB;
 
+    // Constructor
     public SearchResult(String title, Integer posA, Integer posB){
         this.title = title;
         this.posA = posA;
         this.posB = posB;
     }
 
+    // Getters and setters
     public Integer getPosA() {
         return posA;
     }

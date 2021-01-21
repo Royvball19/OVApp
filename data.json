@@ -1,4 +1,4 @@
-{"firstName":"Klaas","lastName":"Bruinsma","password":"Test","myFavoriteTrip":[{"locationToLat":0,"distance":"0","locationTo":"Den Haag","tripTimes":[],"locationFromLng":0,"locationToLng":0,"ID":0,"tripExtras":[],"locationFrom":"Amsterdam","locationFromLat":0}],"ID":0,"userName":"Test","residence":"Test","age":1}
+{"firstName":"Klaas","lastName":"Bruinsma","password":"Test","myFavoriteTrip":[{"locationToLat":0,"distance":"0","locationTo":"Den Haag","tripTimes":[],"locationFromLng":0,"locationToLng":0,"ID":0,"tripExtras":[],"locationFrom":"Amsterdam","locationFromLat":0},{"locationToLat":0,"distance":"0","locationTo":"Amsterdam","tripTimes":[],"locationFromLng":0,"locationToLng":0,"ID":0,"tripExtras":[],"locationFrom":"Alkmaar","locationFromLat":0}],"ID":0,"userName":"Test","residence":"Test","age":1}
 {"firstName":"Donald","lastName":"Duck","password":"gerrit","myFavoriteTrip":[],"ID":1,"userName":"gerrit","residence":"","age":1}
 {"firstName":"Yannick","lastName":"van den Bos","password":"doodle","myFavoriteTrip":[],"ID":3,"userName":"yankee","residence":"0","age":24}
 ,

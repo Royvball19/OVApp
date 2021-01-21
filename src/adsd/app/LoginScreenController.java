@@ -23,11 +23,13 @@ import java.util.ResourceBundle;
 
 public class LoginScreenController
 {
+    // Get resource bundle
+    private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-    ResourceBundle rb = ResourceBundle.getBundle("lang");
+    // Instance of datahandler
+    private DataHandler dataHandler;
 
-    DataHandler dataHandler;
-
+    // Attributes FXML
     @FXML private ToolBar myToolBar;
     @FXML private Label profileNotExist;
     @FXML private Label titelLoginLabel;
@@ -35,6 +37,7 @@ public class LoginScreenController
     @FXML private PasswordField password;
     @FXML private Hyperlink noAccount;
 
+    // Attributes
     private String lang;
     private String country;
 
@@ -51,7 +54,6 @@ public class LoginScreenController
         userName.setPromptText(rb.getString("MPuserName"));
         password.setPromptText(rb.getString("MPpassword"));
         noAccount.setText(rb.getString("MPnoAccount"));
-/*        logOutButton.setText(rb.getString("logOutButton"));*/
 
         dataHandler = new DataHandler();
         dataHandler.readFromExternalData();
@@ -71,23 +73,20 @@ public class LoginScreenController
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
 
-
-
-                    Parent homeScreenParent = null;
+                    Parent parent = null;
 
                     try {
-                        homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+                        parent = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
-                    Scene myFavoriteTrips = new Scene(homeScreenParent);
-                    myFavoriteTrips.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+                    Scene scene = new Scene(parent);
+                    scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
                     Stage window = (Stage) myToolBar.getScene().getWindow();
 
-                    window.setScene(myFavoriteTrips);
+                    window.setScene(scene);
                     window.show();
-
 
                 return i;
 
@@ -133,14 +132,14 @@ public class LoginScreenController
         } else
         {
             Parent favTripParent = FXMLLoader.load(getClass().getResource("fxml/MyFavoriteTrips.fxml"));
-            Scene myProfileScene = new Scene(favTripParent);
+            Scene scene = new Scene(favTripParent);
 
-            myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(myProfileScene);
+            window.setScene(scene);
             window.show();
         }
     }
@@ -148,14 +147,14 @@ public class LoginScreenController
     public void toRegistration() throws IOException
     {
 
-        Parent homeScreenParent = FXMLLoader.load(getClass().getResource("fxml/UserRegistration.fxml"));
-        Scene myFavoriteTrips = new Scene(homeScreenParent);
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml/UserRegistration.fxml"));
+        Scene scene = new Scene(parent);
 
-        homeScreenParent.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        parent.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         // This line gets the stage information
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        window.setScene(myFavoriteTrips);
+        window.setScene(scene);
         window.show();
 
     }

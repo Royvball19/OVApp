@@ -16,6 +16,8 @@ public class Trip
     private double locationFromLng;
     private double locationToLat;
     private double locationToLng;
+
+    // Arraylists
     private ArrayList<TripTimes> times;
     private ArrayList<TripExtra> extras;
 
@@ -34,14 +36,6 @@ public class Trip
         this.times  = new ArrayList<TripTimes>();
         this.extras = new ArrayList<TripExtra>();
 
-    }
-
-    public Trip(String locationFrom, String locationTo)
-    {
-        this.locationFrom = locationFrom;
-        this.locationTo   = locationTo;
-        this.times        = new ArrayList<TripTimes>();
-        this.extras       = new ArrayList<TripExtra>();
     }
 
     // JSON Constructor

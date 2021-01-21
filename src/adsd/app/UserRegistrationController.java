@@ -25,9 +25,10 @@ import java.util.ResourceBundle;
 
 public class UserRegistrationController {
 
+    // Get resource bundle
     private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
-
+    // Attributes FXML
     @FXML private TextField firstName;
     @FXML private TextField lastName;
     @FXML private TextField age;
@@ -42,8 +43,10 @@ public class UserRegistrationController {
     @FXML private Text  text;
     @FXML private Button register;
 
+    // Instance of datahandler
     private DataHandler dataHandler = new DataHandler();
 
+    // Attributes
     private String lang;
     private String country;
 
@@ -55,7 +58,6 @@ public class UserRegistrationController {
         Locale.setDefault(new Locale(lang, country));
 
         ResourceBundle rb = ResourceBundle.getBundle("lang");
-
 
         dataHandler.readFromExternalData();
 
@@ -72,9 +74,6 @@ public class UserRegistrationController {
         saveTimeBenefitLabel.setText(rb.getString("URtimeBenefits"));
         text.setText(rb.getString("URtext"));
         register.setText(rb.getString("URregisterButton"));
-
-
-//        errorLabel.setText(rb.getString("URerrorLabel"));
 
     }
 

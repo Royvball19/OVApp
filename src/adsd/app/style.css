@@ -5,7 +5,6 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
-
 }
 
 .label
@@ -93,7 +92,6 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 5, 0, 0, 0);
 }
 
-/*Changed variable name first letter to non caps*/
 #myLangButton {
     -fx-background-color: none;
     -fx-background-image: url("Images/world.png");
@@ -169,8 +167,6 @@
     -fx-text-fill: white;
     -fx-mark-color: orange;
     -fx-prompt-text-fill: white;
-
-
 }
 
 .blackbox {
@@ -217,13 +213,8 @@
 
 }
 
-
-
-
-
 .spinner .increment-arrow-button:hover,
 .spinner .decrement-arrow-button:hover {
-    /* interpolate color between yellow and red based on first color brightness */
     -fx-body-color: ladder(#444, yellow 0%, red 100%);
 }
 
@@ -231,7 +222,6 @@
 .spinner .decrement-arrow-button:hover:pressed,
 .spinner .increment-arrow-button:pressed,
 .spinner .decrement-arrow-button:pressed {
-    /* interpolate color between yellow and red based on first color brightness */
     -fx-body-color: ladder(#AAA, yellow 0%, red 100%);
 }
 
@@ -285,9 +275,6 @@
     -fx-opacity: 0.80;
 }
 
-
-
-/*Map CSS*/
 #mapWebView {
     -fx-opacity: 0.70;
     -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0), 5, 0, 0, 0);
@@ -325,7 +312,6 @@ b {
     padding-left: 10px;
 }
 
-/* Optional: Makes the sample page fill the window. */
 html,
 body {
     height: 100%;
@@ -357,8 +343,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 
 #registrationPane2 {
     -fx-background-color: snow;
-
-    /*-fx-background-color: white;*/
 }
 
 #registratieHeader1 {
@@ -413,8 +397,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     -fx-background-color: black;
     -fx-background-insets: 0, 1, 2;
     -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
-    /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
-    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
 }
 
 .standardPane {
@@ -445,10 +428,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     -fx-background-color: orange;
 }
 
-
-
-
-/*Disables scroll bar for tableview*/
 .table-view .scroll-bar * {
     -fx-min-width: 0;
     -fx-pref-width: 0;

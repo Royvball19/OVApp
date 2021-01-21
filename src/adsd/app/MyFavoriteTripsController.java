@@ -23,10 +23,13 @@ import java.util.Scanner;
 
 public class MyFavoriteTripsController
 {
-
+    // Get resource bundle
     private ResourceBundle rb = ResourceBundle.getBundle("lang");
 
+    // Instance of datahandler
     private DataHandler dataHandler;
+
+    // Attributes FXML
     @FXML private TableView<Trip> favTrips;
     @FXML private TableColumn<Trip, String> favTripsFromCollum;
     @FXML private TableColumn<Trip, String> favTripsToCollum;
@@ -35,12 +38,10 @@ public class MyFavoriteTripsController
     @FXML private Button planFavTripButton;
     @FXML private Label noFavTripSelected;
 
-    int currentUser;
-
+    // Attributes
+    private int currentUser;
     private String lang;
     private String country;
-
-
 
     public void initialize() throws IOException
     {
@@ -91,15 +92,15 @@ public class MyFavoriteTripsController
 
     public void showHomeScreen(ActionEvent event) throws IOException
     {
-        Parent tripInfoParent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
-        Scene routeInfoScene = new Scene(tripInfoParent);
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml/HomeScreen.fxml"));
+        Scene scene = new Scene(parent);
 
         // Gets stage information
         Stage window = (Stage) myToolBar.getScene().getWindow();
 
-        routeInfoScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         // Set scene to go back
-        window.setScene(routeInfoScene);
+        window.setScene(scene);
         window.show();
     }
 
@@ -108,8 +109,8 @@ public class MyFavoriteTripsController
         File myObj = new File("currentuser.txt");
         if(myObj.length() == 0)
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/LoginScreen.fxml"));
+            Scene myProfileScene = new Scene(parent);
 
             myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
@@ -120,8 +121,8 @@ public class MyFavoriteTripsController
             window.show();
         } else
         {
-            Parent homeScreenParent2 = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
-            Scene myProfileScene = new Scene(homeScreenParent2);
+            Parent parent = FXMLLoader.load(getClass().getResource("fxml/MyProfile.fxml"));
+            Scene myProfileScene = new Scene(parent);
 
             myProfileScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
@@ -164,7 +165,6 @@ public class MyFavoriteTripsController
     }
     public void planFavTripButton(ActionEvent event) throws IOException{
 
-
         if (favTrips.getSelectionModel().getSelectedIndex() > -1)
         {
 
@@ -173,13 +173,13 @@ public class MyFavoriteTripsController
             Parent homeScreenParent = loader.load();
 
             Scene homeScreenScene = new Scene(homeScreenParent);
+
             // this loads the correct text into labels
             homeScreenScene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             HomeScreenController homeScreenController = loader.getController();
             homeScreenController.planFavTrip(favTrips.getSelectionModel().getSelectedItem().getLocationFrom(),
                     favTrips.getSelectionModel().getSelectedItem().getLocationTo());
-
 
             // This line gets the stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

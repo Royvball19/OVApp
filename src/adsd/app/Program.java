@@ -22,26 +22,9 @@ import java.util.Scanner;
 public class Program extends Application
 {
 
-    private static DataHandler datahandler;
-
-    private String lang;
-    private String country;
-
-
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-//        FileWriter myWriter = new FileWriter("currentuser.txt");
-//        myWriter.write("");
-//        myWriter.close();
-
-        lang = Files.readAllLines(Paths.get("currentLang.txt")).get(0);
-        country = Files.readAllLines(Paths.get("currentLang.txt")).get(1);
-        Locale.setDefault(new Locale(lang, country));
-
-
-        ResourceBundle rb = ResourceBundle.getBundle("lang");
-//        Locale.setDefault(new Locale("nl", "NL"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/HomeScreen.fxml"));
         Parent startScherm = loader.load();
@@ -55,6 +38,7 @@ public class Program extends Application
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
     {
+
 //        System.out.println("Loading driver...");
 //        try
 //        {
@@ -66,26 +50,8 @@ public class Program extends Application
 //        }
 
         // Application.launch(GUI.class, args);
+
         launch(args);
-
-
-    }
-
-    public void changeLangEng(ActionEvent event) throws IOException
-    {
-        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-        lines.set(0, "en");
-        lines.set(1, "US");
-        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
-
-    }
-
-    public void changeLangNed(ActionEvent event) throws IOException {
-
-        List<String> lines = Files.readAllLines(Paths.get("currentLang.txt"));
-        lines.set(0, "nl");
-        lines.set(1, "NL");
-        Files.write(Paths.get("currentLang.txt"), lines); // You can add a charset and other options too
 
     }
 }
