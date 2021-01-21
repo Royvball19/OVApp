@@ -218,7 +218,6 @@ public class HomeScreenController
 
     private void setInput()
     {
-
         locFromInput = locationFrom.getSelectionModel().getSelectedItem().toString();
         locToInput = locationTo.getSelectionModel().getSelectedItem().toString();
         selectedHour = Double.parseDouble(timeSpinnerHour.getValue().toString());
